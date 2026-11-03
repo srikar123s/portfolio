@@ -1,0 +1,11 @@
+{
+  "title": "Srikar Yalamarthi · AI, ML & Software Systems Portfolio",
+  "description": "Portfolio of Srikar Yalamarthi (Integrated M.Tech at VIT Vellore) — AI & ML Engineer with published Indian Patent, live Streamlit and Vercel applications, and 15+ GitHub repositories.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
