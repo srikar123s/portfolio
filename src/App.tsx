@@ -394,15 +394,10 @@ export default function App() {
 
             <div className="hero-portrait-col">
               <div className="hero-portrait-card">
-                <video
-                  src="/hero-right.mp4"
-                  poster="/srikar-photo.jpg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                <img
+                  src="/srikar-photo.jpg"
+                  alt="Srikar Yalamarthi - AI & ML Engineer"
                   className="hero-portrait-img"
-                  aria-label="Srikar Yalamarthi - Cinematic Video"
                 />
                 <div className="hero-portrait-overlay" />
                 <div className="hero-portrait-badge">
