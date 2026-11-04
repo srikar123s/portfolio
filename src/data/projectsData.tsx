@@ -127,35 +127,35 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Agricultural Evidence Generation Module",
+        title: "Agricultural Evidence Generation Module",
         description:
           "Houses task-specific deep learning and machine learning models for leaf disease detection, crop classification, NPK suitability, and yield forecasting. Outputs are treated strictly as evidence candidates rather than final autonomous actions.",
         inputs: ["Leaf RGB imagery", "Soil parameters (N, P, K, pH)", "Weather history", "Irrigation telemetry"],
         outputs: ["Disease class & confidence", "Crop suitability logits", "Yield estimate baseline"],
       },
       {
-        title: "2. Evidence Requirement Profile (ERP) & Sufficiency Module",
+        title: "Evidence Requirement Profile (ERP) & Sufficiency Module",
         description:
           "Maintains strict schemas of required vs. optional evidence for each agricultural decision type. Calculates the Evidence Sufficiency Score (ESD) to eliminate blind decision making under incomplete data.",
         inputs: ["Raw evidence streams", "Sensor timestamps", "Spatial boundary coordinates"],
         outputs: ["Sufficiency status (Pass/Fail)", "Identified evidence deficit list", "Decision-Ready State"],
       },
       {
-        title: "3. ADIE-1 Decision Engine",
+        title: "ADIE-1 Decision Engine",
         description:
           "The central intelligence nucleus. Applies multi-objective constraint solvers, queries historical Action-Context Relationships (Rac) via k-d tree and vector indexing, and selects the optimal intervention.",
         inputs: ["Decision-Ready State", "Farmer resource constraints", "Action-Context Index"],
         outputs: ["Selected intervention", "Expected outcome Oe", "Decision trace & explanation"],
       },
       {
-        title: "4. Action-Context Effect Record (ACER) & CNDA Module",
+        title: "Action-Context Effect Record (ACER) & CNDA Module",
         description:
           "Captures post-intervention outcomes. Contextual Deviation Attribution (CNDA) analyzes previous ACER records using nearest-neighbor similarity to isolate which contextual dimensions caused deviation Δ.",
         inputs: ["Prescribed intervention", "Execution context", "Observed harvest result Oo"],
         outputs: ["ACER data structure", "Contextual deviation attribution report"],
       },
       {
-        title: "5. Joint Adaptive Update Module",
+        title: "Joint Adaptive Update Module",
         description:
           "Executes closed-loop learning by simultaneously updating the Action-Context Relationship (improving future candidate scoring) and ERP weights (prioritizing critical evidence features).",
         inputs: ["Verified ACER", "Attributed context dimensions"],
@@ -368,49 +368,49 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Data Ingestion & Preprocessing Module",
+        title: "Data Ingestion & Preprocessing Module",
         description:
           "Collects heterogeneous data streams (SRTM DEM, CHIRPS rainfall, SMAP soil moisture) and performs spatial-temporal harmonization via terrain-aware resampling and persistence-weighted interpolation.",
         inputs: ["SRTM 30m DEM GeoTIFF", "CHIRPS NetCDF4 (.nc)", "Historical landslide coordinates"],
         outputs: ["Aligned float32 UTM matrices", "Normalized raster arrays"],
       },
       {
-        title: "2. Digital Twin State Model (Core Module)",
+        title: "Digital Twin State Model (Core Module)",
         description:
           "Maintains the time-evolving state DT(t) = {Rain1d, Rain3d, Rain7d, Soil_Moisture, Slope, Elevation, Risk_Index} across time steps using recursive memory factor λ = 0.6.",
         inputs: ["Harmonized environmental features", "Calibration parameters"],
         outputs: ["Updated Digital Twin State stored in Twin State Store"],
       },
       {
-        title: "3. Hydrology & Downhill Graph Engine",
+        title: "Hydrology & Downhill Graph Engine",
         description:
           "Constructs downhill directed graphs from DEM rasters to trace flow accumulation across river basins. Implements a 1.5× river boost on flow channels in the top 10th percentile.",
         inputs: ["UTM Elevation raster", "Coordinate transform matrix"],
         outputs: ["Flow accumulation array", "Upstream neighbor routing graph"],
       },
       {
-        title: "4. AI-Based Multi-Hazard Prediction Engine",
+        title: "AI-Based Multi-Hazard Prediction Engine",
         description:
           "Executes mathematical formulas and an XGBoost classifier on feature vectors to calculate probabilistic flood and landslide susceptibility maps.",
         inputs: ["Twin State feature vectors", "Trained XGBoost weights"],
         outputs: ["Flood Risk Index (FR)", "Landslide Risk Index (LR)", "Combined Risk (CR)"],
       },
       {
-        title: "5. Adaptive Spatial Refinement Module",
+        title: "Adaptive Spatial Refinement Module",
         description:
           "Identifies high-hazard cells (probability ≥ threshold) and recursively subdivides them using quadtree mesh refinement up to max_depth = 2, reducing compute time by 65%.",
         inputs: ["Coarse hazard grid", "Risk probability array"],
         outputs: ["Refined hierarchical mesh with high-density critical clusters"],
       },
       {
-        title: "6. Scenario Simulation & Calibration Module",
+        title: "Scenario Simulation & Calibration Module",
         description:
           "Enables what-if predictive stress testing by modifying environmental variables (e.g. 1.5× rainfall multiplier) and recalibrates model parameters using observed ground truth.",
         inputs: ["Baseline state", "Synthetic stress parameters", "Observed disaster records"],
         outputs: ["What-if risk projection maps", "Calibrated sensitivity parameters"],
       },
       {
-        title: "7. Visualization & Decision Support Dashboard",
+        title: "Visualization & Decision Support Dashboard",
         description:
           "Interactive dashboard providing 3D cinematic terrain rendering, geospatial hazard point clustering, time-series probability distributions, and GIS GeoJSON export for disaster authorities.",
         inputs: ["Updated Digital Twin state", "Simulation outputs"],
@@ -634,49 +634,49 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Audio Ingestion & Resampling Engine",
+        title: "Audio Ingestion & Resampling Engine",
         description:
           "Decodes WAV, FLAC, MP3, M4A, and OGG formats using SoundFile, converts multi-channel audio to mono, and resamples to 16 kHz.",
         inputs: ["Multi-format audio file upload"],
         outputs: ["16 kHz mono normalized floating-point audio array"],
       },
       {
-        title: "2. Custom 2.43M-Parameter BiLSTM Speech Classifier",
+        title: "Custom 2.43M-Parameter BiLSTM Speech Classifier",
         description:
           "Computes 128-band Mel spectrograms and passes them through a 2-layer bidirectional LSTM network with 256 hidden units to predict character streams.",
         inputs: ["128-band Mel spectrogram tensor"],
         outputs: ["Raw acoustic character transcript (T_BiLSTM)"],
       },
       {
-        title: "3. Local Faster-Whisper ASR Subsystem",
+        title: "Local Faster-Whisper ASR Subsystem",
         description:
           "Executes OpenAI's whisper-tiny.en model locally via faster-whisper with beam size 5 for high-speed, general-purpose acoustic transcription.",
         inputs: ["16 kHz normalized audio array"],
         outputs: ["Whisper English transcript (T_Whisper)"],
       },
       {
-        title: "4. Groq LLM Semantic Transcript Fusion Engine",
+        title: "Groq LLM Semantic Transcript Fusion Engine",
         description:
           "Passes both transcripts to Groq Llama 3.3 70B Versatile with instructions to reconcile differences, correct phonetics, and generate a cohesive final transcript.",
         inputs: ["T_BiLSTM", "T_Whisper", "Fusion system prompt"],
         outputs: ["Reconciled, error-corrected final transcript (T_final)"],
       },
       {
-        title: "5. Structured Intelligence & Action-Item Extractor",
+        title: "Structured Intelligence & Action-Item Extractor",
         description:
           "Parses the consolidated transcript into executive summaries, key bullet points, action items, assigned owners, deadlines, organizations, and an LLM quality score (0–100).",
         inputs: ["Final transcript"],
         outputs: ["Structured JSON analytics summary", "0–100 quality rating"],
       },
       {
-        title: "6. In-Memory ChromaDB Vector Store & RAG Retrieval",
+        title: "In-Memory ChromaDB Vector Store & RAG Retrieval",
         description:
           "Splits transcripts into 700-character chunks with 100-character overlap using RecursiveCharacterTextSplitter, embeds them with all-MiniLM-L6-v2, and indexes into ChromaDB for Top-4 search.",
         inputs: ["Transcript text chunks", "User natural language questions"],
         outputs: ["Top-4 context chunks", "Context-grounded answer with citations"],
       },
       {
-        title: "7. Dual Delivery: Streamlit UI & FastAPI Service",
+        title: "Dual Delivery: Streamlit UI & FastAPI Service",
         description:
           "Provides a responsive Streamlit web dashboard for interactive meeting review alongside a production-ready FastAPI endpoint (/transcribe) for automated pipelines.",
         inputs: ["User browser inputs", "HTTP multipart POST requests"],
@@ -899,49 +899,49 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Product Catalog & Category Taxonomy Engine",
+        title: "Product Catalog & Category Taxonomy Engine",
         description:
           "Organizes 37 agricultural inventory items across three core categories: certified seeds, fertilizers, and farm implements. Includes badge tagging for bestsellers, seasonal recommendations, and pricing.",
         inputs: ["Static & database inventory records", "Category filters"],
         outputs: ["Categorized product grids", "Dynamic search results", "Stock status displays"],
       },
       {
-        title: "2. Client-Side Persistent Cart Subsystem (CartContext)",
+        title: "Client-Side Persistent Cart Subsystem (CartContext)",
         description:
           "Manages active purchasing sessions using React Context API with automatic localStorage serialization. Provides optimistic UI updates for quantity modifications and instantaneous subtotal recalculation.",
         inputs: ["User add/remove/increment actions", "Product metadata"],
         outputs: ["Synchronized cart state", "Itemized checkout list", "Subtotal & delivery totals"],
       },
       {
-        title: "3. User Authentication & Profile Security (AuthContext)",
+        title: "User Authentication & Profile Security (AuthContext)",
         description:
           "Handles user registration, login, and profile persistence. Uses bcrypt password salt-hashing in the Express backend and issues signed JWT bearer tokens for authorized session persistence.",
         inputs: ["Farmer email/phone & password credentials"],
         outputs: ["Authenticated JWT token", "Persistent user profile state in localStorage"],
       },
       {
-        title: "4. Geolocation-Aware Weather Telemetry Subsystem",
+        title: "Geolocation-Aware Weather Telemetry Subsystem",
         description:
           "Integrates WeatherAPI using HTML5 Geolocation or city string queries to deliver current temperature, rain likelihood, humidity, wind speed, and 3-day extended forecasts to optimize field spraying.",
         inputs: ["GPS coordinates (latitude, longitude) or city name"],
         outputs: ["3-day forecast cards", "Precipitation probability", "Spraying suitability indicators"],
       },
       {
-        title: "5. Computer Vision Leaf Pathology Diagnostic Module",
+        title: "Computer Vision Leaf Pathology Diagnostic Module",
         description:
           "Processes leaf imagery captured via camera or file upload, passes tensors to the Roboflow leaf disease inference endpoint, and links predictions to treatment steps and chemical recommendations.",
         inputs: ["User crop leaf photograph (JPEG/PNG)"],
         outputs: ["Predicted disease class", "Confidence score", "Actionable treatment & pesticide guide"],
       },
       {
-        title: "6. Checkout, HERE Maps Autocomplete & Twilio WhatsApp Gateway",
+        title: "Checkout, HERE Maps Autocomplete & Twilio WhatsApp Gateway",
         description:
           "Facilitates checkout with HERE Maps predictive address completion, payment method selection (COD, UPI, Net Banking), and triggers automated order dispatch notifications to the farmer's WhatsApp via Twilio REST API.",
         inputs: ["Shipping address", "Payment selection", "Order payload", "Farmer WhatsApp phone number"],
         outputs: ["Persisted Order record", "Confirmation modal", "Automated WhatsApp notification dispatch"],
       },
       {
-        title: "7. Domain-Constrained Agronomic Chatbot Microservice",
+        title: "Domain-Constrained Agronomic Chatbot Microservice",
         description:
           "FastAPI Python service hosting Groq Llama 3 LLM. Implements system prompts tailored to rural agriculture, addressing soil preparation, pest prevention, and crop rotation with sub-second inference.",
         inputs: ["Farmer text questions in English or transliterated vernacular"],
@@ -1111,28 +1111,28 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Advanced NLP Preprocessing Subsystem",
+        title: "Advanced NLP Preprocessing Subsystem",
         description:
           "Converts unstructured patient inputs into standardized clinical tokens using lemmatization, stopword filtering, and fuzzy string correction to eliminate syntax noise.",
         inputs: ["Raw patient text query", "Medical symptom dictionary"],
         outputs: ["Standardized symptom token list"],
       },
       {
-        title: "2. Transformer Deep Learning Engine",
+        title: "Transformer Deep Learning Engine",
         description:
           "Self-attention classification network trained on multi-symptom pathology matrices to capture non-linear clinical interactions.",
         inputs: ["Encoded symptom feature vector"],
         outputs: ["Logit probability vector across all disease classes"],
       },
       {
-        title: "3. Treatment & Precaution Recommendation Engine",
+        title: "Treatment & Precaution Recommendation Engine",
         description:
           "Associates predicted disease diagnoses with verified medical protocols, providing precautions, medications, and self-care steps.",
         inputs: ["Top-ranked disease predictions"],
         outputs: ["Medication guidance", "Home care tips", "Doctor consultation urgency"],
       },
       {
-        title: "4. Interactive Streamlit Web & Chatbot Interface",
+        title: "Interactive Streamlit Web & Chatbot Interface",
         description:
           "A modern, responsive user interface allowing interactive symptom input, visual confidence displays, and an conversational AI consultation companion.",
         inputs: ["User browser inputs", "Chat messages"],
@@ -1299,35 +1299,35 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Data Preprocessing & Outlier Filtering Module",
+        title: "Data Preprocessing & Outlier Filtering Module",
         description:
           "Normalizes 19,000+ agricultural data rows across 28 Indian states. Filters out top and bottom 1% extreme anomalies from flood or drought disasters.",
         inputs: ["Raw state agriculture datasets", "Crop statistics (1997–2020)"],
         outputs: ["Cleaned numerical feature matrix", "Normalized categorical encodings"],
       },
       {
-        title: "2. Agronomic Temporal Feature Engineering Module",
+        title: "Agronomic Temporal Feature Engineering Module",
         description:
           "Constructs derived agricultural indicators including the Rainfall-Fertilizer ratio, 1/3/5-year rolling moving averages, and historical rainfall deviations.",
         inputs: ["Cleaned historical yield records", "Seasonal rainfall telemetry", "Fertilizer logs"],
         outputs: ["RF-Ratio", "Yield-MA3", "Yield-Trend", "Rainfall-Dev"],
       },
       {
-        title: "3. TabNet Deep Tabular Learning Engine",
+        title: "TabNet Deep Tabular Learning Engine",
         description:
           "Employs sequential attention blocks and sparse feature masks to isolate salient variables at each decision step, balancing temporal baselines with immediate inputs.",
         inputs: ["Chronologically split training tensors (2010–2018)"],
         outputs: ["Trained TabNet model weights", "Feature importance attention scores"],
       },
       {
-        title: "4. Model Evaluation & Benchmark Comparison Subsystem",
+        title: "Model Evaluation & Benchmark Comparison Subsystem",
         description:
           "Computes regression metrics (R², MAE, RMSE) and benchmarks TabNet against Random Forest, XGBoost, and LSTM baselines across Kharif, Rabi, and Whole Year crops.",
         inputs: ["Future test tensors (2021–2023)"],
         outputs: ["R² = 0.942", "MAE = 0.120 tons/ha", "Season-wise evaluation tables"],
       },
       {
-        title: "5. Interactive Streamlit Forecast Dashboard",
+        title: "Interactive Streamlit Forecast Dashboard",
         description:
           "Web interface enabling farmers and policymakers to simulate varying fertilizer, crop choice, and rainfall conditions to forecast expected yield in tons/hectare.",
         inputs: ["User input sliders", "Regional crop selection"],
@@ -1533,42 +1533,42 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Cryptographic Engine (EphemeralChatNode)",
+        title: "Cryptographic Engine (EphemeralChatNode)",
         description:
           "Manages SECP256R1 elliptic curve key generation, ECDH secret agreement, HKDF-SHA256 key expansion, and authenticated AES-256-GCM encryption/decryption.",
         inputs: ["Ephemeral entropy", "Peer public keys", "Message plaintext"],
         outputs: ["Session keys", "Authenticated encrypted frames", "Decrypted JSON payloads"],
       },
       {
-        title: "2. Peer-to-Peer TCP Networking Subsystem",
+        title: "Peer-to-Peer TCP Networking Subsystem",
         description:
           "Maintains listening server sockets and outbound client connections. Spawns dedicated background worker threads for concurrent bidirectional communication.",
         inputs: ["Host/IP address", "Port numbers", "Binary wire frames"],
         outputs: ["TCP socket streams", "Connection life-cycle events"],
       },
       {
-        title: "3. Ephemeral Messaging & Framing Protocol",
+        title: "Ephemeral Messaging & Framing Protocol",
         description:
           "Serializes messages into standardized JSON structures, computes wire frames with length prefixes, and buffers incoming/outgoing messages in RAM.",
         inputs: ["User text", "Target peer ID"],
         outputs: ["Length-prefixed binary frames", "In-memory message buffer"],
       },
       {
-        title: "4. Terminal Command-Line Interface (CLI)",
+        title: "Terminal Command-Line Interface (CLI)",
         description:
           "Interactive terminal command processor supporting /connect, /send, /peers, /status, /history, /clear, and /quit commands.",
         inputs: ["Terminal keyboard input"],
         outputs: ["Console status logs", "Formatted message stream"],
       },
       {
-        title: "5. Multi-Threaded Tkinter Graphical Interface (GUI)",
+        title: "Multi-Threaded Tkinter Graphical Interface (GUI)",
         description:
           "Asynchronous desktop GUI featuring connection dialogs, live chat display, fingerprint verification visualizers, and thread-safe queue updates.",
         inputs: ["User mouse/keyboard events in Tkinter"],
         outputs: ["Graphical chat window", "Real-time peer status"],
       },
       {
-        title: "6. Deterministic Session Cleanup Subsystem",
+        title: "Deterministic Session Cleanup Subsystem",
         description:
           "Executes cleanup_session() to terminate worker threads, close active network sockets, zero out session keys, and wipe in-memory message history.",
         inputs: ["Session termination signal (/quit or disconnect)"],
@@ -1740,35 +1740,35 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Color Space Decorrelation Subsystem (YCoCg-R)",
+        title: "Color Space Decorrelation Subsystem (YCoCg-R)",
         description:
           "Removes cross-channel color correlation prior to spatial prediction using reversible integer lifting steps.",
         inputs: ["24-bit RGB raw pixel array"],
         outputs: ["Decorrelated Y, Co, Cg channel planes"],
       },
       {
-        title: "2. Gradient-Weighted Directional Predictor",
+        title: "Gradient-Weighted Directional Predictor",
         description:
           "Evaluates spatial gradients ∇h and ∇v to compute local edge-sensitive weights for neighbors A and B, minimizing residual variance.",
         inputs: ["Channel planes (Y, Co, Cg)"],
         outputs: ["Predicted pixel matrix P", "Residual error map R = I - P"],
       },
       {
-        title: "3. 4-Context Gradient Classifier",
+        title: "4-Context Gradient Classifier",
         description:
           "Partitions residual errors into four distinct probability contexts based on local edge magnitude |A - B|.",
         inputs: ["Neighbor difference |A - B|"],
         outputs: ["Context ID (0, 1, 2, or 3)"],
       },
       {
-        title: "4. Multi-Context Range Coding Engine",
+        title: "Multi-Context Range Coding Engine",
         description:
           "Maintains adaptive cumulative frequency distributions for each context, compressing residuals into a compact binary bitstream.",
         inputs: ["Contextual residuals", "Dynamic symbol frequency tables"],
         outputs: ["Compressed binary bitstream", "Header metadata"],
       },
       {
-        title: "5. Decompression & Bit-Perfect Verification Engine",
+        title: "Decompression & Bit-Perfect Verification Engine",
         description:
           "Reverses range decoding, restores pixel values via inverse prediction, and verifies MSE = 0 and PSNR = ∞.",
         inputs: ["Compressed bitstream"],
@@ -1946,42 +1946,42 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. 3D Product Catalog & Taxonomy Engine",
+        title: "3D Product Catalog & Taxonomy Engine",
         description:
           "Showcases 6 interactive furniture products (chairs, tables, desk lamps) with realistic PBR textures, price, descriptions, and dimensional specs.",
         inputs: ["Product metadata records", "PBR 3D asset paths"],
         outputs: ["Responsive product grid", "Product detail pages", "Filterable category taxonomy"],
       },
       {
-        title: "2. Single-Object Model-Viewer Subsystem",
+        title: "Single-Object Model-Viewer Subsystem",
         description:
           "Integrates Google @google/model-viewer to render 3D assets with orbit controls, interactive hotspot annotations, QR code desktop-to-mobile handover, and Quick Look/Scene Viewer AR.",
         inputs: ["GLB / USDZ file streams", "Hotspot annotation data"],
         outputs: ["360° interactive 3D canvas", "Direct AR launch triggers"],
       },
       {
-        title: "3. Multi-Object Three.js AR Spatial Scene Subsystem",
+        title: "Multi-Object Three.js AR Spatial Scene Subsystem",
         description:
           "Custom Three.js WebXR application (MultiARMobileViewer) allowing shoppers to select multiple items from their wishlist and arrange them simultaneously in their room.",
         inputs: ["Wishlist item identifiers", "WebXR plane hit-test matrices"],
         outputs: ["Multi-model AR scene", "Real-time touch transformation controls"],
       },
       {
-        title: "4. Real-Time 3D Spatial Collision Detection Engine",
+        title: "Real-Time 3D Spatial Collision Detection Engine",
         description:
           "Evaluates pairwise Euclidean distances across placed 3D meshes, displaying collision bounding indicators when distance d falls below 0.5 units.",
         inputs: ["3D object world coordinates"],
         outputs: ["Distance metrics", "Visual proximity warning banners"],
       },
       {
-        title: "5. Persistent Cart & Wishlist Session State Engine",
+        title: "Persistent Cart & Wishlist Session State Engine",
         description:
           "React Context API implementation (CartContext) handling item addition, quantity modification, subtotal calculation, and multi-model wishlist staging.",
         inputs: ["User cart actions", "Product metadata"],
         outputs: ["Active cart state", "Wishlist models ready for multi-AR inspection"],
       },
       {
-        title: "6. Express 5 REST API & JWT Authentication Gateway",
+        title: "Express 5 REST API & JWT Authentication Gateway",
         description:
           "Node.js HTTPS server providing 6 API route groups: /api/register, /api/login, /api/products, and /api/orders with bcryptjs password salt-hashing.",
         inputs: ["Customer credentials", "Order payloads", "JWT bearer tokens"],
@@ -2174,49 +2174,49 @@ export const projectsData: Project[] = [
     ],
     modules: [
       {
-        title: "1. Dual-Engine OCR Syllabus Extraction Pipeline",
+        title: "Dual-Engine OCR Syllabus Extraction Pipeline",
         description:
           "Ingests syllabus image files, normalizes contrast, and runs EasyOCR with Tesseract fallback to extract topic headings and unit outlines.",
         inputs: ["Syllabus image photograph (PNG/JPEG)"],
         outputs: ["Extracted raw text", "Cleaned topic candidate list"],
       },
       {
-        title: "2. Scikit-Learn Topic Difficulty Classifier",
+        title: "Scikit-Learn Topic Difficulty Classifier",
         description:
           "A machine learning model trained with Scikit-learn that classifies topic complexity into easy, medium, or hard based on linguistic tokens and prerequisites.",
         inputs: ["Topic title and description"],
         outputs: ["Predicted difficulty category (easy, medium, hard)"],
       },
       {
-        title: "3. Exam-Aware Dynamic Scheduling Engine",
+        title: "Exam-Aware Dynamic Scheduling Engine",
         description:
           "Computes scheduling horizon H, workload density rho, and daily capacity C to automatically distribute study blocks across the academic calendar.",
         inputs: ["Subjects", "Topics with difficulty", "Exam dates", "Study preferences"],
         outputs: ["Structured timetable of dated study sessions"],
       },
       {
-        title: "4. Interactive Drag-and-Drop Calendar Subsystem",
+        title: "Interactive Drag-and-Drop Calendar Subsystem",
         description:
           "React Big Calendar interface integrated with React DnD, allowing students to drag sessions, change dates, mark completions, or edit topics.",
         inputs: ["User mouse drag events", "Calendar view toggles"],
         outputs: ["Updated study session dates", "Real-time calendar updates"],
       },
       {
-        title: "5. Academic Analytics & Streak Dashboard",
+        title: "Academic Analytics & Streak Dashboard",
         description:
           "Visualizes topic completion rates, study streak counts, upcoming exam countdowns, and subject-wise effort allocation using Chart.js.",
         inputs: ["Session completion records", "Subject metadata"],
         outputs: ["Completion progress bars", "Streak counters", "Analytics graphs"],
       },
       {
-        title: "6. Schedule-Aware Conversational AI Study Tutor",
+        title: "Schedule-Aware Conversational AI Study Tutor",
         description:
           "FastAPI chat endpoint connecting Hugging Face / LLM inference with the user's active schedule, topics, and deadlines to deliver grounded study coaching.",
         inputs: ["Student natural language questions", "User schedule context"],
         outputs: ["Context-grounded study advice", "Exam preparation tips"],
       },
       {
-        title: "7. FastAPI REST API Gateway & User Profile Management",
+        title: "FastAPI REST API Gateway & User Profile Management",
         description:
           "Modular backend exposing 23 REST endpoints across 7 route modules with Pydantic validation, JWT token authentication, and study preference storage.",
         inputs: ["HTTP REST requests", "JWT tokens"],

@@ -194,19 +194,17 @@ export default function ProjectDeepDivePage({
           </div>
         </header>
 
-        {/* SECTION 1: Overview */}
+        {/* Overview */}
         <section className="deep-dive-block">
           <div className="block-label">
-            <span>01</span>
             <h3>Project Overview &amp; Executive Summary</h3>
           </div>
           <p className="deep-dive-prose">{project.overview}</p>
         </section>
 
-        {/* SECTION 2: Problem Statement & Literature Gaps */}
+        {/* Problem Statement & Literature Gaps */}
         <section className="deep-dive-block">
           <div className="block-label">
-            <span>02</span>
             <h3>Problem Statement &amp; Research Gaps</h3>
           </div>
           <p className="deep-dive-prose">{project.problem}</p>
@@ -226,10 +224,9 @@ export default function ProjectDeepDivePage({
           )}
         </section>
 
-        {/* SECTION 3: Proposed Solution & System Architecture */}
+        {/* Proposed Solution & System Architecture */}
         <section className="deep-dive-block">
           <div className="block-label">
-            <span>03</span>
             <h3>Proposed Solution &amp; System Architecture</h3>
           </div>
           <p className="deep-dive-prose">{project.solution}</p>
@@ -254,11 +251,10 @@ export default function ProjectDeepDivePage({
           </div>
         </section>
 
-        {/* SECTION 4: Mathematical Formulations & Algorithms */}
+        {/* Mathematical Formulations & Algorithms */}
         {project.formulas && project.formulas.length > 0 && (
           <section className="deep-dive-block">
             <div className="block-label">
-              <span>04</span>
               <h3>Mathematical Formulations &amp; Governing Equations</h3>
             </div>
             <p className="deep-dive-prose">
@@ -294,11 +290,10 @@ export default function ProjectDeepDivePage({
           </section>
         )}
 
-        {/* SECTION 5: System Modules & Engineering Workflow */}
+        {/* System Modules & Engineering Workflow */}
         {project.modules && project.modules.length > 0 && (
           <section className="deep-dive-block">
             <div className="block-label">
-              <span>05</span>
               <h3>Functional Modules &amp; Subsystem Breakdown</h3>
             </div>
             <div className="modules-grid">
@@ -334,11 +329,10 @@ export default function ProjectDeepDivePage({
           </section>
         )}
 
-        {/* SECTION 6: Multi-Regional Experimental Validation (If applicable) */}
+        {/* Multi-Regional Experimental Validation (If applicable) */}
         {project.simulationRegions && project.simulationRegions.length > 0 && (
           <section className="deep-dive-block">
             <div className="block-label">
-              <span>06</span>
               <h3>Multi-Regional Geological Validation &amp; Simulations</h3>
             </div>
             <p className="deep-dive-prose">
@@ -358,10 +352,9 @@ export default function ProjectDeepDivePage({
           </section>
         )}
 
-        {/* SECTION 7: Technology Stack & Architectural Rationale */}
+        {/* Technology Stack & Architectural Rationale */}
         <section className="deep-dive-block">
           <div className="block-label">
-            <span>07</span>
             <h3>Technology Stack &amp; Implementation Arsenal</h3>
           </div>
           <div className="tech-tags-large">
@@ -373,29 +366,9 @@ export default function ProjectDeepDivePage({
           </div>
         </section>
 
-        {/* SECTION 8: Individual Contribution & Code Implementation */}
+        {/* Measurable Results & Evaluation */}
         <section className="deep-dive-block">
           <div className="block-label">
-            <span>08</span>
-            <h3>Individual Engineering Contribution</h3>
-          </div>
-          <div className="contribution-card">
-            <p>{project.contribution}</p>
-            <div style={{ marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-              <small style={{ color: "var(--acid)", fontWeight: 700, letterSpacing: "0.08em" }}>
-                IMPLEMENTATION DETAILS
-              </small>
-              <p style={{ marginTop: "6px", color: "#bbb", fontSize: "14px", lineHeight: "1.6" }}>
-                {project.implementation}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 9: Measurable Results & Evaluation */}
-        <section className="deep-dive-block">
-          <div className="block-label">
-            <span>09</span>
             <h3>Measurable Results &amp; Quantitative Metrics</h3>
           </div>
           <div className="metrics-showcase-grid">
@@ -409,10 +382,9 @@ export default function ProjectDeepDivePage({
           </div>
         </section>
 
-        {/* SECTION 10: Engineering Challenges & Solutions */}
+        {/* Engineering Challenges & Solutions */}
         <section className="deep-dive-block">
           <div className="block-label">
-            <span>10</span>
             <h3>Technical Obstacles &amp; Resolution Strategy</h3>
           </div>
           <div className="challenges-card">
