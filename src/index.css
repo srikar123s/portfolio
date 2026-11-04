@@ -1231,6 +1231,54 @@ footer a:hover { color: var(--acid); }
   flex-wrap: wrap;
 }
 
+/* Deep Dive Button Overrides for Dark Background */
+.deep-dive-page-shell .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--acid);
+  color: #0b0b0a;
+  padding: 12px 22px;
+  border-radius: 99px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--acid);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(223, 255, 69, 0.22);
+}
+.deep-dive-page-shell .btn-primary:hover {
+  background: #ffffff;
+  color: #080808;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.28);
+}
+
+.deep-dive-page-shell .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff !important;
+  padding: 12px 20px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.deep-dive-page-shell .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
 /* Deep Dive Content Blocks */
 .deep-dive-block {
   margin-bottom: 44px;
