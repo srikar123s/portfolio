@@ -579,49 +579,233 @@ export const projectsData: Project[] = [
     id: "crop-connect-v1",
     number: "04",
     title: "Crop Connect (v1)",
-    subtitle: "Smart Agriculture E-Commerce & Analytics Platform",
+    subtitle: "Full-Stack Agricultural E-Commerce, Microclimate Telemetry & Pathology Advisory Platform",
     category: "sde",
-    badge: "Live App",
+    badge: "Live App / Full-Stack",
     description:
-      "A full-stack agricultural e-commerce and analytics web application engineered to simplify purchasing of farming essentials, connecting farmers with certified suppliers and live meteorological telemetry.",
+      "A production-deployed agricultural e-commerce and advisory web platform engineered with React 18, Node.js, Express, and MongoDB. Integrates real-time WeatherAPI telemetry, Roboflow computer vision leaf pathology detection, Twilio WhatsApp order notifications, and a domain-constrained agricultural QA chatbot.",
     highlights: [
-      "Built secure REST APIs with optimized backend processing and efficient database indexing",
-      "Modular full-stack architecture supporting e-commerce catalog, farm telemetry, and order tracking",
-      "Deployed and actively hosted in production on Vercel with global CDN caching",
+      "Modular two-tier architecture: React 18 SPA with persistent CartContext & AuthContext, and Express/MongoDB REST backend",
+      "Integrated microclimate intelligence with 3-day meteorological forecasts via WeatherAPI & HTML5 Geolocation",
+      "Computer vision plant disease diagnostic tool backed by Roboflow inference and curated pesticide/treatment mapping",
+      "Automated WhatsApp transaction dispatches via Twilio REST API and HERE Maps address autocomplete",
+      "Domain-constrained agricultural advisory assistant powered by Groq Llama 3 and FastAPI microservice",
+      "Production-deployed on Vercel with optimized 177 KB client bundle and global edge caching",
     ],
-    tags: ["Web Development", "Python", "FastAPI / Node.js", "REST APIs", "MySQL", "Vercel"],
+    tags: [
+      "Full-Stack Web",
+      "React 18",
+      "Node.js & Express",
+      "MongoDB & Mongoose",
+      "FastAPI & Python",
+      "Groq LLM",
+      "Roboflow CV",
+      "WeatherAPI",
+      "Twilio WhatsApp API",
+      "Vercel",
+    ],
     githubUrl: "https://github.com/srikar123s/crop-connect-v1",
     liveUrl: "https://crop-connect-v1-git-main-crop-connects-projects.vercel.app/",
+    academicMeta: {
+      type: "Capstone Project",
+      courseCode: "Full Stack Agricultural E-Commerce & Advisory System",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
+    },
     overview:
-      "Crop Connect is a production-deployed e-commerce and agricultural assistance web application. It bridges the gap between rural farmers and certified suppliers of seeds, fertilizers, and equipment while embedding real-time weather telemetry to help growers schedule purchases around seasonal rainfall.",
+      "Crop Connect is an end-to-end full-stack agricultural commerce and decision-support web platform engineered to eliminate predatory supply-chain intermediaries and provide rural smallholders with verified inputs and localized agronomic guidance. Built with a React 18 single-page frontend, a Node.js/Express REST API layer, and MongoDB document persistence, the platform integrates three essential farming workflows into a unified experience: (1) direct procurement of 37 certified seed varieties, chemical/organic fertilizers, and farm implements with piecewise delivery rules and persistent client sessions; (2) location-aware meteorological forecasting (temperature, rain probability, humidity) via WeatherAPI to prevent fertilizer runoff and guide planting; and (3) an AI advisory suite coupling Roboflow leaf disease classification with a domain-constrained Groq LLM chatbot for actionable agronomic triage.",
     problem:
-      "Agricultural supply chains suffer from opaque middleman pricing, counterfeit supplies, and lack of localized weather context at the point of purchasing seeds and seasonal fertilizers.",
+      "Agricultural input procurement in developing agrarian economies is severely hampered by three systemic challenges: (1) Predatory Intermediaries — multi-tiered broker networks inflate the retail price of certified seeds and fertilizers by 25–40% while circulating substandard and counterfeit inputs; (2) Blind Procurement — farmers make purchasing decisions without localized weather context, leading to catastrophic crop losses when heavy rains wash away newly applied fertilizers; and (3) Fragmented Advisory Services — disease identification tools and agronomic advice are isolated in disparate services or unavailable in regional languages, leaving farmers without timely intervention when leaf blights strike.",
+    literatureGaps: [
+      "G1. Disconnection Between Input Procurement and Agronomic Context: Commercial agricultural marketplaces operate purely as transactional storefronts, omitting real-time meteorological forecasts needed to time fertilizer and seed purchases.",
+      "G2. Lack of Real-Time Direct Order Notifications: Existing agrarian portals rely on email confirmations that rural smallholders rarely access, failing to exploit pervasive instant messaging channels like WhatsApp for logistics updates.",
+      "G3. Siloed Crop Pathology Diagnostics: Computer vision disease detection tools exist as standalone academic demos that diagnose ailments without linking findings to immediate therapeutic treatments or orderable inputs.",
+      "G4. Absence of Low-Bandwidth Web Optimization: Bulky web applications fail to load on unstable rural 3G/4G cellular connections, requiring aggressive bundle optimization and client-side state caching.",
+      "G5. Lack of Domain Guardrails in LLM Farm Chatbots: Unconstrained conversational agents hallucinate unsafe chemical dosages, requiring strict prompt-engineered intent filters bounded to agricultural contexts.",
+    ],
     solution:
-      "Engineered an integrated web platform featuring certified agricultural vendor catalogs, secure order management, real-time weather integration, and a mobile-optimized interface accessible on low-bandwidth rural connections.",
+      "Engineered an integrated, responsive web platform uniting e-commerce logistics with applied artificial intelligence. The client layer features a responsive React 18 SPA with centralized CartContext persisting order state to localStorage, alongside an AuthContext securing user sessions via JWT. The backend exposes modular Express REST routes for user authentication, product catalog operations, order checkout, and Twilio WhatsApp notifications. Geolocation-based WeatherAPI telemetry delivers 3-day actionable weather forecasts, while an external Roboflow vision endpoint classifies leaf diseases and maps them to vetted chemical treatments. An asynchronous Python FastAPI microservice powered by Groq Llama 3 answers farmer questions with strict agricultural guardrails.",
     architecture: {
-      summary: "Full-Stack Agriculture Marketplace & Telemetry Architecture",
+      summary:
+        "React 18 SPA (Cart & Auth Contexts) → Node.js/Express REST Gateway → MongoDB Atlas (Users, Products, Orders) ⇄ WeatherAPI Telemetry + Roboflow Leaf Vision API + Twilio WhatsApp Service + FastAPI/Groq LLM Advisory",
       steps: [
-        { name: "Client Layer", detail: "Mobile-responsive web storefront built for low-bandwidth devices" },
-        { name: "API Gateway", detail: "Secure RESTful routing with authentication and validation" },
-        { name: "Order & Catalog Service", detail: "Inventory querying, shopping cart, and transaction processing" },
-        { name: "Weather Telemetry API", detail: "External meteorological forecast and rain alert integration" },
-        { name: "Relational Database", detail: "Indexed MySQL schema managing inventory and user accounts" },
-        { name: "Vercel Cloud Edge", detail: "Production deployment with automated CDN edge distribution" },
+        {
+          name: "Client Presentation & Context Layer",
+          detail:
+            "React 18 single-page application utilizing React Router v6 across 10 distinct routes. Employs React Context API (CartContext, AuthContext) with localStorage synchronization for offline-resilient cart state.",
+        },
+        {
+          name: "REST API Gateway & Security",
+          detail:
+            "Express.js backend providing CORS handling, JSON payload validation, bcrypt password hashing, and JWT token-based authentication guarding protected order routes.",
+        },
+        {
+          name: "Document Data Persistence",
+          detail:
+            "MongoDB Atlas cluster with Mongoose schemas for User accounts, Product inventory (categorized by Seeds, Fertilizers, Tools), and transactional Order documents.",
+        },
+        {
+          name: "Microclimate Telemetry Integration",
+          detail:
+            "Queries WeatherAPI via browser HTML5 Geolocation coordinates or manual city query, rendering 3-day precipitation, temperature, and wind forecasts.",
+        },
+        {
+          name: "Computer Vision Leaf Diagnostic Service",
+          detail:
+            "Accepts leaf photograph uploads, queries Roboflow inference API, and maps output pathology classes to an agronomic lookup table providing remedies and pesticides.",
+        },
+        {
+          name: "Automated Messaging & Address Resolution",
+          detail:
+            "Integrates HERE Maps API for client-side address autocomplete and Twilio REST API to trigger instant WhatsApp order dispatch confirmations upon checkout.",
+        },
+        {
+          name: "Domain-Constrained Advisory Microservice",
+          detail:
+            "FastAPI Python service hosting Groq Llama 3 with domain system prompts that filter out non-agricultural queries and deliver rapid agronomic recommendations.",
+        },
       ],
     },
-    techStack: ["Web Development", "Python", "FastAPI", "MySQL", "REST APIs", "HTML5/CSS3", "JavaScript", "Vercel"],
+    formulas: [
+      {
+        title: "Cart Subtotal Formulation",
+        latex: "S = \\sum_{i=1}^{n} P_i \\cdot Q_i",
+        explanation:
+          "Computes the cumulative product expenditure across n distinct cart items, where Pi is the unit price in INR and Qi is the user-selected item quantity.",
+        variables: [
+          { symbol: "S", meaning: "Cart subtotal before logistics surcharges (₹)" },
+          { symbol: "P_i", meaning: "Unit retail price of catalog item i (₹)" },
+          { symbol: "Q_i", meaning: "Selected quantity of catalog item i" },
+          { symbol: "n", meaning: "Total number of unique products in the cart" },
+        ],
+      },
+      {
+        title: "Piecewise Delivery Fee Schedule",
+        latex: "D = \\begin{cases} 0 & \\text{if } S \\ge 1000 \\text{ or } n < 1 \\\\ 50 & \\text{otherwise} \\end{cases}",
+        explanation:
+          "Applies a flat ₹50 rural logistics surcharge for orders under ₹1,000 to cover transport overhead, waiving delivery costs entirely for high-volume orders exceeding ₹1,000.",
+        variables: [
+          { symbol: "D", meaning: "Delivery logistics charge (₹)" },
+          { symbol: "S", meaning: "Order subtotal (₹)" },
+          { symbol: "n", meaning: "Number of unique items in cart" },
+        ],
+      },
+      {
+        title: "Payable Order Total",
+        latex: "T = S + D",
+        explanation:
+          "Defines the final payable checkout amount calculated on the client and reconciled by the backend order processing route.",
+        variables: [
+          { symbol: "T", meaning: "Total payable amount (₹)" },
+          { symbol: "S", meaning: "Order subtotal (₹)" },
+          { symbol: "D", meaning: "Applicable delivery fee (₹)" },
+        ],
+      },
+      {
+        title: "Deterministic Delivery Horizon",
+        latex: "\\text{Date}_{\\text{delivery}} = \\text{Date}_{\\text{order}} + 3 \\text{ days}",
+        explanation:
+          "Calculates the estimated farm dispatch delivery timestamp shown in order confirmation modals, ensuring transparent scheduling for agricultural inputs.",
+      },
+      {
+        title: "Domain Relevance Chatbot Filter",
+        latex: "f(q) = \\begin{cases} 1 & \\text{if } \\text{Intent}(q) \\in \\mathcal{A}_{\\text{agri}} \\\\ 0 & \\text{otherwise (Reject query)} \\end{cases}",
+        explanation:
+          "Enforces a strict domain relevance filter in the Groq LLM system prompt, discarding out-of-domain conversational queries and maintaining strict agronomic focus.",
+        variables: [
+          { symbol: "q", meaning: "Farmer natural language input query" },
+          { symbol: "\\mathcal{A}_{\\text{agri}}", meaning: "Set of permitted agricultural concepts (crops, soil, fertilizers, pests)" },
+          { symbol: "f(q)", meaning: "Binary query routing decision" },
+        ],
+      },
+      {
+        title: "Pathology-to-Treatment Advisory Function",
+        latex: "\\text{Advice}(c) = \\langle \\text{Condition}(c), \\text{Treatment}(c), \\text{Pesticide}(c) \\rangle",
+        explanation:
+          "Maps detected leaf disease classification index c from the Roboflow vision endpoint to a curated clinical knowledge dictionary specifying condition details, cultural management, and chemical pesticides.",
+      },
+    ],
+    modules: [
+      {
+        title: "1. Product Catalog & Category Taxonomy Engine",
+        description:
+          "Organizes 37 agricultural inventory items across three core categories: certified seeds, fertilizers, and farm implements. Includes badge tagging for bestsellers, seasonal recommendations, and pricing.",
+        inputs: ["Static & database inventory records", "Category filters"],
+        outputs: ["Categorized product grids", "Dynamic search results", "Stock status displays"],
+      },
+      {
+        title: "2. Client-Side Persistent Cart Subsystem (CartContext)",
+        description:
+          "Manages active purchasing sessions using React Context API with automatic localStorage serialization. Provides optimistic UI updates for quantity modifications and instantaneous subtotal recalculation.",
+        inputs: ["User add/remove/increment actions", "Product metadata"],
+        outputs: ["Synchronized cart state", "Itemized checkout list", "Subtotal & delivery totals"],
+      },
+      {
+        title: "3. User Authentication & Profile Security (AuthContext)",
+        description:
+          "Handles user registration, login, and profile persistence. Uses bcrypt password salt-hashing in the Express backend and issues signed JWT bearer tokens for authorized session persistence.",
+        inputs: ["Farmer email/phone & password credentials"],
+        outputs: ["Authenticated JWT token", "Persistent user profile state in localStorage"],
+      },
+      {
+        title: "4. Geolocation-Aware Weather Telemetry Subsystem",
+        description:
+          "Integrates WeatherAPI using HTML5 Geolocation or city string queries to deliver current temperature, rain likelihood, humidity, wind speed, and 3-day extended forecasts to optimize field spraying.",
+        inputs: ["GPS coordinates (latitude, longitude) or city name"],
+        outputs: ["3-day forecast cards", "Precipitation probability", "Spraying suitability indicators"],
+      },
+      {
+        title: "5. Computer Vision Leaf Pathology Diagnostic Module",
+        description:
+          "Processes leaf imagery captured via camera or file upload, passes tensors to the Roboflow leaf disease inference endpoint, and links predictions to treatment steps and chemical recommendations.",
+        inputs: ["User crop leaf photograph (JPEG/PNG)"],
+        outputs: ["Predicted disease class", "Confidence score", "Actionable treatment & pesticide guide"],
+      },
+      {
+        title: "6. Checkout, HERE Maps Autocomplete & Twilio WhatsApp Gateway",
+        description:
+          "Facilitates checkout with HERE Maps predictive address completion, payment method selection (COD, UPI, Net Banking), and triggers automated order dispatch notifications to the farmer's WhatsApp via Twilio REST API.",
+        inputs: ["Shipping address", "Payment selection", "Order payload", "Farmer WhatsApp phone number"],
+        outputs: ["Persisted Order record", "Confirmation modal", "Automated WhatsApp notification dispatch"],
+      },
+      {
+        title: "7. Domain-Constrained Agronomic Chatbot Microservice",
+        description:
+          "FastAPI Python service hosting Groq Llama 3 LLM. Implements system prompts tailored to rural agriculture, addressing soil preparation, pest prevention, and crop rotation with sub-second inference.",
+        inputs: ["Farmer text questions in English or transliterated vernacular"],
+        outputs: ["Context-grounded agronomic advice", "Step-by-step crop management answers"],
+      },
+    ],
+    techStack: [
+      "React 18",
+      "React Router v6",
+      "Context API",
+      "Tailwind CSS",
+      "Node.js & Express.js",
+      "MongoDB & Mongoose",
+      "Python 3.10+",
+      "FastAPI",
+      "Groq LLM (Llama 3)",
+      "Roboflow Computer Vision API",
+      "WeatherAPI",
+      "HERE Maps Geocoding API",
+      "Twilio WhatsApp REST API",
+      "Vercel Edge Platform",
+    ],
     contribution:
-      "Designed the relational database schema, programmed RESTful API endpoints for catalog and cart operations, integrated weather forecast feeds, and deployed the full-stack web application to Vercel.",
+      "Engineered the full-stack architecture of Crop Connect (v1) at SCOPE, VIT Vellore. Developed the React 18 single-page application with persistent CartContext and AuthContext; built the Express.js and MongoDB REST backend with JWT authentication and Mongoose schemas; integrated third-party telemetry and notification APIs (WeatherAPI, HERE Maps, Twilio WhatsApp); integrated the Roboflow leaf disease detection pipeline with structured treatment mappings; and deployed the production web application to Vercel.",
     implementation:
-      "Developed a robust backend with optimized SQL queries and indexing for rapid search across product catalogs. Handled responsive UI styling using semantic HTML and CSS to guarantee high usability on mobile browsers.",
+      "Programmed the responsive frontend in React 18 leveraging Tailwind CSS utility classes and modern hooks (useContext, useEffect, useState) with localStorage persistence. Structured the Express.js server with modular route handlers (/auth, /products, /orders, /whatRoutes) and Mongoose models. Created the FastAPI Python microservice (chat.py) with Groq cloud inference for low-latency conversational advisory. Optimized the frontend build using Webpack/Vite code splitting to achieve a 177 KB production bundle for low-bandwidth rural mobile networks.",
     results: [
-      { metric: "100%", label: "Mobile Responsive" },
-      { metric: "< 200ms", label: "Catalog Query Latency" },
-      { metric: "Zero Downtime", label: "Production Uptime on Vercel" },
-      { metric: "Live", label: "Publicly Accessible Web App" },
+      { metric: "37 Products", label: "Catalog Inventory", context: "Seeds, Fertilizers, and Implements" },
+      { metric: "177 KB", label: "Optimized Bundle Size", context: "Gzip JS bundle tailored for rural 3G bandwidth" },
+      { metric: "10 Routes", label: "Frontend Navigation Paths", context: "Catalog, cart, weather, vision, checkout" },
+      { metric: "3-Day", label: "Guaranteed Delivery Horizon", context: "Deterministic farm dispatch scheduling" },
+      { metric: "Sub-Second", label: "LLM Advisory Latency", context: "Via Groq Llama 3 FastAPI integration" },
+      { metric: "Live", label: "Production Deployment", context: "Actively hosted on Vercel Edge" },
     ],
     challenges:
-      "Ensuring snappy performance over unstable rural 3G mobile connections. Mitigated by lazy-loading product images, caching catalog lookups, and minimizing JSON payload sizes across REST endpoints.",
+      "Coordinating heterogeneous external microservices (WeatherAPI, Roboflow CV, Groq LLM, Twilio WhatsApp) without degrading UI responsiveness over high-latency rural connections. Solved by decoupling API interactions: executing Twilio messaging asynchronously after database commit, caching catalog data and cart state in client localStorage, and providing optimistic feedback states during image inference.",
     visual: (
       <div className="visual-bg-agri">
         <div className="atlas-window" aria-hidden="true">
