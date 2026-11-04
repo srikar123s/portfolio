@@ -663,69 +663,180 @@ export const projectsData: Project[] = [
     id: "smart-heal",
     number: "05",
     title: "Smart-Heal",
-    subtitle: "AI Healthcare Assistant & Clinical Symptom Inference",
+    subtitle: "Medical Diagnosis and Treatment Suggestion System via Transformer & Advanced NLP",
     category: "ai",
-    badge: "Live App",
+    badge: "AI / VIT Project",
     description:
-      "An intelligent medical assistant built with Streamlit, PyTorch, and Groq API. Utilizes a custom Transformer deep learning model to predict conditions from symptoms and delivers actionable triage guidance.",
+      "An intelligent medical diagnosis and treatment recommendation platform utilizing a custom Transformer deep learning classification network and domain-tuned NLP with fuzzy symptom matching and interactive clinical consultation.",
     highlights: [
-      "Custom Transformer neural network for multi-symptom disease classification",
-      "Low-latency clinical conversational agent via Groq Llama 3 integration",
-      "Comprehensive triage output with recommended precautions and specialist matching",
+      "Custom Transformer deep learning classification network mapping symptom co-occurrences",
+      "Advanced NLP pipeline: lemmatization, stopword removal, and fuzzy matching for misspelled symptoms",
+      "Integrated treatment and prevention engine delivering medicines, precautions, and home care tips",
+      "Streamlit web interface featuring top-3 ranked disease predictions and interactive health chat",
     ],
-    tags: ["Machine Learning", "NLP", "LLMs", "Groq API", "Python", "Streamlit", "PyTorch"],
+    tags: [
+      "Deep Learning",
+      "Transformers",
+      "Natural Language Processing (NLP)",
+      "Fuzzy Matching",
+      "Lemmatization",
+      "Python",
+      "Streamlit",
+      "Healthcare AI",
+    ],
     githubUrl: "https://github.com/srikar123s/Smart-Heal",
     liveUrl: "https://smart-heal.streamlit.app/",
+    academicMeta: {
+      type: "Mini Project",
+      courseCode: "Medical Diagnosis AI Research",
+      supervision: "Prof. BIJI C.L (SCOPE, VIT University)",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE)",
+      teamMembers: ["Yalamarthi Srikar (22MIC0038)", "Vulavala Sagar Reddy (22MIC0011)"],
+    },
     overview:
-      "Smart-Heal is an AI-powered clinical triage and medical assistant application. It allows users to input multi-symptom profiles, runs a trained Transformer classification network to predict disease probabilities, and coordinates with Groq LLM pipelines to deliver immediate, safe triage advice and doctor specialty recommendations.",
+      "SmartHeal is an intelligent healthcare assistant and medical decision-support platform designed to bridge the accessibility gap between patients and primary healthcare consultations. Driven by the increasing strain on healthcare infrastructure and the prevalence of hazardous self-diagnosis on unverified internet search engines, SmartHeal processes natural language symptom queries, maps them using a multi-stage NLP correction pipeline, and predicts probable pathologies using a custom Transformer deep learning classification model. Beyond raw classification, the system delivers structured clinical support: top-3 ranked conditions with calibrated confidence percentages, verified medication suggestions, preventive measures, and an interactive Streamlit consultation interface.",
     problem:
-      "Patients experiencing alarming or ambiguous symptoms often turn to unstructured search engines, resulting in health anxiety or delayed medical attention. Medical triage needs fast, evidence-grounded risk classification.",
+      "Patients experiencing alarming or ambiguous physical symptoms frequently turn to unstructured web search engines, causing misdiagnosis, unnecessary panic, or dangerous delays in seeking medical attention. Existing digital health bots suffer from severe limitations: (1) Rigid Symptom Matching — failing on user typos, grammatical variants, or regional phrasing; (2) Diagnostic Black Boxes — providing only a single disease label without confidence scores or alternatives; and (3) Absence of Actionable Guidance — omitting preventive measures, home remedies, and triage recommendations.",
+    literatureGaps: [
+      "G1. Limited Accessibility to Medical Expertise: Rural and underserved communities face critical shortages of physicians, requiring accessible early-assessment tools.",
+      "G2. Unreliable Internet Self-Diagnosis: Unverified web forums promote misinformation, escalating patient anxiety and incorrect self-medication.",
+      "G3. Lack of Intelligent Symptom Recognition: Conventional tools rely on exact string matching, failing on user spelling errors, synonyms, or varied sentence phrasing.",
+      "G4. Absence of Personalized Treatment Guidance: Most existing diagnostic models stop at disease classification without offering structured treatment and preventive advice.",
+      "G5. Lack of Domain-Specific NLP Tuning: General-purpose language models introduce noise and hallucinations rather than following structured clinical symptom mappings.",
+    ],
     solution:
-      "Built a two-stage clinical inference pipeline: a self-attention Transformer trained on clinical symptom-disease mappings for probabilistic diagnosis, followed by a guardrailed conversational LLM agent providing safety precautions and urgent care guidance.",
+      "Engineered an integrated clinical prediction architecture combining robust NLP preprocessing with a Transformer neural network. Raw user text inputs are lowercased, stripped of punctuation, lemmatized to root morphological forms, and matched against verified medical symptom lexicons using fuzzy string distance algorithms (Levenshtein distance). The resolved symptoms are vectorized via LabelEncoding and fed into a multi-head self-attention Transformer that captures non-linear symptom co-occurrences. The network outputs a calibrated Softmax probability distribution over clinical pathologies, ranking the top 3 most probable conditions along with tailored treatment plans, precautions, and an interactive chatbot assistant.",
     architecture: {
-      summary: "Deep Learning Clinical Symptom Classification & Chatbot Pipeline",
+      summary:
+        "User Text Query → Natural Language Preprocessing (Tokenization & Stopword Removal) → Lemmatization & Fuzzy Matching → Structured LabelEncoding Vectorization → Transformer Deep Neural Network → Top-3 Disease Confidence Scoring → Treatment & Prevention Knowledge Retrieval → Streamlit Web & Chat Interface",
       steps: [
-        { name: "Symptom Extraction", detail: "Multi-hot binary vector encoding of reported clinical symptoms" },
-        { name: "Transformer Network", detail: "Self-attention layers capturing symptom co-occurrence patterns" },
-        { name: "Probability Distribution", detail: "Softmax confidence scoring across 40+ clinical pathologies" },
-        { name: "Triage Risk Assessor", detail: "Classifies urgency into Immediate, Urgent, or Primary Care" },
-        { name: "Groq Clinical Guardrail", detail: "Safety-aligned conversational protocol for home care advice" },
+        {
+          name: "Natural Language Input & Tokenization",
+          detail: "Accepts free-form comma-separated symptom queries and tokenizes user expressions into discrete lexical units.",
+        },
+        {
+          name: "Morphological Lemmatization",
+          detail: "Reduces inflectional variants to base lemma forms (e.g. 'vomiting' → 'vomit', 'headaches' → 'headache').",
+        },
+        {
+          name: "Fuzzy Symptom Normalization",
+          detail: "Applies fuzzy string matching to correct typos, misspellings, and phonetic approximations against verified medical vocabularies.",
+        },
+        {
+          name: "Structured Feature Encoding",
+          detail: "Converts normalized symptom lists into multi-hot binary numerical feature vectors using LabelEncoder.",
+        },
+        {
+          name: "Transformer Neural Classification",
+          detail: "Multi-layer self-attention blocks model dependencies and complex co-occurrence interactions among symptoms.",
+        },
+        {
+          name: "Top-3 Probabilistic Diagnosis",
+          detail: "Generates Softmax confidence probabilities, isolating and ranking the top 3 most likely medical conditions.",
+        },
+        {
+          name: "Treatment & Advisory Generation",
+          detail: "Retrieves evidence-grounded precautions, medications, and lifestyle remedies from structured medical datasets.",
+        },
+        {
+          name: "Interactive Streamlit Interface",
+          detail: "Renders real-time prediction confidence bars and coordinates a conversational assistant for follow-up queries.",
+        },
       ],
     },
-    techStack: ["PyTorch", "Transformers", "Groq API", "Streamlit", "Python", "Scikit-Learn", "Pandas"],
+    formulas: [
+      {
+        title: "Fuzzy Symptom Similarity (Levenshtein Ratio)",
+        latex: "\\text{Sim}(s_{\\text{user}}, s_{\\text{lex}}) = \\frac{|s_{\\text{user}}| + |s_{\\text{lex}}| - \\text{dist}(s_{\\text{user}}, s_{\\text{lex}})}{|s_{\\text{user}}| + |s_{\\text{lex}}|}",
+        explanation:
+          "Computes string similarity between user-input symptoms and medical vocabulary entries, resolving typos and colloquial phrasings to standardized clinical terms.",
+      },
+      {
+        title: "Softmax Disease Confidence Distribution",
+        latex: "P(D_k \\mid S) = \\frac{\\exp(z_k)}{\\sum_{j=1}^C \\exp(z_j)}",
+        explanation:
+          "Calculates normalized posterior probabilities across all modeled disease classes C given encoded symptom vector S, enabling top-3 ranking.",
+        variables: [
+          { symbol: "P(D_k \\mid S)", meaning: "Calibrated probability of disease condition k" },
+          { symbol: "z_k", meaning: "Raw logit output from the Transformer classification head" },
+          { symbol: "C", meaning: "Total number of modeled clinical disease categories" },
+        ],
+      },
+    ],
+    modules: [
+      {
+        title: "1. Advanced NLP Preprocessing Subsystem",
+        description:
+          "Converts unstructured patient inputs into standardized clinical tokens using lemmatization, stopword filtering, and fuzzy string correction to eliminate syntax noise.",
+        inputs: ["Raw patient text query", "Medical symptom dictionary"],
+        outputs: ["Standardized symptom token list"],
+      },
+      {
+        title: "2. Transformer Deep Learning Engine",
+        description:
+          "Self-attention classification network trained on multi-symptom pathology matrices to capture non-linear clinical interactions.",
+        inputs: ["Encoded symptom feature vector"],
+        outputs: ["Logit probability vector across all disease classes"],
+      },
+      {
+        title: "3. Treatment & Precaution Recommendation Engine",
+        description:
+          "Associates predicted disease diagnoses with verified medical protocols, providing precautions, medications, and self-care steps.",
+        inputs: ["Top-ranked disease predictions"],
+        outputs: ["Medication guidance", "Home care tips", "Doctor consultation urgency"],
+      },
+      {
+        title: "4. Interactive Streamlit Web & Chatbot Interface",
+        description:
+          "A modern, responsive user interface allowing interactive symptom input, visual confidence displays, and an conversational AI consultation companion.",
+        inputs: ["User browser inputs", "Chat messages"],
+        outputs: ["Real-time prediction cards", "Interactive conversational answers"],
+      },
+    ],
+    techStack: [
+      "Python 3.10+",
+      "PyTorch",
+      "Transformers Architecture",
+      "Natural Language Toolkit (NLTK)",
+      "FuzzyWuzzy / RapidFuzz",
+      "Scikit-Learn (LabelEncoder)",
+      "NumPy & Pandas",
+      "Streamlit",
+    ],
     contribution:
-      "Built and evaluated the PyTorch Transformer classification model, engineered clinical prompt guardrails to prevent medical hallucination, and designed the interactive Streamlit clinical interface.",
+      "Co-developed the SmartHeal project under the academic supervision of Prof. BIJI C.L at SCOPE, VIT Vellore. Engineered the NLP symptom standardization and fuzzy matching pipeline, built and evaluated the PyTorch Transformer disease classification model, structured the treatment and precaution recommendation engine, and deployed the interactive Streamlit clinical application.",
     implementation:
-      "Trained a multi-layer self-attention classifier on clinical symptom datasets using cross-entropy loss. Integrated the Groq Llama 3 API for sub-second inference speed, formatting outputs into structured risk cards with actionable precautions.",
+      "Implemented using PyTorch for the custom Transformer classification network and NLTK for morphological lemmatization. Designed a fuzzy matching threshold filter (ratio >= 80) to automatically catch typos. Packaged the entire inference pipeline into a lightweight Streamlit web application running with sub-second prediction response times.",
     results: [
-      { metric: "96.4%", label: "Classification Confidence" },
-      { metric: "< 500ms", label: "Groq Chatbot Latency" },
-      { metric: "40+", label: "Modeled Disease Categories" },
-      { metric: "Live", label: "Streamlit Cloud Deployment" },
+      { metric: "Top-3", label: "Multi-Disease Probability Ranking", context: "Displays calibrated confidence percentages" },
+      { metric: "< 500ms", label: "Inference & Advisory Latency", context: "Real-time interactive Streamlit web response" },
+      { metric: "100%", label: "Domain-Specific Preprocessing", context: "Lemmatization + fuzzy typo correction" },
+      { metric: "Live", label: "Interactive Streamlit Deployment", context: "Publicly accessible online clinical assistant" },
     ],
     challenges:
-      "Preventing clinical hallucinations and ensuring medical safety. Overcome by implementing strict deterministic disclaimer rules and grounding LLM prompts in verified medical protocol templates.",
+      "Handling varied colloquial descriptions and frequent user spelling errors without failing or returning uninformative blank predictions. Overcome by implementing a dual-pass NLP pipeline that applies word-level lemmatization followed by Levenshtein fuzzy string distance matching against medical terminology lexicons.",
     visual: (
       <div className="visual-bg-health">
         <div className="health-mockup" aria-hidden="true">
           <div className="health-head">
-            <span><span>🩺</span> Smart-Heal Triage</span>
+            <span><span>🩺</span> Smart-Heal Clinical AI</span>
             <small>TRANSFORMER</small>
           </div>
           <div className="health-symptoms">
             <div className="health-chip">
-              <span>Reported: Acute Migraine + Photophobia</span>
-              <strong>96.4% Conf</strong>
+              <span>Symptoms: itching, skin rash, fatigue, mild fever</span>
+              <strong>Rank #1: Chicken Pox</strong>
             </div>
             <div className="health-chip">
-              <span>Risk Tier: Moderate · Consult Neurologist</span>
-              <strong>Triage Level 2</strong>
+              <span>Confidence: 96.4% · Top 3 Ranked</span>
+              <strong>Active Precautions</strong>
             </div>
           </div>
           <div className="health-result">
-            <span>CLINICAL AI ASSESSMENT</span>
-            <strong>Cluster Headache / Migraine with Aura</strong>
-            <p>Immediate rest in dark room advised; follow prescribed protocol.</p>
+            <span>CLINICAL DIAGNOSIS &amp; TREATMENT</span>
+            <strong>Chicken Pox / Viral Exanthem</strong>
+            <p>Advised rest, hydration, calamine lotion application, and isolation.</p>
           </div>
         </div>
       </div>
@@ -735,48 +846,175 @@ export const projectsData: Project[] = [
     id: "crop-yield-predictor",
     number: "06",
     title: "Crop-Yield-Predictor",
-    subtitle: "Agricultural Productivity Forecaster via TabNet Deep Learning",
+    subtitle: "Crop Yield Prediction Using TabNet: A Deep Learning Approach with Temporal Features",
     category: "ai",
-    badge: "Live App",
+    badge: "AI / Research Paper",
     description:
-      "An AI-powered agricultural forecasting platform utilizing Google's TabNet deep learning architecture for tabular data to evaluate soil chemistry, temperature, and rainfall for harvest estimation.",
+      "A deep learning agricultural yield forecasting platform utilizing Google's TabNet architecture with sequential attention masks, temporal rolling features, and domain-engineered agronomic interactions across 19,000+ multi-state records in India.",
     highlights: [
-      "TabNet deep neural architecture providing interpretable feature attention masks",
-      "Trained on multi-regional soil and weather historical crop datasets",
-      "Interactive prediction dashboard with live parameter tuning and harvest forecasting",
+      "TabNet deep tabular neural architecture achieving R² = 0.942 and MAE = 0.120 tons/ha",
+      "Rigorous chronological splitting (2010–2018 train, 2019–2020 val, 2021–2023 test) preventing data leakage",
+      "Engineered agronomic features: Rainfall-Fertilizer Ratio, 3-Year Yield Moving Averages, and Yield Trends",
+      "Interpretable feature importance: Historical Yield (31.2%), Rainfall (22.8%), Fertilizer (18.4%)",
+      "Outperformed Random Forest (R² = 0.872), XGBoost (R² = 0.901), and LSTM (R² = 0.884)",
     ],
-    tags: ["Machine Learning", "Deep Learning", "TabNet", "Data Preprocessing", "Python", "Streamlit"],
+    tags: [
+      "Deep Learning",
+      "Google TabNet",
+      "Sequential Attention",
+      "Feature Engineering",
+      "Time Series & Agronomy",
+      "PyTorch",
+      "Python",
+      "Streamlit",
+    ],
     githubUrl: "https://github.com/srikar123s/Crop-Yield-Predictor",
     liveUrl: "https://crop-yield-prediction2026.streamlit.app/",
+    academicMeta: {
+      type: "Independent Research",
+      courseCode: "Agricultural Deep Learning Research",
+      supervision: "Faculty Guidance @ SCOPE, VIT University",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE)",
+      teamMembers: ["Vulavala Sagar Reddy", "Srikar Yalamarthi (22MIC0038)", "Sravan P"],
+    },
     overview:
-      "Crop-Yield-Predictor is a specialized machine learning tool designed to forecast agricultural yields per hectare using Google's TabNet architecture. By leveraging sparse attention mechanisms, it enables agronomists and farmers to explore how varying Nitrogen, Phosphorus, Potassium, and rainfall levels directly impact production.",
+      "Crop-Yield-Predictor is an advanced machine learning research project that applies Google's TabNet deep learning architecture with sequential attention to agricultural yield estimation. Accurately predicting agricultural productivity is vital for food security, farm input planning, and government supply management. While traditional statistical regression models assume simplistic linear relationships and standard tree ensembles treat all features equally without context, this research couples long-term historical production records with current season agronomic inputs across 19,000+ cleaned records, 55 crops, and 28 Indian states (1997–2020). By combining chronological train-validation-test splitting with domain-engineered features (such as Rainfall-Fertilizer interaction ratios and multi-year yield trends), the TabNet model achieves state-of-the-art predictive accuracy (R² = 0.942, MAE = 0.120 tons/ha), substantially outperforming Random Forest, XGBoost, and recurrent LSTM networks.",
     problem:
-      "Standard tabular machine learning algorithms like Decision Trees or standard MLPs treat tabular agricultural features as black boxes, failing to reveal which specific soil nutrient is limiting crop productivity in a given region.",
+      "Predicting agricultural yields is fraught with difficulty due to complex, non-linear interactions between weather, soil, and management practices. Existing approaches face four critical flaws: (1) Inability to Capture Temporal-Agronomic Interactions — statistical models fail on non-linear dependencies while ML models treat past and present inputs without hierarchical weighting; (2) Data Leakage — many studies use random train/test splits that leak future weather into past predictions; (3) The Black-Box Dilemma — deep learning architectures rarely provide interpretable feature attention masks, preventing agronomists and policymakers from trusting predictions; and (4) Geographical Bias — prior benchmarks predominantly focus on temperate zones in developed nations rather than tropical, heterogeneous smallholder farms in India.",
+    literatureGaps: [
+      "G1. Oversimplified Linear Assumptions: Traditional multiple linear regression and ARIMA fail to model complex non-linear climate-fertilizer synergies.",
+      "G2. Equal Weighting in Standard ML: Random Forest and XGBoost treat features uniformly without dynamic contextual prioritization between historical baseline vs current inputs.",
+      "G3. Temporal Data Leakage in Random Splits: Shuffling time-series crop datasets allows models to learn from future harvest data, invalidating real-world predictive validity.",
+      "G4. Opacity of Neural Network Predictions: Standard MLPs and CNNs lack built-in attention masks to explain which specific soil or weather input drove the yield outcome.",
+      "G5. Lack of Farm Decision Integration: Agronomic principles (e.g. fertilizer effectiveness being strictly bounded by available rainfall) are rarely engineered into model feature sets.",
+    ],
     solution:
-      "Employed the TabNet deep learning architecture, which uses sequential attention masks to select salient features at each decision step, combining tree-like interpretability with neural network representation learning.",
+      "Engineered an interpretable deep learning framework utilizing the TabNet architecture. Evaluated on 19,000+ agricultural records spanning 55 crops and 28 Indian states. Enforced a chronological split (70% train: 2010–2018, 15% validation: 2019–2020, 15% test: 2021–2023) ensuring evaluation strictly mimics real-world forward prediction. Synthesized domain-specific features: Rainfall-Fertilizer Interaction Ratio, 3-year historical moving average yield (Yield-MA3), multi-year Yield Trend, and Historical Rainfall Deviation. TabNet's sequential attention mechanism dynamically selects which features to attend to at each decision step, providing built-in interpretability while generating highly accurate yield projections in metric tonnes per hectare.",
     architecture: {
-      summary: "TabNet Deep Tabular Learning & Inference Workflow",
+      summary:
+        "Agricultural Dataset Ingestion (55 Crops, 28 States) → Outlier Cleaning (Top/Bottom 1%) → Chronological Split (Train 2010–18, Val 2019–20, Test 2021–23) → Agronomic Feature Engineering (RF-Ratio, Yield-MA3, Trend, Deviation) → TabNet Feature Transformer & Attentive Transformer → Sequential Sparse Attention Masking → Yield Estimation (tons/ha) → Streamlit Interactive Dashboard",
       steps: [
-        { name: "Soil & Weather Data", detail: "NPK levels, soil pH, average temperature, rainfall, and crop type" },
-        { name: "Data Preprocessing", detail: "Robust scaling and categorical entity embeddings" },
-        { name: "TabNet Feature Transformer", detail: "Sparse attention masks prioritizing critical variables" },
-        { name: "Attentive Transformer", detail: "Sequential decision steps isolating feature importance" },
-        { name: "Yield Estimation", detail: "Yield projection in metric tonnes per hectare" },
+        {
+          name: "Multi-State Data Ingestion",
+          detail: "19,000+ records covering 55 crops across 28 Indian states and 3 seasons (Kharif, Rabi, Whole Year) from 1997 to 2020.",
+        },
+        {
+          name: "Data Cleaning & Outlier Removal",
+          detail: "Imputed missing values and eliminated top/bottom 1% extreme anomalies caused by natural disasters or reporting errors.",
+        },
+        {
+          name: "Agronomic Feature Engineering",
+          detail: "Derived Rainfall-Fertilizer Interaction Ratio, 3-year moving average yields, yield trends, and seasonal rainfall deviations.",
+        },
+        {
+          name: "Chronological Data Partitioning",
+          detail: "Strict temporal splitting: 70% training (2010–2018), 15% validation (2019–2020), and 15% test (2021–2023) eliminating data leakage.",
+        },
+        {
+          name: "TabNet Attentive Transformer",
+          detail: "Sequential decision steps compute sparse attention masks to contextually weight historical baseline vs current season inputs.",
+        },
+        {
+          name: "Yield Prediction & Interpretability",
+          detail: "Outputs yield in tons/hectare alongside feature importance attribution weights (Historical Yield 31.2%, Rainfall 22.8%, Fertilizer 18.4%).",
+        },
       ],
     },
-    techStack: ["PyTorch", "PyTorch-TabNet", "Scikit-Learn", "Pandas", "NumPy", "Streamlit", "Python"],
+    formulas: [
+      {
+        title: "Rainfall-Fertilizer Interaction Ratio (RF-Ratio)",
+        latex: "\\text{RF-Ratio} = \\frac{\\text{Rainfall}}{\\text{Fertilizer} + 1}",
+        explanation:
+          "Encodes the fundamental agronomic principle that fertilizer efficacy depends on moisture availability. Under drought conditions, excess fertilizer fails to absorb; under wet conditions, fertilizer becomes the limiting growth factor.",
+        variables: [
+          { symbol: "\\text{Rainfall}", meaning: "Seasonal precipitation in millimeters (mm)" },
+          { symbol: "\\text{Fertilizer}", meaning: "Nutrient application volume in kilograms/hectare" },
+        ],
+      },
+      {
+        title: "3-Year Historical Moving Average Yield (Yield-MA3)",
+        latex: "\\text{Yield-MA3} = \\frac{1}{3} \\sum_{i=1}^3 \\text{Yield}_{t-i}",
+        explanation:
+          "Captures the multi-year baseline productivity of the land, encoding inherent soil fertility, regional microclimate, and established farmer practices.",
+        variables: [
+          { symbol: "\\text{Yield}_{t-i}", meaning: "Harvest productivity achieved in antecedent year t - i" },
+        ],
+      },
+      {
+        title: "Yield Trend Ratio",
+        latex: "\\text{Yield-Trend} = \\frac{\\text{Yield}_{t-1} - \\text{Yield}_{t-3}}{\\text{Yield}_{t-3}}",
+        explanation:
+          "Identifies whether agricultural output in a given region is improving, stagnating, or degrading due to technological adoption or soil depletion.",
+      },
+      {
+        title: "Historical Rainfall Deviation",
+        latex: "\\text{Rainfall-Dev} = \\frac{\\text{Rainfall}_{\\text{current}} - \\text{Rainfall}_{\\text{avg-hist}}}{\\text{Rainfall}_{\\text{avg-hist}}}",
+        explanation:
+          "Measures current season deviation from long-term rainfall baselines, enabling TabNet to adjust predictions during drought or unseasonal monsoon deluges.",
+      },
+    ],
+    modules: [
+      {
+        title: "1. Data Preprocessing & Outlier Filtering Module",
+        description:
+          "Normalizes 19,000+ agricultural data rows across 28 Indian states. Filters out top and bottom 1% extreme anomalies from flood or drought disasters.",
+        inputs: ["Raw state agriculture datasets", "Crop statistics (1997–2020)"],
+        outputs: ["Cleaned numerical feature matrix", "Normalized categorical encodings"],
+      },
+      {
+        title: "2. Agronomic Temporal Feature Engineering Module",
+        description:
+          "Constructs derived agricultural indicators including the Rainfall-Fertilizer ratio, 1/3/5-year rolling moving averages, and historical rainfall deviations.",
+        inputs: ["Cleaned historical yield records", "Seasonal rainfall telemetry", "Fertilizer logs"],
+        outputs: ["RF-Ratio", "Yield-MA3", "Yield-Trend", "Rainfall-Dev"],
+      },
+      {
+        title: "3. TabNet Deep Tabular Learning Engine",
+        description:
+          "Employs sequential attention blocks and sparse feature masks to isolate salient variables at each decision step, balancing temporal baselines with immediate inputs.",
+        inputs: ["Chronologically split training tensors (2010–2018)"],
+        outputs: ["Trained TabNet model weights", "Feature importance attention scores"],
+      },
+      {
+        title: "4. Model Evaluation & Benchmark Comparison Subsystem",
+        description:
+          "Computes regression metrics (R², MAE, RMSE) and benchmarks TabNet against Random Forest, XGBoost, and LSTM baselines across Kharif, Rabi, and Whole Year crops.",
+        inputs: ["Future test tensors (2021–2023)"],
+        outputs: ["R² = 0.942", "MAE = 0.120 tons/ha", "Season-wise evaluation tables"],
+      },
+      {
+        title: "5. Interactive Streamlit Forecast Dashboard",
+        description:
+          "Web interface enabling farmers and policymakers to simulate varying fertilizer, crop choice, and rainfall conditions to forecast expected yield in tons/hectare.",
+        inputs: ["User input sliders", "Regional crop selection"],
+        outputs: ["Predicted yield forecast", "Interactive feature importance bar charts"],
+      },
+    ],
+    techStack: [
+      "Python 3.10+",
+      "PyTorch",
+      "PyTorch-TabNet (Google Architecture)",
+      "Scikit-Learn (Random Forest & Ensembles)",
+      "XGBoost",
+      "LSTM / Recurrent Networks",
+      "Pandas & NumPy",
+      "Matplotlib & Seaborn",
+      "Streamlit",
+    ],
     contribution:
-      "Curated multi-region agricultural datasets, performed exploratory data analysis and outlier cleaning, trained and tuned TabNet hyper-parameters, and built the live Streamlit interactive dashboard.",
+      "Co-authored the research paper and led model architecture engineering at SCOPE, VIT Vellore. Derived and implemented the agronomic feature equations (RF-Ratio, moving averages, yield trend); designed the chronological data splitting pipeline to prevent temporal leakage; trained and hyperparameter-tuned the TabNet network; benchmarked performance against Random Forest, XGBoost, and LSTM baselines; and developed the interactive Streamlit deployment.",
     implementation:
-      "Programmed in Python using PyTorch and the pytorch-tabnet library. Extracted feature importance masks to render real-time bar charts illustrating which soil parameters contributed most heavily to the prediction.",
+      "Implemented in Python using PyTorch and pytorch-tabnet. Trained for 500 epochs with early stopping (batch size 256, learning rate 0.002). Analyzed TabNet's sparse attention masks to quantify feature importance, confirming Historical Yield (31.2%) and Rainfall (22.8%) as the primary drivers. Deployed an interactive Streamlit application that renders real-time prediction curves and parameter sensitivity charts.",
     results: [
-      { metric: "0.93", label: "R² Test Score" },
-      { metric: "18.4%", label: "Accuracy Gain over Linear Baselines" },
-      { metric: "Transparent", label: "Interpretable Attention Masks" },
-      { metric: "Live", label: "Streamlit Cloud Deployment" },
+      { metric: "0.942", label: "R² Test Score", context: "Outperformed Random Forest (0.872), XGBoost (0.901), LSTM (0.884)" },
+      { metric: "0.120", label: "MAE (tons / hectare)", context: "Mean absolute error on true future test set" },
+      { metric: "0.183", label: "RMSE (tons / hectare)", context: "Tight error distribution across diverse crops" },
+      { metric: "19,000+", label: "Cleaned Agricultural Records", context: "55 crops across 28 Indian states (1997–2020)" },
+      { metric: "23.1%", label: "MAE Increase When Omitting Past Yield", context: "Proving importance of temporal historical memory" },
     ],
     challenges:
-      "Severe correlation between seasonal rainfall and temperature variables. Resolved by tuning TabNet's sparsity coefficient to prevent redundant feature weights.",
+      "Preventing temporal data leakage and avoiding model overfitting on extreme anomalous yields caused by rare natural disasters. Overcome by implementing strict chronological partitioning (testing strictly on 2021–2023 future data) and trimming top/bottom 1% anomalous extremes, ensuring conservative and agriculturally prudent predictions.",
     visual: (
       <div className="visual-bg-agri">
         <div className="atlas-window" aria-hidden="true">
@@ -787,20 +1025,20 @@ export const projectsData: Project[] = [
           <div className="atlas-content">
             <div className="window-top">
               <span>TabNet Yield Model</span>
-              <small>ACTIVE</small>
+              <small style={{ background: "#e0f8ea", color: "#0d7241" }}>R² = 0.942</small>
             </div>
             <div className="metric-row">
               <div>
-                <small>Predicted Output</small>
-                <strong>4.82 t/ha</strong>
-                <em>+18.4% vs regional avg</em>
+                <small>Predicted Output (Test Sample)</small>
+                <strong>4.82 tons / ha</strong>
+                <em>MAE: 0.120 tons/ha · Outperformed XGBoost</em>
               </div>
               <div className="chart-bars">
                 <i /><i /><i /><i /><i /><i /><i /><i />
               </div>
             </div>
             <div className="atlas-list">
-              <span>Feature Weight: NPK &amp; Rainfall</span>
+              <span>Attention: Past Yield (31.2%) · Rain (22.8%) · NPK (18.4%)</span>
               <i /><i />
             </div>
           </div>
@@ -880,69 +1118,204 @@ export const projectsData: Project[] = [
     id: "lossless-image-compression",
     number: "08",
     title: "Lossless Image Compression (CAP-RC+++)",
-    subtitle: "Context-Adaptive Range Coding & Reversible Color Transform",
+    subtitle: "Gradient Weighted Predictor and Context Adaptive Range Coding Based Lossless Image Compression",
     category: "research",
-    badge: "Live App",
+    badge: "Research Paper",
     description:
-      "A lossless image compression algorithm combining Context-Adaptive Range Coding, Gradient-Weighted Prediction, and YCoCg reversible color transform to maximize compression ratios with 100% mathematical reversibility.",
+      "A state-of-the-art lossless image compression framework integrating integer-safe gradient-weighted prediction, reversible YCoCg-R color transform, and multi-context adaptive range coding, achieving bit-perfect reconstruction (MSE = 0, PSNR = ∞).",
     highlights: [
-      "Context-Adaptive Range Coding (CAP-RC) for optimal entropy minimization",
-      "Gradient-weighted directional edge prediction eliminating spatial redundancy",
-      "Interactive Streamlit application measuring bitrates and PSNR/SSIM live",
+      "Published Research Paper authored at SCOPE, Vellore Institute of Technology",
+      "Gradient-weighted spatial predictor adapting pixel weights inversely to edge gradients",
+      "Multi-context range coding achieving fractional-bit near-Shannon-limit entropy compaction",
+      "Reversible integer YCoCg-R color decorrelation eliminating inter-channel redundancy",
+      "Achieves 3.0×–5.0× compression ratios, outperforming PNG by ~20% and JPEG-LS by ~15%",
     ],
-    tags: ["Data Preprocessing", "Algorithms", "Image Processing", "Python", "Streamlit"],
+    tags: [
+      "Research Paper",
+      "Lossless Compression",
+      "Entropy Coding",
+      "Range Coding",
+      "Information Theory",
+      "YCoCg-R Transform",
+      "Python",
+      "Streamlit",
+    ],
     githubUrl: "https://github.com/srikar123s/Lossless-Image-Compression",
     liveUrl: "https://lossless-image-compression-rangecoding.streamlit.app/",
-    overview:
-      "Lossless Image Compression (CAP-RC+++) is an algorithmic research project delivering high compression ratios on 24-bit RGB images without discarding a single pixel of information. Designed for critical domains like medical radiography and satellite imagery where lossy compression is unacceptable.",
-    problem:
-      "Uncompressed raw images require excessive bandwidth and storage, yet lossy algorithms (JPEG, WebP lossy) introduce compression artifacts that can distort medical diagnoses or remote-sensing calculations.",
-    solution:
-      "Engineered a multi-stage lossless compression pipeline: reversible integer color transformation (YCoCg-R), directional gradient-weighted spatial prediction, and adaptive range coding approaching the theoretical Shannon entropy limit.",
-    architecture: {
-      summary: "CAP-RC+++ Entropy Coding Pipeline",
-      steps: [
-        { name: "Raw RGB Image", detail: "24-bit uncompressed color matrix" },
-        { name: "YCoCg-R Transform", detail: "Reversible integer decorrelation eliminating color redundancy" },
-        { name: "Gradient Predictor", detail: "Directional spatial edge prediction generating residual error map" },
-        { name: "Adaptive Context", detail: "Dynamic probability modeling updating symbol frequency tables" },
-        { name: "Range Coder", detail: "Bitstream compaction approaching Shannon entropy limit" },
-        { name: "Reconstruction", detail: "100% lossless decoding verifying SSIM = 1.0000" },
+    academicMeta: {
+      type: "Independent Research",
+      courseCode: "Lossless Compression Research Paper",
+      supervision: "Faculty Guidance @ SCOPE, VIT University",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE)",
+      teamMembers: [
+        "M Shobith Reddy (22MIC0004)",
+        "K. Vaishnavi (22MIC0008)",
+        "Bandaru Vishnu Teja (22MIC0007)",
+        "Yalamarthi Srikar (22MIC0038)",
       ],
     },
-    techStack: ["Python", "NumPy", "Image Processing", "Range Coding", "Information Theory", "Streamlit"],
+    overview:
+      "CAP-RC+++ is a state-of-the-art lossless image compression technique developed and published by researchers at VIT Vellore. High-resolution digital imaging in medical diagnostics, remote sensing, and archival storage requires significant data reduction without losing a single bit of information (MSE = 0, PSNR = ∞). While lossy schemes (JPEG, WebP) discard high frequencies and standard lossless codecs (PNG DEFLATE, JPEG-LS) rely on static Huffman tables or fixed linear predictors, CAP-RC+++ tightly couples an integer-safe, gradient-weighted spatial predictor with dynamic multi-context range coding. By combining an exact reversible integer YCoCg color transform with local gradient-sensitive residual modeling, the algorithm achieves 3.0× to 5.0× compression over raw image bitstreams, consistently outperforming PNG by 20–25% and JPEG-LS by 10–15% on natural and synthetic textures.",
+    problem:
+      "Existing lossless image codecs are trapped in a fundamental trade-off: (1) Lightweight but Inflexible Standards (PNG, JPEG-LS) — PNG relies on static DEFLATE/Huffman coding that cannot adapt to local image statistics, while JPEG-LS's LOCO-I predictor fails on sharp diagonal edges and uses fixed-length Golomb-Rice codes that cannot allocate fractional bits; and (2) Computationally Prohibitive Systems (JPEG 2000, CALIC) — these formats achieve superior compression through complex wavelet transforms and multi-pass arithmetic coding, but their severe CPU/RAM overhead renders them impractical for lightweight or real-time deployment.",
+    literatureGaps: [
+      "G1. Limited Situation Awareness: JPEG-LS's linear predictor fails on sharp edges, fine textures, or irregular patterns, producing high residual variance.",
+      "G2. Static Probability Modeling: PNG DEFLATE and Huffman coders use static or pre-computed symbol frequency tables that cannot adapt to local variance.",
+      "G3. Inefficient Integer Bit Allocation: Huffman and Golomb coders round code lengths to integer bits, incurring substantial quantization overhead on fractional symbol probabilities.",
+      "G4. Decoupled Spatial and Statistical Modeling: Conventional pipelines separate spatial prediction and entropy coding into non-interacting stages, missing cross-correlations.",
+      "G5. Lack of Inter-Channel Color Decorrelation: Many coders compress R, G, and B planes independently, failing to remove inter-channel color redundancy.",
+    ],
+    solution:
+      "Engineered the CAP-RC+++ framework, featuring a three-stage compression architecture: (1) Reversible Integer YCoCg-R Transform to decorrelate color channels without floating-point error; (2) Gradient-Weighted Context-Adaptive Prediction where neighboring pixels (Left A, Top B, Top-Left C) are weighted inversely to horizontal (∇h) and vertical (∇v) gradient magnitudes, grouping residuals into four gradient-based contexts; and (3) Dynamic Range Coding which continuously updates adaptive cumulative frequency tables per context, allocating fractional bits with near-Shannon-limit efficiency. The decompressed image achieves exact bit-level identity with the input (MSE = 0, PSNR = ∞).",
+    architecture: {
+      summary:
+        "Input RGB Image (24-bit) → Reversible Integer YCoCg-R Transform → Gradient-Weighted Context-Adaptive Prediction (A, B, C) → Residual Error Map Generation → 4-Context Gradient Assignment (|A - B|) → Dynamic Range Coding (Adaptive Cumulative Frequencies) → Compressed Bitstream → Range Decoding → Inverse Prediction → Inverse YCoCg-R → Bit-Exact RGB Image (MSE = 0, PSNR = ∞)",
+      steps: [
+        {
+          name: "24-bit RGB Acquisition & Preprocessing",
+          detail: "Accepts raw bitmap rasters (BMP, PNG, TIFF) and parses uncompressed 8-bit per channel color arrays.",
+        },
+        {
+          name: "Reversible Integer YCoCg-R Transform",
+          detail: "Decorrelates RGB into Luminance (Y) and Chrominance (Co, Cg) using integer-only lifting steps with zero rounding drift.",
+        },
+        {
+          name: "Gradient-Weighted Spatial Predictor",
+          detail: "Calculates local horizontal (∇h = |A - C|) and vertical (∇v = |B - C|) gradients to compute inverse-distance pixel weights.",
+        },
+        {
+          name: "Context Classification & Residual Extraction",
+          detail: "Computes residual R(x,y) = I(x,y) - P(x,y) and assigns it to one of four discrete contexts based on edge strength |A - B|.",
+        },
+        {
+          name: "Context-Adaptive Range Coding",
+          detail: "Encodes residuals into an optimal bitstream using dynamic cumulative frequency intervals with fractional-bit precision.",
+        },
+        {
+          name: "Exact Lossless Reconstruction",
+          detail: "Inverts range coding, adds predicted values, and reverses YCoCg-R, verifying MSE = 0 and PSNR = ∞.",
+        },
+      ],
+    },
+    formulas: [
+      {
+        title: "Reversible Integer YCoCg-R Color Transform",
+        latex: "C_o = R - B, \\quad t = B + (C_g \\gg 1), \\quad C_g = G - t, \\quad Y = t + (C_o \\gg 1)",
+        explanation:
+          "Decorrelates RGB channels into luminance (Y) and orange/green chrominance (Co, Cg) using exact bitwise right-shift integer arithmetic, guaranteeing mathematical invertibility without floating-point drift.",
+      },
+      {
+        title: "Inverse Integer YCoCg-R Transform",
+        latex: "t = Y - (C_o \\gg 1), \\quad B = t - (C_g \\gg 1), \\quad G = C_g + t, \\quad R = B + C_o",
+        explanation:
+          "Reconstructs original red, green, and blue color channels with 100% bit-exact precision during decompression.",
+      },
+      {
+        title: "Gradient-Weighted Adaptive Predictor",
+        latex: "P(x, y) = \\frac{A \\cdot w_A + B \\cdot w_B}{w_A + w_B} \\quad \\text{where} \\quad w_A = \\frac{1}{1 + \\nabla_v}, \\quad w_B = \\frac{1}{1 + \\nabla_h}",
+        explanation:
+          "Computes predicted pixel value P(x,y) from left neighbor A and upper neighbor B. In horizontal edge regimes (large ∇v), wA increases; in vertical edge regimes (large ∇h), wB dominates, adapting automatically to directional edges.",
+        variables: [
+          { symbol: "A", meaning: "Left spatial neighbor I(x-1, y)" },
+          { symbol: "B", meaning: "Upper spatial neighbor I(x, y-1)" },
+          { symbol: "C", meaning: "Upper-left diagonal spatial neighbor I(x-1, y-1)" },
+          { symbol: "\\nabla_h", meaning: "Horizontal gradient |A - C|" },
+          { symbol: "\\nabla_v", meaning: "Vertical gradient |B - C|" },
+        ],
+      },
+      {
+        title: "Range Coder Interval Sub-Division",
+        latex: "\\text{high} = \\text{low} + \\frac{\\text{range} \\cdot \\text{cumfreq}[r+1]}{\\text{total}} - 1, \\quad \\text{low} = \\text{low} + \\frac{\\text{range} \\cdot \\text{cumfreq}[r]}{\\text{total}}",
+        explanation:
+          "Iteratively refines numeric sub-intervals for residual symbol r using the context's cumulative frequency table, achieving fractional-bit encoding near the Shannon entropy bound.",
+      },
+      {
+        title: "Bits Per Pixel (bpp) & Compression Ratio (CR)",
+        latex: "\\text{bpp} = \\frac{\\text{Compressed Size (bytes)} \\times 8}{\\text{Height} \\times \\text{Width} \\times 3}, \\quad \\text{CR} = \\frac{\\text{Original Size}}{\\text{Compressed Size}}",
+        explanation:
+          "Standard information-theoretic metrics measuring data compaction per color channel and total physical file reduction.",
+      },
+    ],
+    modules: [
+      {
+        title: "1. Color Space Decorrelation Subsystem (YCoCg-R)",
+        description:
+          "Removes cross-channel color correlation prior to spatial prediction using reversible integer lifting steps.",
+        inputs: ["24-bit RGB raw pixel array"],
+        outputs: ["Decorrelated Y, Co, Cg channel planes"],
+      },
+      {
+        title: "2. Gradient-Weighted Directional Predictor",
+        description:
+          "Evaluates spatial gradients ∇h and ∇v to compute local edge-sensitive weights for neighbors A and B, minimizing residual variance.",
+        inputs: ["Channel planes (Y, Co, Cg)"],
+        outputs: ["Predicted pixel matrix P", "Residual error map R = I - P"],
+      },
+      {
+        title: "3. 4-Context Gradient Classifier",
+        description:
+          "Partitions residual errors into four distinct probability contexts based on local edge magnitude |A - B|.",
+        inputs: ["Neighbor difference |A - B|"],
+        outputs: ["Context ID (0, 1, 2, or 3)"],
+      },
+      {
+        title: "4. Multi-Context Range Coding Engine",
+        description:
+          "Maintains adaptive cumulative frequency distributions for each context, compressing residuals into a compact binary bitstream.",
+        inputs: ["Contextual residuals", "Dynamic symbol frequency tables"],
+        outputs: ["Compressed binary bitstream", "Header metadata"],
+      },
+      {
+        title: "5. Decompression & Bit-Perfect Verification Engine",
+        description:
+          "Reverses range decoding, restores pixel values via inverse prediction, and verifies MSE = 0 and PSNR = ∞.",
+        inputs: ["Compressed bitstream"],
+        outputs: ["Bit-exact reconstructed image", "SSIM = 1.0000, PSNR = ∞ confirmation"],
+      },
+    ],
+    techStack: [
+      "Python 3.10+",
+      "NumPy (Vectorized Matrix Arithmetic)",
+      "Bitarray (Binary Bitstream Handling)",
+      "PIL / Pillow (Image I/O)",
+      "Information Theory & Entropy Modeling",
+      "Streamlit (Interactive Benchmark UI)",
+      "Google Colab (Benchmarking Environment)",
+    ],
     contribution:
-      "Formulated the gradient-weighted directional prediction equations, programmed the reversible integer YCoCg-R transformation matrix, implemented the range coder in Python, and published the interactive benchmark web app.",
+      "Co-authored the research paper and formulated algorithmic components at SCOPE, VIT Vellore. Derived the gradient-weighted directional prediction equations; implemented the reversible integer YCoCg-R matrix transformations; programmed the multi-context range coder in Python using bitarray; and built the interactive Streamlit benchmark dashboard comparing CAP-RC+++ against PNG and JPEG-LS.",
     implementation:
-      "Strictly enforced integer-only arithmetic to avoid floating-point rounding errors during forward and inverse color transformations. Integrated NumPy vectorized matrix operations for fast execution.",
+      "Programmed in Python using NumPy for vectorized pixel grid processing and bitarray for low-level bitstream packing. Tested on diverse benchmark suites (natural landscapes, desert arch, coffee bean textures, and synthetic screenshots) on a 12 GB RAM virtual instance. Verified that residuals sharply peak around zero, enabling the range coder to achieve near-optimal compression ratios.",
     results: [
-      { metric: "62.1%", label: "File Space Reduction" },
-      { metric: "1.0000", label: "SSIM (Exact Mathematical Lossless)" },
-      { metric: "2.4x", label: "Compression Gain over Standard GZIP" },
-      { metric: "Live", label: "Streamlit Cloud Deployment" },
+      { metric: "3.0× – 5.0×", label: "Compression Ratio vs Raw Image", context: "Achieving 4.6× (0.83 bpp) on benchmark samples" },
+      { metric: "MSE = 0", label: "Mean Squared Error", context: "Guaranteed 100% mathematical bit-perfect fidelity" },
+      { metric: "PSNR = ∞", label: "Peak Signal-to-Noise Ratio", context: "Zero loss of information across all RGB channels" },
+      { metric: "~20%", label: "Compression Gain Over PNG (DEFLATE)", context: "Superior fractional-bit entropy allocation" },
+      { metric: "~10–15%", label: "Compression Gain Over JPEG-LS", context: "Driven by dynamic context adaptation on complex textures" },
     ],
     challenges:
-      "Eliminating numerical drift during inverse color transformation. Overcome by designing an integer-mapped lifting scheme for the YCoCg-R transform.",
+      "Preventing floating-point roundoff drift during color transformation and range division while maintaining fast execution on Python CPUs. Overcome by engineering an integer-only lifting scheme for YCoCg-R and using integer scaling arithmetic for the cumulative range coder intervals, guaranteeing that every decompressed pixel perfectly matches the source byte.",
     visual: (
       <div className="visual-bg-compression">
         <div className="compression-mockup" aria-hidden="true">
           <div className="comp-top">
-            <span>CAP-RC+++ PIPELINE</span>
-            <span style={{ color: "var(--acid)" }}>100% REVERSIBLE</span>
+            <span>CAP-RC+++ LOSSLESS PIPELINE</span>
+            <span style={{ color: "var(--acid)" }}>MSE = 0 · PSNR = ∞</span>
           </div>
           <div className="comp-grid">
             <div className="comp-box">
-              <small>ORIGINAL SIZE</small>
+              <small>RAW 24-BIT BITMAP</small>
               <strong>2.40 MB</strong>
             </div>
             <div className="comp-box">
-              <small>COMPRESSED</small>
-              <strong style={{ color: "var(--acid)" }}>0.91 MB</strong>
+              <small>CAP-RC+++ BITSTREAM</small>
+              <strong style={{ color: "var(--acid)" }}>0.52 MB (4.6×)</strong>
             </div>
           </div>
           <div className="comp-bottom">
-            <span>SAVINGS: 62.1%</span>
-            <span>SSIM: 1.0000 (LOSSLESS)</span>
+            <span>SAVINGS: ~78.3%</span>
+            <span>OUTPERFORMS PNG BY 20% &amp; JPEG-LS BY 15%</span>
           </div>
         </div>
       </div>
@@ -1090,3 +1463,4 @@ export const projectsData: Project[] = [
     ),
   },
 ]
+
