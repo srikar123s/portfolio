@@ -1826,47 +1826,195 @@ export const projectsData: Project[] = [
     id: "webstore-ar-vr",
     number: "09",
     title: "Webstore AR/VR",
-    subtitle: "Interactive WebXR 3D E-Commerce & Augmented Reality Experience",
+    subtitle: "Interactive WebXR 3D E-Commerce, Multi-Object Spatial AR & Collision Detection",
     category: "sde",
     badge: "WebXR & 3D",
     description:
-      "An interactive 3D web storefront utilizing WebXR and Three.js, allowing users to inspect realistic 3D furniture models and project them to true scale in physical rooms using Augmented Reality.",
+      "An augmented reality e-commerce web platform coupling React 17 with Google @google/model-viewer and Three.js/WebXR. Enables single- and multi-object true-to-scale AR placement in domestic rooms, 3D spatial collision detection, and an Express 5 HTTPS backend with JWT authentication.",
     highlights: [
-      "Real-time 3D model rendering and lighting in the browser with Three.js orbit controls",
-      "WebXR Augmented Reality hit-testing for true-to-scale physical room placement",
-      "Pure browser-based experience requiring zero external app installations",
+      "Dual AR visualization pipelines: Google @google/model-viewer for single-object WebXR/Scene Viewer/Quick Look, and Three.js for multi-object spatial AR",
+      "Interactive 3D scene controls: 360° orbit rotation, multi-touch pinch-to-scale, and gesture-driven angular orientation",
+      "Spatial proximity collision detection engine calculating Euclidean distance (d < 0.5 units) to prevent mesh clipping",
+      "Full e-commerce customer journey with catalog, product detail, persistent cart, wishlist, and multi-model comparison",
+      "Node.js & Express 5 HTTPS backend with JWT authentication, bcryptjs salt hashing, and order history tracking",
+      "Cross-platform asset pipeline serving GLTF/GLB formats for Android Scene Viewer and USDZ for iOS Quick Look",
     ],
-    tags: ["Three.js", "WebXR", "JavaScript", "Web Development", "HTML5/CSS3", "3D Graphics"],
+    tags: [
+      "Three.js",
+      "WebXR API",
+      "Augmented Reality",
+      "@google/model-viewer",
+      "React 17",
+      "Node.js & Express 5",
+      "JWT & bcryptjs",
+      "GLTF / GLB / USDZ",
+      "JavaScript",
+    ],
     githubUrl: "https://github.com/srikar123s/webstore",
+    academicMeta: {
+      type: "Independent Research",
+      courseCode: "WebXR 3D Spatial Computing & E-Commerce",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
+    },
     overview:
-      "Webstore AR/VR is a modern 3D e-commerce showcase built on Three.js and WebXR. It empowers online shoppers to preview physical home products directly in 3D in their web browser and project them into their living spaces via Augmented Reality before making a purchase.",
+      "Webstore AR/VR is an augmented reality e-commerce web application engineered to eliminate the uncertainty of purchasing domestic furniture and decorative items online. Traditional e-commerce catalogs force consumers to rely on flat 2D photography that fails to convey physical volume, proportions, or aesthetic harmony with existing furniture. Webstore AR/VR solves this by integrating dual 3D/AR pipelines: Google @google/model-viewer for lightweight, single-object WebXR/Quick Look placement with informative hotspot annotations, and a custom Three.js engine for simultaneous multi-object AR room layout. The platform implements real-time 3D spatial collision detection, multi-touch pinch scaling and rotation, persistent cart/wishlist management, and a secure Express 5 HTTPS API backend.",
     problem:
-      "Online furniture and home decor purchases suffer from high return rates because 2D static photos fail to convey physical scale, depth, and aesthetics in a customer's actual living environment.",
+      "Online furniture and home decor retail experiences suffer from consistently high product return rates (25–35%) caused by three spatial visualization barriers: (1) Spatial Scale Disconnect — 2D product photos cannot convey whether a desk or sofa will physically fit within a customer's specific room dimensions; (2) Inability to Evaluate Multi-Item Harmony — existing apps display only isolated single items, preventing shoppers from previewing how complementary items (e.g. coffee tables and armchairs) look together; and (3) Friction of Native App Downloads — proprietary AR apps demand large app-store downloads, causing high user abandonment before product engagement.",
+    literatureGaps: [
+      "G1. Flat 2D Visualization Blindspots: Conventional 2D photography cannot convey physical dimensions, volume, or depth of furniture in domestic spaces, inflating return rates.",
+      "G2. Lack of Multi-Object Spatial Arrangement: Most AR platforms only permit viewing one isolated product at a time, failing to assess how multiple furniture items harmonize together.",
+      "G3. Mesh Interpenetration & Clipping: Basic AR placement tools lack real-time distance and bounding-box collision detection, allowing virtual models to overlap or clip unrealistically into walls.",
+      "G4. High App Installation Friction: Native mobile AR applications require multi-hundred-megabyte app downloads, driving high user abandonment before product inspection.",
+      "G5. Cross-Platform Asset Fragmentation: Incompatibility between Android WebXR/Scene Viewer (GLTF/GLB) and iOS Quick Look (USDZ) requires automated multi-format model routing.",
+    ],
     solution:
-      "Created an interactive web store featuring 3D product viewports, realistic PBR materials, orbit/zoom controls, and WebXR-based surface-detection AR that places virtual items on physical floors to scale.",
+      "Built an interactive web storefront uniting React 17 with advanced WebXR rendering engines and a Node.js/Express 5 backend. The frontend provides a 6-product interactive catalog with dual AR experiences: single-item inspection using Google @google/model-viewer (supporting Android Scene Viewer, iOS Quick Look USDZ, and WebXR), and multi-object scene arrangement via Three.js (supporting simultaneous multi-model placement from the wishlist). Implemented a 3D Euclidean distance collision detection algorithm that warns users whenever models are placed within 0.5 units of each other. The backend provides secure RESTful HTTPS endpoints with JWT tokens and bcrypt password hashing for registration, authentication, and order history tracking.",
     architecture: {
-      summary: "Three.js & WebXR 3D Storefront Architecture",
+      summary:
+        "React 17 SPA (Catalog, CartContext, AuthContext) → Dual AR Engine (Google Model-Viewer & Three.js/WebXR) → Real-Time 3D Collision Evaluator → Express 5 HTTPS REST API (JWT & bcryptjs) → Order & Inventory Services",
       steps: [
-        { name: "Web Storefront", detail: "Product catalog showcasing 3D furniture models" },
-        { name: "Three.js Engine", detail: "WebGL rendering with PBR textures, directional lighting, and shadows" },
-        { name: "Orbit Controls", detail: "Smooth 360-degree rotation, pitch, and zoom manipulation" },
-        { name: "WebXR Session", detail: "Initiates device camera access and horizontal plane detection" },
-        { name: "AR Projection", detail: "Hit-testing places true-to-scale virtual furniture in physical room" },
+        {
+          name: "Catalog Presentation & State Layer",
+          detail: "React 17 single-page application utilizing React Router DOM v6 across 12 distinct routes. Centralizes cart and authentication state via React Context API.",
+        },
+        {
+          name: "Single-Object Model-Viewer Subsystem",
+          detail: "Integrates Google @google/model-viewer for 360° orbit rotation, zoom, hotspot annotations, and one-tap AR launching on Android and iOS.",
+        },
+        {
+          name: "Multi-Object Three.js AR Scene Engine",
+          detail: "Custom Three.js canvas permitting users to place and arrange multiple 3D models simultaneously in their physical room via WebXR hit-testing.",
+        },
+        {
+          name: "Real-Time 3D Spatial Collision Engine",
+          detail: "Computes continuous Euclidean distance between model centroids, triggering visual warnings when proximity falls below 0.5 units.",
+        },
+        {
+          name: "Multi-Touch Gesture Processor",
+          detail: "Translates two-finger touch gestures into real-time uniform scale adjustments and angular orientation updates along the vertical Y-axis.",
+        },
+        {
+          name: "Cross-Platform Model Asset Pipeline",
+          detail: "Serves optimized GLTF/GLB binary assets for WebGL and Android Scene Viewer, paired with USDZ representations for iOS Quick Look.",
+        },
+        {
+          name: "Express 5 HTTPS REST Backend",
+          detail: "Node.js server exposing 6 API endpoint groups for registration, JWT authentication, order placement, and historical order querying.",
+        },
       ],
     },
-    techStack: ["JavaScript", "Three.js", "WebXR API", "WebGL", "HTML5", "CSS3", "glTF / USDZ"],
+    formulas: [
+      {
+        title: "3D Spatial Collision Distance Formulation",
+        latex: "d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}",
+        explanation:
+          "Calculates real-time 3D Euclidean distance between the centroid coordinates (x1, y1, z1) and (x2, y2, z2) of two virtual models in the Three.js scene graph. If d < 0.5 units, the engine triggers an automatic collision warning to prevent virtual mesh clipping.",
+        variables: [
+          { symbol: "d", meaning: "Euclidean distance between model centroids in 3D world units" },
+          { symbol: "(x_1, y_1, z_1)", meaning: "Spatial coordinates of primary virtual model" },
+          { symbol: "(x_2, y_2, z_2)", meaning: "Spatial coordinates of secondary virtual model" },
+        ],
+      },
+      {
+        title: "Touch Pinch-to-Scale Transform",
+        latex: "\\text{Scale Factor} = \\frac{\\|\\mathbf{p}_1^{(t)} - \\mathbf{p}_2^{(t)}\\|}{\\|\\mathbf{p}_1^{(0)} - \\mathbf{p}_2^{(0)}\\|}",
+        explanation:
+          "Computes dynamic scale multiplier during two-finger touch manipulation in AR mode, calculating the ratio between the instantaneous separation of touch points p1, p2 at time t and their initial touch separation at time 0.",
+        variables: [
+          { symbol: "\\mathbf{p}_1, \\mathbf{p}_2", meaning: "2D screen touch point coordinate vectors" },
+        ],
+      },
+      {
+        title: "Gesture-Driven Angular Orientation",
+        latex: "\\Delta \\theta = \\operatorname{atan2}\\left(y_2^{(t)} - y_1^{(t)}, \\, x_2^{(t)} - x_1^{(t)}\\right) - \\operatorname{atan2}\\left(y_2^{(0)} - y_1^{(0)}, \\, x_2^{(0)} - x_1^{(0)}\\right)",
+        explanation:
+          "Calculates the differential rotation angle delta theta applied around the vertical Y-axis from two-finger touch vectors, providing natural rotational placement on flat floor surfaces in WebXR.",
+      },
+      {
+        title: "Cumulative Cart Valuation Formulation",
+        latex: "\\text{Total} = \\sum_{i=1}^{n} P_i \\cdot Q_i",
+        explanation:
+          "Calculates total checkout order value by multiplying item price Pi by selected quantity Qi across all n active cart items.",
+      },
+      {
+        title: "JWT Security Session Horizon",
+        latex: "t_{\\text{expire}} = t_{\\text{issued}} + 3600 \\text{ seconds (1 hour)}",
+        explanation:
+          "Enforces standard 1-hour session token validity for customer authentication tokens generated by the Express backend.",
+      },
+    ],
+    modules: [
+      {
+        title: "1. 3D Product Catalog & Taxonomy Engine",
+        description:
+          "Showcases 6 interactive furniture products (chairs, tables, desk lamps) with realistic PBR textures, price, descriptions, and dimensional specs.",
+        inputs: ["Product metadata records", "PBR 3D asset paths"],
+        outputs: ["Responsive product grid", "Product detail pages", "Filterable category taxonomy"],
+      },
+      {
+        title: "2. Single-Object Model-Viewer Subsystem",
+        description:
+          "Integrates Google @google/model-viewer to render 3D assets with orbit controls, interactive hotspot annotations, QR code desktop-to-mobile handover, and Quick Look/Scene Viewer AR.",
+        inputs: ["GLB / USDZ file streams", "Hotspot annotation data"],
+        outputs: ["360° interactive 3D canvas", "Direct AR launch triggers"],
+      },
+      {
+        title: "3. Multi-Object Three.js AR Spatial Scene Subsystem",
+        description:
+          "Custom Three.js WebXR application (MultiARMobileViewer) allowing shoppers to select multiple items from their wishlist and arrange them simultaneously in their room.",
+        inputs: ["Wishlist item identifiers", "WebXR plane hit-test matrices"],
+        outputs: ["Multi-model AR scene", "Real-time touch transformation controls"],
+      },
+      {
+        title: "4. Real-Time 3D Spatial Collision Detection Engine",
+        description:
+          "Evaluates pairwise Euclidean distances across placed 3D meshes, displaying collision bounding indicators when distance d falls below 0.5 units.",
+        inputs: ["3D object world coordinates"],
+        outputs: ["Distance metrics", "Visual proximity warning banners"],
+      },
+      {
+        title: "5. Persistent Cart & Wishlist Session State Engine",
+        description:
+          "React Context API implementation (CartContext) handling item addition, quantity modification, subtotal calculation, and multi-model wishlist staging.",
+        inputs: ["User cart actions", "Product metadata"],
+        outputs: ["Active cart state", "Wishlist models ready for multi-AR inspection"],
+      },
+      {
+        title: "6. Express 5 REST API & JWT Authentication Gateway",
+        description:
+          "Node.js HTTPS server providing 6 API route groups: /api/register, /api/login, /api/products, and /api/orders with bcryptjs password salt-hashing.",
+        inputs: ["Customer credentials", "Order payloads", "JWT bearer tokens"],
+        outputs: ["Authenticated user sessions", "Order confirmation records", "Order history list"],
+      },
+    ],
+    techStack: [
+      "React 17",
+      "React Router DOM v6",
+      "@google/model-viewer",
+      "Three.js",
+      "WebXR Device API",
+      "WebGL",
+      "Node.js & Express 5",
+      "JSON Web Tokens (JWT)",
+      "bcryptjs",
+      "HTML5 / CSS3",
+      "GLTF / GLB / USDZ 3D Assets",
+    ],
     contribution:
-      "Constructed the Three.js 3D viewport, implemented touch and mouse orbit camera controls, integrated WebXR AR hit-testing, and built the responsive web catalog interface.",
+      "Architected and implemented the Webstore AR/VR application at SCOPE, VIT Vellore. Built the React 17 frontend with dual AR inspection pipelines (Google @google/model-viewer and custom Three.js WebXR multi-model placement); formulated and coded the 3D Euclidean collision distance warning engine; designed the multi-touch pinch-to-scale and gesture rotation math; developed the Express 5 HTTPS backend with JWT authentication; and optimized 3D GLB/USDZ asset loading for browser performance.",
     implementation:
-      "Utilized Three.js for scene graph management, directional light rigging, and glTF 3D model parsing. Wired WebXR APIs for AR surface tracking on compatible mobile browsers.",
+      "Developed using React 17 for UI composition across 26 JavaScript files and 19 CSS stylesheets (2,579 JS lines, 2,467 CSS lines). Configured Google @google/model-viewer for single-item AR with automated fallback to iOS Quick Look (USDZ) or Android Scene Viewer. Created a Three.js multi-object WebXR canvas handling plane hit-testing, ambient lighting, and raycaster-based object selection. Structured the backend in Express 5 with modular REST routes and JWT authentication.",
     results: [
-      { metric: "60 FPS", label: "Smooth 3D Browser Rendering" },
-      { metric: "True Scale", label: "Accurate AR Metric Placement" },
-      { metric: "Zero Apps", label: "Runs Purely in Web Browser" },
-      { metric: "Open Source", label: "GitHub Codebase Available" },
+      { metric: "6 Products", label: "Interactive 3D Furniture Catalog", context: "GLTF/GLB & USDZ formats" },
+      { metric: "Dual AR", label: "Visualization Engines", context: "Google model-viewer & Three.js WebXR" },
+      { metric: "d < 0.5 Units", label: "Collision Proximity Threshold", context: "Real-time 3D Euclidean distance" },
+      { metric: "332 KB", label: "Production Gzip JS Bundle", context: "Zero native app download required" },
+      { metric: "12 Routes", label: "Client Navigation Paths", context: "Catalog, details, 3D viewers, cart, checkout" },
+      { metric: "6 Endpoints", label: "Backend API Groups", context: "Authentication, catalog, and orders" },
     ],
     challenges:
-      "Maintaining smooth 60 FPS frame rates on low-end mobile graphics chips. Overcome by optimizing mesh polygon counts and compressing PBR textures.",
+      "Accommodating divergent AR runtimes across Android (WebXR/Scene Viewer with GLTF) and iOS (ARKit Quick Look with USDZ) without forcing users to install third-party apps. Solved by implementing an adaptive model-routing layer that inspects the browser user-agent and dynamically serves either @google/model-viewer with Scene Viewer intent or an anchor tag linking directly to the USDZ asset for native iOS Quick Look rendering.",
     visual: (
       <div className="visual-bg-ar">
         <div className="ar-mockup" aria-hidden="true">
@@ -1896,48 +2044,217 @@ export const projectsData: Project[] = [
     id: "studymate",
     number: "10",
     title: "Studymate",
-    subtitle: "Smart Study Planner with ML Difficulty Estimation & AI Chatbot",
+    subtitle: "AI-Powered Academic Study Planner with OCR Syllabus Parsing, ML Difficulty Scoring & Exam-Aware Scheduling",
     category: "sde",
-    badge: "Full Stack",
+    badge: "Full Stack / AI",
     description:
-      "An intelligent academic study planner that extracts syllabus topics from notes and images, estimates learning difficulty using ML, and generates dynamic drag-and-drop revision calendars with an AI study chatbot.",
+      "A full-stack intelligent study planner engineered with React 18/Vite and a 23-endpoint FastAPI backend. Features EasyOCR/Tesseract syllabus digitization, Scikit-learn topic difficulty estimation, exam-horizon workload density scheduling, and a schedule-aware AI study chatbot.",
     highlights: [
-      "Automated topic extraction from syllabus notes with ML-based difficulty estimation",
-      "Interactive drag-and-drop study calendar with streak tracking and completion analytics",
-      "Built-in AI study assistant chatbot for instant topic review, exam prep, and guidance",
+      "Dual-engine OCR syllabus extraction pipeline utilizing EasyOCR and Tesseract to digitize physical syllabus sheets",
+      "Machine learning topic difficulty classifier trained with Scikit-learn (predicting easy, medium, hard)",
+      "Exam-aware dynamic study scheduling algorithm optimizing daily session capacity based on workload density",
+      "Full-featured React 18 / Vite frontend with React Big Calendar and React DnD for drag-and-drop revision management",
+      "Schedule-aware conversational AI study tutor built on FastAPI with context-grounded academic interrogation",
+      "Modular FastAPI backend with 23 REST API endpoints across 7 route modules and 7,490+ lines of codebase",
     ],
-    tags: ["Python", "Web Development", "REST APIs", "AI Assistant", "Data Analytics", "Full Stack"],
+    tags: [
+      "React 18 & Vite",
+      "FastAPI & Python",
+      "EasyOCR & Tesseract",
+      "Scikit-learn (ML)",
+      "React Big Calendar",
+      "React DnD",
+      "Chart.js",
+      "JWT Authentication",
+      "Hugging Face AI",
+    ],
     githubUrl: "https://github.com/srikar123s/Studymate",
+    academicMeta: {
+      type: "Independent Research",
+      courseCode: "Intelligent Educational Planning & Applied NLP",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
+    },
     overview:
-      "Studymate is an intelligent academic planner designed to help university students organize their coursework. It automatically parses uploaded syllabus images or notes, estimates topic difficulty, auto-schedules study blocks into an interactive calendar, and provides an integrated AI chatbot for continuous revision support.",
+      "StudyMate is an artificial-intelligence-powered academic study planner and learning management platform engineered to resolve the fragmentation of modern university coursework. College students typically organize their academic schedules using disconnected spreadsheets, mobile reminders, and physical notes that lack intelligence regarding exam timelines, syllabus complexity, or learning progression. Built with a React 18/Vite frontend and a high-performance FastAPI Python backend (7,490+ source lines across 56 files), StudyMate integrates four core educational workflows into a unified experience: (1) automated syllabus digitization via EasyOCR and Tesseract with image contrast enhancement; (2) machine-learning topic difficulty classification (easy, medium, hard) via Scikit-learn; (3) an exam-horizon workload density algorithm that computes daily study session capacity and schedules revision blocks; and (4) an interactive drag-and-drop React Big Calendar alongside a context-grounded AI conversational study companion.",
     problem:
-      "Students often misjudge the time needed to master difficult topics, leading to cramming and suboptimal exam outcomes. Traditional calendar tools require tedious manual entry and lack academic intelligence.",
+      "University students face structural academic challenges that lead to chronic procrastination, suboptimal exam performance, and cognitive overload: (1) Manual Syllabus Typing Overhead — students waste significant time manually typing dozens of chapter topics and sub-units from physical handouts into digital tools; (2) Static, Uncalibrated Planning — generic calendar tools allocate uniform 1-hour blocks without recognizing that an advanced quantum mechanics topic requires 3× the study quantum of an introductory definition; and (3) Clustered Exam Congestion — when multiple finals occur in the same week, students fail to compute workload density, leading to last-minute cramming without structured revision intervals.",
+    literatureGaps: [
+      "G1. Manual Syllabus Digitization Overhead: Students waste substantial time manually typing chapter topics and units from printed physical handouts into digital planners.",
+      "G2. Static, Uniform Schedule Allocation: Standard calendar apps allocate fixed study durations without adjusting for subject difficulty or remaining exam horizons.",
+      "G3. Lack of Workload Density Awareness: Traditional study tools fail to calculate required daily study sessions dynamically when multiple exams cluster together.",
+      "G4. Disconnected Academic Assistance: Chatbots operate in isolation without knowledge of a student's impending deadlines, topic difficulties, or completion milestones.",
+      "G5. Absence of Interactive Re-Scheduling: Rigid schedules break down when students miss sessions, lacking intuitive drag-and-drop calendar rebalancing.",
+    ],
     solution:
-      "Built an end-to-end academic productivity suite that combines text extraction, machine learning difficulty estimation, drag-and-drop schedule optimization, and an AI study tutor into a single web application.",
+      "Engineered an integrated educational operating system uniting computer vision, machine learning, and interactive web scheduling. The client features a responsive React 18 single-page application built on Vite with React Big Calendar and React DnD for dynamic drag-and-drop timetable modification. The Python backend is built with FastAPI, exposing 23 REST endpoints across 7 route modules (/auth, /subjects, /topics, /schedule, /chat, /ml, /profile). The system ingests syllabus photos via EasyOCR and Tesseract, predicts topic difficulty using a Scikit-learn classifier, and calculates scheduling horizon (H) and workload density (rho) to dynamically allocate daily capacity (C in {1, 2, 3}). An integrated chatbot references the student's active schedule and topic completion records to provide personalized revision advice.",
     architecture: {
-      summary: "Studymate AI Topic Extraction & Scheduling Architecture",
+      summary:
+        "Syllabus Image / Text Upload → Dual OCR Engine (EasyOCR + Tesseract) → Scikit-learn Topic Difficulty Classifier → Exam-Horizon Dynamic Scheduling Engine → React Big Calendar & React DnD UI → Context-Aware FastAPI Chatbot",
       steps: [
-        { name: "Syllabus Upload", detail: "Notes, syllabus images, or course topic text ingestion" },
-        { name: "Topic Extraction", detail: "NLP parsing and chapter segmentation" },
-        { name: "ML Difficulty Estimator", detail: "Scores complexity based on prerequisites and terminology" },
-        { name: "Schedule Generator", detail: "Optimizes study blocks onto a drag-and-drop calendar" },
-        { name: "Analytics Dashboard", detail: "Tracks daily study streaks, completion rates, and milestones" },
-        { name: "AI Study Tutor", detail: "Conversational assistant for Q&A and concept review" },
+        {
+          name: "Syllabus Image Ingestion & OCR",
+          detail: "Accepts mobile photographs or textbook scans, applies grayscale contrast normalization, and extracts topic tokens via EasyOCR with Tesseract fallback.",
+        },
+        {
+          name: "Text Segmentation & Topic Parsing",
+          detail: "Normalizes numbering, separates bullet points, eliminates duplicate entries, and structures clean topic records in topic_extractor.py.",
+        },
+        {
+          name: "ML Difficulty Estimation Engine",
+          detail: "Scikit-learn model predicts topic difficulty classification (easy = 1 session, medium = 2 sessions, hard = 3 sessions).",
+        },
+        {
+          name: "Workload Density & Capacity Allocation",
+          detail: "Calculates scheduling horizon H = D_max - D_today + 1 and workload density rho to dynamically determine daily study capacity C in {1, 2, 3}.",
+        },
+        {
+          name: "Exam-Aware Schedule Generation",
+          detail: "Allocates study blocks prioritizing nearest exam dates, distributing sessions across weekdays and preserving revision days before finals.",
+        },
+        {
+          name: "Interactive Drag-and-Drop Calendar",
+          detail: "React Big Calendar with React DnD empowers students to drag, reorder, mark complete, or reschedule study blocks in real time.",
+        },
+        {
+          name: "Schedule-Aware Conversational AI Tutor",
+          detail: "FastAPI chat route queries active schedule, pending topics, and exam deadlines to answer academic queries with grounded situational context.",
+        },
       ],
     },
-    techStack: ["Python", "FastAPI / Flask", "Web Development", "REST APIs", "AI Assistant", "HTML5/CSS3", "JavaScript"],
+    formulas: [
+      {
+        title: "Topic Effort Quantification Model",
+        latex: "E(t) = \\begin{cases} 1, & \\text{if } \\text{Difficulty}(t) = \\text{Easy} \\\\ 2, & \\text{if } \\text{Difficulty}(t) = \\text{Medium} \\\\ 3, & \\text{if } \\text{Difficulty}(t) = \\text{Hard} \\end{cases}",
+        explanation:
+          "Quantifies the study effort required for topic t into discrete session counts E(t) based on machine learning difficulty classification.",
+        variables: [
+          { symbol: "E(t)", meaning: "Number of required study sessions for topic t" },
+          { symbol: "\\text{Difficulty}(t)", meaning: "ML-predicted topic difficulty (easy, medium, hard)" },
+        ],
+      },
+      {
+        title: "Scheduling Horizon Window",
+        latex: "H = D_{\\max} - D_{\\text{today}} + 1",
+        explanation:
+          "Defines the total scheduling window H in days, spanning from the current date D_today to the latest examination date D_max across enrolled subjects.",
+        variables: [
+          { symbol: "H", meaning: "Available study horizon in days" },
+          { symbol: "D_{\\max}", meaning: "Latest exam date among all registered subjects" },
+          { symbol: "D_{\\text{today}}", meaning: "Current date of schedule generation" },
+        ],
+      },
+      {
+        title: "Workload Density & Daily Capacity Allocation",
+        latex: "\\rho = \\frac{\\sum_{t=1}^{n} E(t)}{H}, \\quad C = \\begin{cases} 1, & \\rho \\le 1.2 \\\\ 2, & 1.2 < \\rho \\le 2.2 \\\\ 3, & \\rho > 2.2 \\end{cases}",
+        explanation:
+          "Formulates workload density rho as total required session effort divided by available days H, dynamically allocating daily study capacity C in {1, 2, 3} sessions per day.",
+        variables: [
+          { symbol: "\\rho", meaning: "Workload density ratio (sessions required per day)" },
+          { symbol: "C", meaning: "Daily session capacity constraint (sessions/day)" },
+          { symbol: "n", meaning: "Total count of incomplete topics" },
+        ],
+      },
+      {
+        title: "Topic Mastery Completion Condition",
+        latex: "\\text{Completed}(t) = \\begin{cases} 1, & S_c(t) \\ge E(t) \\\\ 0, & S_c(t) < E(t) \\end{cases}",
+        explanation:
+          "Evaluates topic completion status where Sc(t) is the count of completed valid study blocks, strictly excluding general revision and exam sessions.",
+        variables: [
+          { symbol: "S_c(t)", meaning: "Count of completed study sessions for topic t" },
+          { symbol: "E(t)", meaning: "Required effort threshold for topic t" },
+        ],
+      },
+      {
+        title: "Image Contrast Preprocessing for OCR",
+        latex: "I_{\\text{norm}}(x, y) = \\text{Clip}\\left(\\alpha \\cdot \\text{Grayscale}(I(x, y)) + \\beta, \\, 0, \\, 255\\right)",
+        explanation:
+          "Applies linear contrast scaling and brightness adjustment to mobile camera photographs before token extraction in EasyOCR and Tesseract.",
+      },
+    ],
+    modules: [
+      {
+        title: "1. Dual-Engine OCR Syllabus Extraction Pipeline",
+        description:
+          "Ingests syllabus image files, normalizes contrast, and runs EasyOCR with Tesseract fallback to extract topic headings and unit outlines.",
+        inputs: ["Syllabus image photograph (PNG/JPEG)"],
+        outputs: ["Extracted raw text", "Cleaned topic candidate list"],
+      },
+      {
+        title: "2. Scikit-Learn Topic Difficulty Classifier",
+        description:
+          "A machine learning model trained with Scikit-learn that classifies topic complexity into easy, medium, or hard based on linguistic tokens and prerequisites.",
+        inputs: ["Topic title and description"],
+        outputs: ["Predicted difficulty category (easy, medium, hard)"],
+      },
+      {
+        title: "3. Exam-Aware Dynamic Scheduling Engine",
+        description:
+          "Computes scheduling horizon H, workload density rho, and daily capacity C to automatically distribute study blocks across the academic calendar.",
+        inputs: ["Subjects", "Topics with difficulty", "Exam dates", "Study preferences"],
+        outputs: ["Structured timetable of dated study sessions"],
+      },
+      {
+        title: "4. Interactive Drag-and-Drop Calendar Subsystem",
+        description:
+          "React Big Calendar interface integrated with React DnD, allowing students to drag sessions, change dates, mark completions, or edit topics.",
+        inputs: ["User mouse drag events", "Calendar view toggles"],
+        outputs: ["Updated study session dates", "Real-time calendar updates"],
+      },
+      {
+        title: "5. Academic Analytics & Streak Dashboard",
+        description:
+          "Visualizes topic completion rates, study streak counts, upcoming exam countdowns, and subject-wise effort allocation using Chart.js.",
+        inputs: ["Session completion records", "Subject metadata"],
+        outputs: ["Completion progress bars", "Streak counters", "Analytics graphs"],
+      },
+      {
+        title: "6. Schedule-Aware Conversational AI Study Tutor",
+        description:
+          "FastAPI chat endpoint connecting Hugging Face / LLM inference with the user's active schedule, topics, and deadlines to deliver grounded study coaching.",
+        inputs: ["Student natural language questions", "User schedule context"],
+        outputs: ["Context-grounded study advice", "Exam preparation tips"],
+      },
+      {
+        title: "7. FastAPI REST API Gateway & User Profile Management",
+        description:
+          "Modular backend exposing 23 REST endpoints across 7 route modules with Pydantic validation, JWT token authentication, and study preference storage.",
+        inputs: ["HTTP REST requests", "JWT tokens"],
+        outputs: ["Validated JSON responses", "User authentication status"],
+      },
+    ],
+    techStack: [
+      "React 18",
+      "Vite",
+      "React Router DOM",
+      "React Big Calendar",
+      "React DnD",
+      "Chart.js",
+      "Axios",
+      "Python 3.10+",
+      "FastAPI",
+      "Uvicorn",
+      "Pydantic",
+      "EasyOCR",
+      "Tesseract OCR",
+      "Scikit-learn (ML)",
+      "Hugging Face Inference API",
+      "JWT Authentication",
+    ],
     contribution:
-      "Engineered the full-stack architecture, developed the topic difficulty scoring logic, implemented the interactive drag-and-drop calendar UI, and integrated the AI conversational study assistant.",
+      "Engineered the full-stack architecture of StudyMate at SCOPE, VIT Vellore. Developed the React 18/Vite frontend with React Big Calendar and React DnD; built the FastAPI backend with 23 REST API endpoints across 7 route modules; designed the dual-engine EasyOCR and Tesseract syllabus parsing pipeline; created the Scikit-learn topic difficulty estimation classifier; formulated the workload-density-driven dynamic scheduling algorithm; and integrated the schedule-aware AI conversational study tutor.",
     implementation:
-      "Constructed with a Python backend providing RESTful endpoints for topic parsing, schedule generation, and chatbot responses. Designed a clean, distraction-free web interface with streak analytics.",
+      "Implemented across 56 files totaling 7,492 lines of source code. Programmed the frontend in React 18 leveraging Vite for rapid build times (247 KB gzipped JS bundle), React Big Calendar for timetable visualization, and React DnD for drag-and-drop rescheduling. Structured the FastAPI server with modular route handlers (/auth, /subjects, /topics, /schedule, /chat, /ml, /profile) and Pydantic schemas. Packaged EasyOCR and Tesseract in backend/utils/ocr.py with contrast normalization for robust syllabus parsing.",
     results: [
-      { metric: "< 2s", label: "Automated Timetable Generation" },
-      { metric: "100%", label: "Customizable Drag & Drop" },
-      { metric: "Integrated", label: "AI Study Tutor Chatbot" },
-      { metric: "Open Source", label: "GitHub Codebase Available" },
+      { metric: "56 Files", label: "Tracked Source Files", context: "7,492 total lines across frontend & backend" },
+      { metric: "23 Endpoints", label: "FastAPI REST Routes", context: "Spanning 7 route modules" },
+      { metric: "Dual OCR", label: "Syllabus Digitization", context: "EasyOCR with Tesseract fallback" },
+      { metric: "3-Tier Capacity", label: "Workload Density Scaling", context: "C in {1, 2, 3} sessions/day" },
+      { metric: "247 KB", label: "Gzip Frontend Bundle", context: "Vite production build" },
+      { metric: "16 JSX Pages", label: "React Frontend UI", context: "Dashboard, calendar, analytics, profile" },
     ],
     challenges:
-      "Extracting coherent topic hierarchies from varied syllabus formats. Overcome by developing flexible heuristic parsing rules and keyword frequency tokenization.",
+      "Resolving noisy and distorted mobile syllabus photographs where varied typography, multi-column layouts, and uneven lighting cause conventional OCR to fail. Overcome by developing an image preprocessing pipeline (grayscale conversion, contrast enhancement, and noise filtering) followed by EasyOCR extraction with Tesseract fallback, coupled with regex-based segmentation to normalize topic titles and unit numbers.",
     visual: (
       <div className="visual-bg-study">
         <div className="study-mockup" aria-hidden="true">
