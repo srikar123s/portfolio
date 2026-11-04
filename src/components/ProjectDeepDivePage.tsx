@@ -147,6 +147,29 @@ export default function ProjectDeepDivePage({
                     <strong style={{ color: "var(--acid)" }}>{project.academicMeta.patentNo}</strong>
                     <span>Status: {project.academicMeta.patentStatus}</span>
                     <em>Published: {project.academicMeta.publicationDate}</em>
+                    <a
+                      href={project.academicMeta.patentDocUrl || "/multi-hazard.pdf"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        marginTop: "8px",
+                        padding: "6px 14px",
+                        borderRadius: "99px",
+                        background: "rgba(223, 255, 69, 0.15)",
+                        border: "1px solid var(--acid)",
+                        color: "var(--acid)",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        textDecoration: "none",
+                        width: "fit-content",
+                      }}
+                    >
+                      <span>📄 View Official Patent Document (PDF)</span>
+                      <ArrowUpRight size={13} />
+                    </a>
                   </div>
                 ) : (
                   <div>
@@ -163,16 +186,31 @@ export default function ProjectDeepDivePage({
           {/* Quick Action Links Bar */}
           <div className="deep-dive-action-row">
             <a
-              className="btn-primary"
+              className="deep-dive-btn-primary"
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
               <GitHubIcon size={16} /> Explore GitHub Source Code <ArrowUpRight size={14} />
             </a>
+            {project.academicMeta?.patentNo && (
+              <a
+                className="deep-dive-btn-primary"
+                href={project.academicMeta.patentDocUrl || "/multi-hazard.pdf"}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "#ffffff",
+                  color: "#0a0a0a",
+                  borderColor: "#ffffff",
+                }}
+              >
+                <span>📄 View Patent Document (PDF)</span> <ArrowUpRight size={14} />
+              </a>
+            )}
             {project.liveUrl && (
               <a
-                className="btn-secondary"
+                className="deep-dive-btn-secondary"
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -181,7 +219,7 @@ export default function ProjectDeepDivePage({
               </a>
             )}
             <button
-              className="btn-secondary"
+              className="deep-dive-btn-secondary"
               onClick={() => {
                 if (navigator.clipboard) {
                   navigator.clipboard.writeText(window.location.href)
@@ -394,13 +432,13 @@ export default function ProjectDeepDivePage({
 
         {/* Bottom Navigation */}
         <footer className="deep-dive-footer-nav">
-          <button className="btn-secondary" onClick={onBack}>
+          <button className="deep-dive-btn-secondary" onClick={onBack}>
             <ArrowLeftIcon size={16} /> Return to Portfolio Main
           </button>
           <div className="deep-dive-footer-right">
             {prevProject && (
               <button
-                className="btn-secondary"
+                className="deep-dive-btn-secondary"
                 onClick={() => onSelectProject(prevProject.id)}
               >
                 ← Previous Project (#{prevProject.number})
@@ -408,7 +446,7 @@ export default function ProjectDeepDivePage({
             )}
             {nextProject && (
               <button
-                className="btn-primary"
+                className="deep-dive-btn-primary"
                 onClick={() => onSelectProject(nextProject.id)}
               >
                 Next Project (#{nextProject.number}) →

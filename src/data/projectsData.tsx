@@ -250,6 +250,7 @@ export const projectsData: Project[] = [
       patentNo: "Indian Patent Application No. 202641065384",
       patentStatus: "Published in Official Patent Journal",
       publicationDate: "June 2026 (Filed April 2026)",
+      patentDocUrl: "/multi-hazard.pdf",
     },
     overview:
       "The Digital Twin Terrain Graph System (DTTGS) is an advanced environmental hazard assessment and simulation framework that combines high-resolution Digital Elevation Models (DEM), satellite precipitation (CHIRPS), and soil moisture telemetry into a persistent, time-evolving virtual replica of physical terrain. Floods and landslides are physically coupled events: excessive rainfall saturates soil, increasing pore pressure and triggering slope instability, while debris blocks natural drainage pathways and triggers catastrophic flash flooding. Existing disaster forecasting systems treat these events in isolation and rely on static snapshot analyses that lack hydrologic memory. This research formulates a unified mathematical multi-hazard model with recursive state evolution and adaptive quadtree spatial mesh refinement, generating sub-second hazard contour maps for emergency evacuation and disaster mitigation authorities.",

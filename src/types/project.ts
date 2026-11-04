@@ -49,6 +49,7 @@ export interface Project {
     patentNo?: string
     patentStatus?: string
     publicationDate?: string
+    patentDocUrl?: string
   }
 
   // 10 Core Structured Deep Dive Sections

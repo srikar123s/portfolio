@@ -10,8 +10,14 @@
     />
     <title>Srikar Yalamarthi · AI, ML &amp; Software Systems Portfolio</title>
     <script>
-      window.$RefreshReg$ = window.$RefreshReg$ || function () {};
-      window.$RefreshSig$ = window.$RefreshSig$ || function () { return function (type) { return type; }; };
+      var $RefreshReg$ = function () {};
+      var $RefreshSig$ = function () { return function (type) { return type; }; };
+      window.$RefreshReg$ = $RefreshReg$;
+      window.$RefreshSig$ = $RefreshSig$;
+      if (typeof globalThis !== "undefined") {
+        globalThis.$RefreshReg$ = $RefreshReg$;
+        globalThis.$RefreshSig$ = $RefreshSig$;
+      }
     </script>
     <!-- figma:head-end -->
   </head>

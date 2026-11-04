@@ -58,6 +58,13 @@ const SearchIcon = ({ size = 15 }: { size?: number }) => (
   </svg>
 )
 
+const FileTextIcon = ({ size = 16 }: { size?: number }) => (
+  <svg aria-hidden="true" fill="none" height={size} viewBox="0 0 24 24" width={size}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+  </svg>
+)
+
 const MenuIcon = ({ open }: { open: boolean }) => (
   <svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24">
     {open ? (
@@ -616,6 +623,54 @@ export default function App() {
                   <br />
                   Proposed an innovative Digital Twin and adaptive terrain mesh framework that dynamically simulates hydrological runoff and soil shear stress for real-time flood and landslide risk forecasting.
                 </p>
+                <div style={{ marginTop: "16px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                  <a
+                    href="/multi-hazard.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="patent-doc-pill"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      padding: "9px 18px",
+                      borderRadius: "99px",
+                      background: "rgba(223, 255, 69, 0.15)",
+                      border: "1px solid var(--acid)",
+                      color: "var(--acid)",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <FileTextIcon size={15} />
+                    <span>View Official Patent Document (PDF)</span>
+                    <ArrowUpRight size={13} />
+                  </a>
+                  <a
+                    href="/multi-hazard.pdf"
+                    download="Multi-Hazard-Patent-Application-202641065384.pdf"
+                    className="patent-doc-pill"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      padding: "9px 16px",
+                      borderRadius: "99px",
+                      background: "rgba(255, 255, 255, 0.08)",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <DownloadIcon size={14} />
+                    <span>Download PDF</span>
+                  </a>
+                </div>
               </div>
               <div className="patent-meta-box">
                 <div className="patent-meta-row">
@@ -626,10 +681,27 @@ export default function App() {
                   <span>Technology Field</span>
                   <strong>Geospatial AI &amp; Digital Twin</strong>
                 </div>
-                <button
+                <a
                   className="btn-live-app"
+                  href="/multi-hazard.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    justifyContent: "center",
+                    textDecoration: "none",
+                    fontWeight: 700,
+                    background: "var(--acid)",
+                    color: "#0a0a0a",
+                    border: "none",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <FileTextIcon size={15} /> Open Patent Doc (PDF) ↗
+                </a>
+                <button
+                  className="btn-repo"
                   onClick={() => openDeepDive("multi-hazard-prediction-system")}
-                  style={{ justifyContent: "center", cursor: "pointer", border: "none" }}
+                  style={{ justifyContent: "center", cursor: "pointer", width: "100%", marginBottom: "8px" }}
                 >
                   View Patent Dossier →
                 </button>
@@ -638,7 +710,7 @@ export default function App() {
                   href="https://github.com/srikar123s/Multi-Hazard-Prediction-System"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ justifyContent: "center", marginTop: "8px" }}
+                  style={{ justifyContent: "center" }}
                 >
                   <GitHubIcon size={15} /> Patent Codebase
                 </a>
