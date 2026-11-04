@@ -44,13 +44,11 @@ export interface Project {
   academicMeta?: {
     type: "Capstone Project" | "Mini Project" | "Independent Research"
     courseCode?: string
-    supervision: string
     institution: string
     department: string
     patentNo?: string
     patentStatus?: string
     publicationDate?: string
-    teamMembers?: string[]
   }
 
   // 10 Core Structured Deep Dive Sections

@@ -136,10 +136,10 @@ export default function ProjectDeepDivePage({
             <div className="academic-meta-card">
               <div className="academic-meta-grid">
                 <div>
-                  <small>ACADEMIC SUPERVISION &amp; INSTITUTION</small>
-                  <strong>{project.academicMeta.supervision}</strong>
-                  <span>{project.academicMeta.institution}</span>
-                  <em>{project.academicMeta.department}</em>
+                  <small>ACADEMIC CONTEXT &amp; INSTITUTION</small>
+                  <strong>{project.academicMeta.institution}</strong>
+                  <span>{project.academicMeta.department}</span>
+                  <em>{project.academicMeta.courseCode || "Integrated M.Tech (CSE)"}</em>
                 </div>
                 {project.academicMeta.patentNo ? (
                   <div>
@@ -150,10 +150,10 @@ export default function ProjectDeepDivePage({
                   </div>
                 ) : (
                   <div>
-                    <small>PROJECT CONTEXT</small>
-                    <strong>{project.academicMeta.courseCode || "Integrated M.Tech Final Year"}</strong>
-                    <span>Developer: {project.academicMeta.teamMembers?.join(", ")}</span>
-                    <em>Vellore Institute of Technology, Vellore</em>
+                    <small>PROJECT DOMAIN &amp; SCOPE</small>
+                    <strong>{project.title}</strong>
+                    <span>{project.academicMeta.courseCode || project.badge}</span>
+                    <em>Applied Software &amp; Machine Learning Engineering</em>
                   </div>
                 )}
               </div>

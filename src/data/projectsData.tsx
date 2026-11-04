@@ -31,10 +31,8 @@ export const projectsData: Project[] = [
     academicMeta: {
       type: "Capstone Project",
       courseCode: "CSI4901 - Capstone Project",
-      supervision: "Dr. Mary Mekala A (Associate Professor Grade 1, SCOPE)",
       institution: "Vellore Institute of Technology (VIT), Vellore",
       department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
-      teamMembers: ["Yalamarthi Srikar (22MIC0038)"],
     },
     overview:
       "AgroNexus AI is an adaptive, context-aware intelligent decision-support system for precision agriculture developed as an Integrated M.Tech Capstone Project at VIT Vellore. Modern agriculture relies heavily on machine learning models for crop selection, fertilizer recommendation, irrigation scheduling, yield estimation, and plant disease detection. However, existing agricultural AI tools function as disconnected, single-prediction models without systematic decision synthesis, context conditioning, or learning from real-world post-intervention outcomes. AgroNexus AI introduces a unified Evidence Layer, a central Agricultural Decision and Intervention Engine (ADIE-1), an Evidence Requirement Profile (ERP) sufficiency gate, and an Action-Context Effect Record (ACER) closed loop that continuously updates future decision processing based on observed harvest deviations.",
@@ -177,7 +175,7 @@ export const projectsData: Project[] = [
       "React",
     ],
     contribution:
-      "Formulated the theoretical framework and mathematical algorithms for AgroNexus AI under the academic supervision of Dr. Mary Mekala A at VIT Vellore. Designed the ADIE-1 engine architecture, developed the Evidence Requirement Profile (ERP) sufficiency scoring logic, engineered the ACER data structures, and implemented the complete FastAPI backend and explainability dashboard.",
+      "Formulated the theoretical framework and mathematical algorithms for AgroNexus AI as part of the Capstone Project at VIT Vellore. Designed the ADIE-1 engine architecture, developed the Evidence Requirement Profile (ERP) sufficiency scoring logic, engineered the ACER data structures, and implemented the complete FastAPI backend and explainability dashboard.",
     implementation:
       "Constructed a modular microservices architecture in Python using FastAPI. Implemented vectorized evidence validation routines and spatial nearest-neighbor search using SciPy k-d trees for rapid ACER retrieval (< 15ms). Integrated SHAP and LIME to generate decision-level explanations that display evidence weights and trade-off rationales alongside recommendations.",
     results: [
@@ -247,18 +245,11 @@ export const projectsData: Project[] = [
     academicMeta: {
       type: "Mini Project",
       courseCode: "CSI1006 Mini Project & Indian Patent",
-      supervision: "Prof. Deepa D (Professor, SCOPE)",
       institution: "Vellore Institute of Technology (VIT), Vellore",
       department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
       patentNo: "Indian Patent Application No. 202641065384",
       patentStatus: "Published in Official Patent Journal",
       publicationDate: "June 2026 (Filed April 2026)",
-      teamMembers: [
-        "Yalamarthi Srikar (22MIC0038)",
-        "Vulavala Sagar Reddy (22MIC0011)",
-        "Mylavaram Ashutosh Reddy (22MIC0013)",
-        "P Sravan (22MIC0134)",
-      ],
     },
     overview:
       "The Digital Twin Terrain Graph System (DTTGS) is an advanced environmental hazard assessment and simulation framework that combines high-resolution Digital Elevation Models (DEM), satellite precipitation (CHIRPS), and soil moisture telemetry into a persistent, time-evolving virtual replica of physical terrain. Floods and landslides are physically coupled events: excessive rainfall saturates soil, increasing pore pressure and triggering slope instability, while debris blocks natural drainage pathways and triggers catastrophic flash flooding. Existing disaster forecasting systems treat these events in isolation and rely on static snapshot analyses that lack hydrologic memory. This research formulates a unified mathematical multi-hazard model with recursive state evolution and adaptive quadtree spatial mesh refinement, generating sub-second hazard contour maps for emergency evacuation and disaster mitigation authorities.",
@@ -460,7 +451,7 @@ export const projectsData: Project[] = [
       "Git",
     ],
     contribution:
-      "Co-invented and authored the Published Indian Patent Application (No. 202641065384) under the academic supervision of Prof. Deepa D at SCOPE, VIT Vellore. Derived the mathematical equations for Flood Risk (FR), Landslide Risk (LR), and Combined Risk (CR); formulated the recursive state evolution algorithm (St); implemented the adaptive quadtree mesh refinement in Python; and conducted multi-region experimental simulations across the Western Ghats, Assam, and Uttarakhand.",
+      "Authored and developed the Published Indian Patent Application (No. 202641065384) at SCOPE, VIT Vellore. Derived the mathematical equations for Flood Risk (FR), Landslide Risk (LR), and Combined Risk (CR); formulated the recursive state evolution algorithm (St); implemented the adaptive quadtree mesh refinement in Python; and conducted multi-region experimental simulations across the Western Ghats, Assam, and Uttarakhand.",
     implementation:
       "Programmed the core pipeline (`Main.py`) in Python utilizing Rasterio and GDAL for geospatial raster handling, NumPy and SciPy for vectorized downhill gradient routing, and GeoPandas for spatial vector operations. Automated NetCDF4 parsing of satellite CHIRPS precipitation grids. Constructed an interactive 3D hazard visualization dashboard communicating real-time probability overlays and spatial GeoJSON contours.",
     results: [
@@ -689,10 +680,8 @@ export const projectsData: Project[] = [
     academicMeta: {
       type: "Mini Project",
       courseCode: "Medical Diagnosis AI Research",
-      supervision: "Prof. BIJI C.L (SCOPE, VIT University)",
       institution: "Vellore Institute of Technology (VIT), Vellore",
-      department: "School of Computer Science and Engineering (SCOPE)",
-      teamMembers: ["Yalamarthi Srikar (22MIC0038)", "Vulavala Sagar Reddy (22MIC0011)"],
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
     },
     overview:
       "SmartHeal is an intelligent healthcare assistant and medical decision-support platform designed to bridge the accessibility gap between patients and primary healthcare consultations. Driven by the increasing strain on healthcare infrastructure and the prevalence of hazardous self-diagnosis on unverified internet search engines, SmartHeal processes natural language symptom queries, maps them using a multi-stage NLP correction pipeline, and predicts probable pathologies using a custom Transformer deep learning classification model. Beyond raw classification, the system delivers structured clinical support: top-3 ranked conditions with calibrated confidence percentages, verified medication suggestions, preventive measures, and an interactive Streamlit consultation interface.",
@@ -805,7 +794,7 @@ export const projectsData: Project[] = [
       "Streamlit",
     ],
     contribution:
-      "Co-developed the SmartHeal project under the academic supervision of Prof. BIJI C.L at SCOPE, VIT Vellore. Engineered the NLP symptom standardization and fuzzy matching pipeline, built and evaluated the PyTorch Transformer disease classification model, structured the treatment and precaution recommendation engine, and deployed the interactive Streamlit clinical application.",
+      "Developed the SmartHeal project at SCOPE, VIT Vellore. Engineered the NLP symptom standardization and fuzzy matching pipeline, built and evaluated the PyTorch Transformer disease classification model, structured the treatment and precaution recommendation engine, and deployed the interactive Streamlit clinical application.",
     implementation:
       "Implemented using PyTorch for the custom Transformer classification network and NLTK for morphological lemmatization. Designed a fuzzy matching threshold filter (ratio >= 80) to automatically catch typos. Packaged the entire inference pipeline into a lightweight Streamlit web application running with sub-second prediction response times.",
     results: [
@@ -873,13 +862,11 @@ export const projectsData: Project[] = [
     academicMeta: {
       type: "Independent Research",
       courseCode: "Agricultural Deep Learning Research",
-      supervision: "Faculty Guidance @ SCOPE, VIT University",
       institution: "Vellore Institute of Technology (VIT), Vellore",
-      department: "School of Computer Science and Engineering (SCOPE)",
-      teamMembers: ["Vulavala Sagar Reddy", "Srikar Yalamarthi (22MIC0038)", "Sravan P"],
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
     },
     overview:
-      "Crop-Yield-Predictor is an advanced machine learning research project that applies Google's TabNet deep learning architecture with sequential attention to agricultural yield estimation. Accurately predicting agricultural productivity is vital for food security, farm input planning, and government supply management. While traditional statistical regression models assume simplistic linear relationships and standard tree ensembles treat all features equally without context, this research couples long-term historical production records with current season agronomic inputs across 19,000+ cleaned records, 55 crops, and 28 Indian states (1997–2020). By combining chronological train-validation-test splitting with domain-engineered features (such as Rainfall-Fertilizer interaction ratios and multi-year yield trends), the TabNet model achieves state-of-the-art predictive accuracy (R² = 0.942, MAE = 0.120 tons/ha), substantially outperforming Random Forest, XGBoost, and recurrent LSTM networks.",
+      "Crop-Yield-Predictor is an advanced machine learning research project applying Google's TabNet deep learning architecture with sequential attention to agricultural yield estimation. Accurately predicting agricultural productivity is vital for food security, farm input planning, and government supply management. While traditional statistical regression models assume simplistic linear relationships and standard tree ensembles treat all features equally without context, this research couples long-term historical production records with current season agronomic inputs across 19,000+ cleaned records, 55 crops, and 28 Indian states (1997–2020). By combining chronological train-validation-test splitting with domain-engineered features (such as Rainfall-Fertilizer interaction ratios and multi-year yield trends), the TabNet model achieves state-of-the-art predictive accuracy (R² = 0.942, MAE = 0.120 tons/ha), substantially outperforming Random Forest, XGBoost, and recurrent LSTM networks.",
     problem:
       "Predicting agricultural yields is fraught with difficulty due to complex, non-linear interactions between weather, soil, and management practices. Existing approaches face four critical flaws: (1) Inability to Capture Temporal-Agronomic Interactions — statistical models fail on non-linear dependencies while ML models treat past and present inputs without hierarchical weighting; (2) Data Leakage — many studies use random train/test splits that leak future weather into past predictions; (3) The Black-Box Dilemma — deep learning architectures rarely provide interpretable feature attention masks, preventing agronomists and policymakers from trusting predictions; and (4) Geographical Bias — prior benchmarks predominantly focus on temperate zones in developed nations rather than tropical, heterogeneous smallholder farms in India.",
     literatureGaps: [
@@ -1003,7 +990,7 @@ export const projectsData: Project[] = [
       "Streamlit",
     ],
     contribution:
-      "Co-authored the research paper and led model architecture engineering at SCOPE, VIT Vellore. Derived and implemented the agronomic feature equations (RF-Ratio, moving averages, yield trend); designed the chronological data splitting pipeline to prevent temporal leakage; trained and hyperparameter-tuned the TabNet network; benchmarked performance against Random Forest, XGBoost, and LSTM baselines; and developed the interactive Streamlit deployment.",
+      "Authored the research paper and led model architecture engineering at SCOPE, VIT Vellore. Derived and implemented the agronomic feature equations (RF-Ratio, moving averages, yield trend); designed the chronological data splitting pipeline to prevent temporal leakage; trained and hyperparameter-tuned the TabNet network; benchmarked performance against Random Forest, XGBoost, and LSTM baselines; and developed the interactive Streamlit deployment.",
     implementation:
       "Implemented in Python using PyTorch and pytorch-tabnet. Trained for 500 epochs with early stopping (batch size 256, learning rate 0.002). Analyzed TabNet's sparse attention masks to quantify feature importance, confirming Historical Yield (31.2%) and Rainfall (22.8%) as the primary drivers. Deployed an interactive Streamlit application that renders real-time prediction curves and parameter sensitivity charts.",
     results: [
@@ -1145,18 +1132,11 @@ export const projectsData: Project[] = [
     academicMeta: {
       type: "Independent Research",
       courseCode: "Lossless Compression Research Paper",
-      supervision: "Faculty Guidance @ SCOPE, VIT University",
       institution: "Vellore Institute of Technology (VIT), Vellore",
-      department: "School of Computer Science and Engineering (SCOPE)",
-      teamMembers: [
-        "M Shobith Reddy (22MIC0004)",
-        "K. Vaishnavi (22MIC0008)",
-        "Bandaru Vishnu Teja (22MIC0007)",
-        "Yalamarthi Srikar (22MIC0038)",
-      ],
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
     },
     overview:
-      "CAP-RC+++ is a state-of-the-art lossless image compression technique developed and published by researchers at VIT Vellore. High-resolution digital imaging in medical diagnostics, remote sensing, and archival storage requires significant data reduction without losing a single bit of information (MSE = 0, PSNR = ∞). While lossy schemes (JPEG, WebP) discard high frequencies and standard lossless codecs (PNG DEFLATE, JPEG-LS) rely on static Huffman tables or fixed linear predictors, CAP-RC+++ tightly couples an integer-safe, gradient-weighted spatial predictor with dynamic multi-context range coding. By combining an exact reversible integer YCoCg color transform with local gradient-sensitive residual modeling, the algorithm achieves 3.0× to 5.0× compression over raw image bitstreams, consistently outperforming PNG by 20–25% and JPEG-LS by 10–15% on natural and synthetic textures.",
+      "CAP-RC+++ is a state-of-the-art lossless image compression technique developed as algorithmic research at VIT Vellore. High-resolution digital imaging in medical diagnostics, remote sensing, and archival storage requires significant data reduction without losing a single bit of information (MSE = 0, PSNR = ∞). While lossy schemes (JPEG, WebP) discard high frequencies and standard lossless codecs (PNG DEFLATE, JPEG-LS) rely on static Huffman tables or fixed linear predictors, CAP-RC+++ tightly couples an integer-safe, gradient-weighted spatial predictor with dynamic multi-context range coding. By combining an exact reversible integer YCoCg color transform with local gradient-sensitive residual modeling, the algorithm achieves 3.0× to 5.0× compression over raw image bitstreams, consistently outperforming PNG by 20–25% and JPEG-LS by 10–15% on natural and synthetic textures.",
     problem:
       "Existing lossless image codecs are trapped in a fundamental trade-off: (1) Lightweight but Inflexible Standards (PNG, JPEG-LS) — PNG relies on static DEFLATE/Huffman coding that cannot adapt to local image statistics, while JPEG-LS's LOCO-I predictor fails on sharp diagonal edges and uses fixed-length Golomb-Rice codes that cannot allocate fractional bits; and (2) Computationally Prohibitive Systems (JPEG 2000, CALIC) — these formats achieve superior compression through complex wavelet transforms and multi-pass arithmetic coding, but their severe CPU/RAM overhead renders them impractical for lightweight or real-time deployment.",
     literatureGaps: [
@@ -1284,7 +1264,7 @@ export const projectsData: Project[] = [
       "Google Colab (Benchmarking Environment)",
     ],
     contribution:
-      "Co-authored the research paper and formulated algorithmic components at SCOPE, VIT Vellore. Derived the gradient-weighted directional prediction equations; implemented the reversible integer YCoCg-R matrix transformations; programmed the multi-context range coder in Python using bitarray; and built the interactive Streamlit benchmark dashboard comparing CAP-RC+++ against PNG and JPEG-LS.",
+      "Authored the research paper and formulated the algorithmic components at SCOPE, VIT Vellore. Derived the gradient-weighted directional prediction equations; implemented the reversible integer YCoCg-R matrix transformations; programmed the multi-context range coder in Python using bitarray; and built the interactive Streamlit benchmark dashboard comparing CAP-RC+++ against PNG and JPEG-LS.",
     implementation:
       "Programmed in Python using NumPy for vectorized pixel grid processing and bitarray for low-level bitstream packing. Tested on diverse benchmark suites (natural landscapes, desert arch, coffee bean textures, and synthetic screenshots) on a 12 GB RAM virtual instance. Verified that residuals sharply peak around zero, enabling the range coder to achieve near-optimal compression ratios.",
     results: [
