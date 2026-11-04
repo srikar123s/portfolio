@@ -496,49 +496,221 @@ export const projectsData: Project[] = [
     id: "caption-craft",
     number: "03",
     title: "Caption Craft",
-    subtitle: "Hybrid Speech Recognition & Contextual RAG Intelligence",
+    subtitle: "Hybrid Speech Recognition, LLM Transcript Fusion & Contextual RAG Intelligence",
     category: "ai",
-    badge: "Live App",
+    badge: "Live App / Hybrid ASR",
     description:
-      "A deep learning speech recognition and transcript intelligence suite built for Indian-accented English, combining Mel Spectrogram extraction, Bi-LSTM + CTC transcription, ChromaDB semantic retrieval, and Groq LLM RAG.",
+      "A hybrid speech recognition and transcript intelligence suite coupling a custom 2-layer Bidirectional LSTM neural network (2.43M parameters) on 128-band Mel spectrograms with local Whisper Tiny English ASR, Groq Llama 3.3 transcript reconciliation, and in-memory ChromaDB RAG Q&A.",
     highlights: [
-      "Custom Bi-LSTM + CTC neural network for alignment-free temporal speech modeling",
-      "RAG Q&A architecture using LangChain, Sentence Transformers & ChromaDB",
-      "Groq LLM pipeline for instant executive summary & action item synthesis",
+      "Custom 2-layer BiLSTM acoustic neural network (2.43M parameters) trained on 128-band Mel spectrograms",
+      "Dual ASR ensemble architecture combining local BiLSTM inference with faster-whisper Tiny English",
+      "Groq Llama 3.3 70B semantic transcript fusion reconciling acoustic discrepancies into unified text",
+      "Automated meeting intelligence extracting summaries, key decisions, action items, owners, and deadlines",
+      "In-memory ChromaDB vector store with all-MiniLM-L6-v2 embeddings for grounded Top-4 RAG interrogation",
+      "Dual deployment surface: interactive Streamlit web dashboard and high-concurrency FastAPI endpoint",
     ],
-    tags: ["Machine Learning", "NLP", "LLMs", "RAG", "LangChain", "ChromaDB", "Python", "Streamlit"],
+    tags: [
+      "Speech Recognition",
+      "PyTorch",
+      "Bi-LSTM",
+      "Whisper ASR",
+      "Groq LLM (Llama 3.3)",
+      "RAG",
+      "ChromaDB",
+      "LangChain",
+      "FastAPI",
+      "Streamlit",
+    ],
     githubUrl: "https://github.com/srikar123s/Caption-Craft",
     liveUrl: "https://caption-craft1.streamlit.app/",
+    academicMeta: {
+      type: "Independent Research",
+      courseCode: "Speech Intelligence & Neural RAG Architecture",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
+    },
     overview:
-      "Caption Craft is an end-to-end speech recognition and intelligent transcript interrogation suite optimized specifically for Indian-accented English. It marries custom acoustic recurrent modeling with a modern Retrieval-Augmented Generation (RAG) system, enabling users to upload long audio recordings, obtain accurate transcripts, generate executive summaries, and ask questions directly grounded in the spoken content.",
+      "Caption Craft is an end-to-end hybrid speech recognition, semantic reconciliation, and transcript intelligence platform. It addresses the fundamental challenges of acoustic speech-to-text accuracy and information overload from long conversational recordings. By uniting a custom local 2-layer Bidirectional LSTM neural network (2.43M parameters) operating on 128-band Mel spectrograms with an OpenAI faster-whisper Tiny English ASR engine, Caption Craft reconciles dual transcripts using Groq-hosted Llama 3.3 70B Versatile LLM. The reconciled transcript is then parsed into structured intelligence (executive summaries, action items with owners and deadlines, entity recognition, and numerical decisions) and indexed into an in-memory ChromaDB vector store powered by all-MiniLM-L6-v2 embeddings for real-time, grounded RAG question answering.",
     problem:
-      "Commercial Speech-to-Text models often exhibit high Word Error Rates (WER) on regional Indian English phonetics. Furthermore, transcribing long meetings leaves users with unstructured text dumps that require tedious manual reading to extract decisions and action items.",
+      "Raw speech recordings and conventional ASR systems suffer from significant real-world limitations: (1) Acoustic & Domain Vulnerability — standalone speech models frequently stumble on technical jargon, varying microphone hardware, or ambient acoustic noise; (2) Unstructured Information Exhaustion — raw audio transcripts produce unformatted, rambling text dumps that require hours of tedious manual reading to distill decisions and commitments; and (3) Absence of Contextual Interrogation — static meeting transcripts cannot be interactively questioned or verified without reading the entire document from start to finish.",
+    literatureGaps: [
+      "G1. Acoustic Discrepancies Across Standalone ASR Engines: Single-model speech recognizers exhibit high error rates when encountering background acoustic noise or clipped microphones, necessitating multi-engine ensemble fusion.",
+      "G2. Lack of Automated Post-ASR Structural Extraction: Standard transcription engines produce raw text dumps without distilling actionable executive summaries, key decisions, or assigned deadlines.",
+      "G3. Inability to Query Long Transcripts Contextually: Users cannot interrogate meeting minutes interactively without manual reading or brute-force keyword search.",
+      "G4. Computational Latency Trade-Off: Running large foundation speech models locally introduces severe hardware latency, requiring lightweight local inference coupled with cloud-accelerated LLM reasoning.",
+      "G5. Hallucination Risk in Meeting Summarization: Ungrounded language models summarize meetings by inventing facts unless strictly constrained by vector retrieval and source chunk attribution.",
+    ],
     solution:
-      "Engineered an acoustic pipeline using log Mel Spectrograms and a custom Bi-LSTM trained with Connectionist Temporal Classification (CTC) loss, backed by a Whisper fallback ensemble. The transcribed text is chunked, embedded via Sentence Transformers, stored in ChromaDB, and connected to Groq Llama 3 for real-time RAG Q&A.",
+      "Engineered an integrated dual-engine speech recognition and semantic fusion pipeline. Ingested audio (WAV, FLAC, MP3, M4A, OGG) is decoded via SoundFile, converted to mono, and resampled to 16 kHz. A local 2-layer BiLSTM model predicts character tokens from 128-channel Mel spectrograms, while faster-whisper (whisper-tiny.en) independently decodes the acoustic stream. A Groq-hosted Llama 3.3 70B model reconciles discrepancies between the two transcripts into a consolidated, error-corrected text. The resulting text is recursively chunked (700 characters, 100 overlap), embedded with all-MiniLM-L6-v2, and indexed in ChromaDB for Top-4 cosine similarity retrieval. An interactive Streamlit dashboard and a FastAPI endpoint expose both the analytical summary and conversational RAG interface.",
     architecture: {
-      summary: "End-to-End Speech Recognition & Contextual RAG Architecture",
+      summary:
+        "Audio Upload (WAV/MP3/OGG) → Stereo-to-Mono & 16kHz Resampling → Dual ASR (Custom 2-Layer BiLSTM + Whisper Tiny) → Groq Llama 3.3 Semantic Fusion → Structured Intelligence Extraction & ChromaDB Vector Store → Top-4 RAG Conversational Retrieval → Streamlit UI & FastAPI",
       steps: [
-        { name: "Audio Input", detail: "Microphone stream or uploaded WAV audio (16kHz PCM)" },
-        { name: "Mel Spectrogram", detail: "80-band acoustic feature extraction via Librosa/Torchaudio" },
-        { name: "Bi-LSTM + CTC", detail: "Recurrent acoustic modeling with alignment-free temporal loss" },
-        { name: "Hybrid Confidence", detail: "Confidence scoring with Whisper ensemble fallback" },
-        { name: "ChromaDB Vector Store", detail: "Sentence-transformer embedding and vector indexing" },
-        { name: "Groq LLM RAG", detail: "Context-grounded question answering and action-item synthesis" },
+        {
+          name: "Audio Normalization & Decoding",
+          detail: "Accepts multi-format audio files, decodes via SoundFile, averages stereo channels to mono, and resamples to 16 kHz.",
+        },
+        {
+          name: "Mel-Spectrogram Feature Extraction",
+          detail: "Computes 128-channel Mel spectrograms over STFT power spectra, padded or truncated to a fixed window of 300 frames.",
+        },
+        {
+          name: "Custom 2-Layer BiLSTM Inference",
+          detail: "Recurrent acoustic network with 256 hidden units per direction (~2.43M parameters) predicting character sequences.",
+        },
+        {
+          name: "Faster-Whisper Tiny English ASR",
+          detail: "Executes local faster-whisper Tiny English model with beam size 5 for independent acoustic hypothesis generation.",
+        },
+        {
+          name: "Groq LLM Semantic Transcript Fusion",
+          detail: "Llama 3.3 70B Versatile reconciles dual transcripts into an error-corrected, coherent final transcript without hallucination.",
+        },
+        {
+          name: "Structured Intelligence Extraction",
+          detail: "Extracts executive summaries, key decisions, action items, owners, deadlines, organizations, and an LLM quality score (0–100).",
+        },
+        {
+          name: "ChromaDB Dense Vector Indexing",
+          detail: "Splits transcript into 700-character chunks with 100-character overlap, computing 384-dimensional dense embeddings via all-MiniLM-L6-v2.",
+        },
+        {
+          name: "Context-Grounded Conversational RAG",
+          detail: "Retrieves Top-4 nearest-neighbor chunks via cosine similarity to answer user questions with strict grounding in audio content.",
+        },
       ],
     },
-    techStack: ["PyTorch", "Librosa", "Torchaudio", "LangChain", "ChromaDB", "Groq API", "Streamlit", "Python"],
+    formulas: [
+      {
+        title: "Mel-Spectrogram Feature Representation",
+        latex: "X = \\text{Mel}\\left(|\\text{STFT}(s(t))|^2\\right) \\in \\mathbb{R}^{128 \\times T} \\quad (T \\le 300)",
+        explanation:
+          "Converts raw audio waveform s(t) into a 128-band logarithmic Mel-frequency spectrogram over short-time Fourier transform power spectra, capturing spectral energy distribution across human vocal frequencies.",
+        variables: [
+          { symbol: "s(t)", meaning: "Raw input audio waveform resampled to 16 kHz" },
+          { symbol: "\\text{STFT}", meaning: "Short-Time Fourier Transform" },
+          { symbol: "X", meaning: "128-channel Mel spectrogram matrix" },
+          { symbol: "T", meaning: "Time frames (capped at 300 frames)" },
+        ],
+      },
+      {
+        title: "Bidirectional LSTM Recurrent State",
+        latex: "h_t = \\left[ \\text{LSTM}_{\\text{fwd}}(x_t, h_{t-1}) \\,;\\, \\text{LSTM}_{\\text{bwd}}(x_t, h_{t+1}) \\right] \\in \\mathbb{R}^{512}",
+        explanation:
+          "Models temporal acoustic dependencies across speech frames by concatenating forward and backward hidden states from 2 stacked LSTM layers with 256 hidden units each (~2.43M trainable parameters).",
+        variables: [
+          { symbol: "x_t", meaning: "128-dimensional Mel spectral slice at time step t" },
+          { symbol: "h_t", meaning: "Concatenated 512-dimensional bidirectional hidden state vector" },
+        ],
+      },
+      {
+        title: "Output Character Projection & Token Decoding",
+        latex: "z_t = W h_t + b, \\quad \\hat{y}_t = \\arg\\max_{k \\in \\{0, \\dots, 127\\}} z_{t,k}",
+        explanation:
+          "Projects concatenated hidden state ht to 128 character output logits, selecting argmax character classes, collapsing consecutive duplicate predictions, and stripping blank tokens.",
+        variables: [
+          { symbol: "W, b", meaning: "Linear projection weights and bias mapping 512 dimensions to 128 classes" },
+          { symbol: "\\hat{y}_t", meaning: "Predicted character token index at time step t" },
+        ],
+      },
+      {
+        title: "Dual-Transcript Semantic Fusion",
+        latex: "T_{\\text{final}} = f_{\\text{Groq}}\\left(T_{\\text{BiLSTM}}, T_{\\text{Whisper}}\\right)",
+        explanation:
+          "Leverages Groq-hosted Llama 3.3 70B with domain prompts to reconcile misheard phonemes between the custom BiLSTM and Whisper Tiny transcripts into a unified, grammatically sound text stream.",
+      },
+      {
+        title: "Dense Vector Semantic Retrieval (RAG)",
+        latex: "D_k = \\operatorname{TopK}_{d_i \\in \\mathcal{D}}\\left( \\frac{\\mathbf{q} \\cdot \\mathbf{d}_i}{\\|\\mathbf{q}\\| \\|\\mathbf{d}_i\\|} \\right), \\quad k = 4",
+        explanation:
+          "Retrieves the 4 most semantically relevant 700-character transcript chunks from ChromaDB using cosine similarity over all-MiniLM-L6-v2 dense vector embeddings to ground the conversational LLM answer.",
+      },
+      {
+        title: "Cumulative Pipeline Processing Latency",
+        latex: "\\text{Processing Time} = t_{\\text{BiLSTM}} + t_{\\text{Whisper}} + t_{\\text{Fusion}} + t_{\\text{Analysis}}",
+        explanation:
+          "Quantifies the end-to-end execution latency across local acoustic decoding, cloud transcript fusion, and structured analysis.",
+      },
+    ],
+    modules: [
+      {
+        title: "1. Audio Ingestion & Resampling Engine",
+        description:
+          "Decodes WAV, FLAC, MP3, M4A, and OGG formats using SoundFile, converts multi-channel audio to mono, and resamples to 16 kHz.",
+        inputs: ["Multi-format audio file upload"],
+        outputs: ["16 kHz mono normalized floating-point audio array"],
+      },
+      {
+        title: "2. Custom 2.43M-Parameter BiLSTM Speech Classifier",
+        description:
+          "Computes 128-band Mel spectrograms and passes them through a 2-layer bidirectional LSTM network with 256 hidden units to predict character streams.",
+        inputs: ["128-band Mel spectrogram tensor"],
+        outputs: ["Raw acoustic character transcript (T_BiLSTM)"],
+      },
+      {
+        title: "3. Local Faster-Whisper ASR Subsystem",
+        description:
+          "Executes OpenAI's whisper-tiny.en model locally via faster-whisper with beam size 5 for high-speed, general-purpose acoustic transcription.",
+        inputs: ["16 kHz normalized audio array"],
+        outputs: ["Whisper English transcript (T_Whisper)"],
+      },
+      {
+        title: "4. Groq LLM Semantic Transcript Fusion Engine",
+        description:
+          "Passes both transcripts to Groq Llama 3.3 70B Versatile with instructions to reconcile differences, correct phonetics, and generate a cohesive final transcript.",
+        inputs: ["T_BiLSTM", "T_Whisper", "Fusion system prompt"],
+        outputs: ["Reconciled, error-corrected final transcript (T_final)"],
+      },
+      {
+        title: "5. Structured Intelligence & Action-Item Extractor",
+        description:
+          "Parses the consolidated transcript into executive summaries, key bullet points, action items, assigned owners, deadlines, organizations, and an LLM quality score (0–100).",
+        inputs: ["Final transcript"],
+        outputs: ["Structured JSON analytics summary", "0–100 quality rating"],
+      },
+      {
+        title: "6. In-Memory ChromaDB Vector Store & RAG Retrieval",
+        description:
+          "Splits transcripts into 700-character chunks with 100-character overlap using RecursiveCharacterTextSplitter, embeds them with all-MiniLM-L6-v2, and indexes into ChromaDB for Top-4 search.",
+        inputs: ["Transcript text chunks", "User natural language questions"],
+        outputs: ["Top-4 context chunks", "Context-grounded answer with citations"],
+      },
+      {
+        title: "7. Dual Delivery: Streamlit UI & FastAPI Service",
+        description:
+          "Provides a responsive Streamlit web dashboard for interactive meeting review alongside a production-ready FastAPI endpoint (/transcribe) for automated pipelines.",
+        inputs: ["User browser inputs", "HTTP multipart POST requests"],
+        outputs: ["Interactive UI displays", "JSON REST API responses"],
+      },
+    ],
+    techStack: [
+      "Python 3.10+",
+      "PyTorch",
+      "Torchaudio",
+      "faster-whisper",
+      "SoundFile",
+      "NumPy",
+      "Groq API (Llama 3.3 70B Versatile)",
+      "LangChain",
+      "ChromaDB",
+      "Sentence Transformers (all-MiniLM-L6-v2)",
+      "FastAPI",
+      "Streamlit",
+    ],
     contribution:
-      "Designed and trained the Bi-LSTM acoustic neural network with CTC loss, built the audio spectrogram processing pipeline, engineered the ChromaDB vector search retrieval mechanism, and created the interactive Streamlit web application.",
+      "Engineered the hybrid speech recognition and transcript intelligence architecture of Caption Craft at SCOPE, VIT Vellore. Developed the dual-ASR pipeline pairing a custom 2-layer BiLSTM model with faster-whisper; designed the Groq Llama 3.3 transcript reconciliation prompt; built the ChromaDB vector retrieval system with sentence-transformer embeddings; structured the automatic meeting action-item and decision extraction logic; and developed both the interactive Streamlit user interface and the FastAPI microservice.",
     implementation:
-      "Built with PyTorch for recurrent network training, Torchaudio for fast audio feature extraction, LangChain for orchestrating document chunking and vector retrieval, and Groq API (Llama 3 70B) for sub-second LLM inference.",
+      "Implemented in Python leveraging PyTorch and Torchaudio for 128-band Mel spectrogram generation and recurrent model inference. Integrated faster-whisper (tiny.en, beam size 5) for independent speech decoding. Employed LangChain with RecursiveCharacterTextSplitter (700 characters, 100 character overlap) and Chroma vector indexing for in-memory semantic retrieval. Designed robust error-recovery mechanisms to parse JSON schema output from Groq LLM and exposed a /transcribe FastAPI endpoint.",
     results: [
-      { metric: "92.1%", label: "Accented Speech Accuracy" },
-      { metric: "< 1.2s", label: "RAG Query Response Time" },
-      { metric: "80%", label: "Review Time Saved" },
-      { metric: "100%", label: "Alignment-Free CTC Training" },
+      { metric: "2.43M", label: "Model Parameters", context: "Custom 2-layer Bidirectional LSTM" },
+      { metric: "128 Bands", label: "Mel Spectrogram Resolution", context: "Short-time Fourier transform feature extraction" },
+      { metric: "Dual ASR", label: "Hybrid Acoustic Ensemble", context: "Reconciles BiLSTM and Whisper Tiny via Groq Llama 3.3" },
+      { metric: "700 Chars", label: "RAG Chunk Size (k=4)", context: "Top-4 semantic retrieval via all-MiniLM-L6-v2" },
+      { metric: "< 1.2s", label: "RAG Query Response Time", context: "Sub-second inference via Groq Llama 3.3 70B" },
+      { metric: "Live", label: "Interactive Streamlit App", context: "Actively hosted and functional online" },
     ],
     challenges:
-      "Handling phonetic blurring and variable background noise across unconstrained microphone recordings. Solved by implementing audio data augmentation (pitch shifting, speed perturbation, Gaussian noise injection) during model training.",
+      "Handling acoustic discrepancies and hallucinated text when fusing disparate transcript hypotheses from local models. Resolved by formulating strict semantic prompt instructions for Groq Llama 3.3 that forbid adding external information, enforce conservative phrasing selection, and validate structured JSON outputs with regex fallback parsing.",
     visual: (
       <div className="visual-bg-speech">
         <div className="phone-mockup" aria-hidden="true">
@@ -1221,47 +1393,212 @@ export const projectsData: Project[] = [
     id: "anonymous-ephemeral-chat",
     number: "07",
     title: "Anonymous Ephemeral Chat",
-    subtitle: "Real-Time WebSocket Messaging with Zero Data Retention",
+    subtitle: "Peer-to-Peer Encrypted Messaging with SECP256R1 ECDH, AES-256-GCM & Zero Disk Footprint",
     category: "sde",
-    badge: "Open Source",
+    badge: "Open Source / P2P",
     description:
-      "A privacy-first real-time messaging application featuring temporary in-memory session lifecycles, full-duplex WebSocket channels, and guaranteed zero server-side message persistence.",
+      "A decentralized peer-to-peer messaging system engineered in Python featuring ephemeral SECP256R1 Elliptic Curve Diffie-Hellman key exchange, HKDF-SHA256 session key derivation, authenticated AES-256-GCM framing, and guaranteed zero-disk memory-only execution.",
     highlights: [
-      "Full duplex bidirectional chat via high-concurrency WebSockets",
-      "Strict in-memory ephemeral rooms with immediate garbage collection upon disconnection",
-      "Clean lightweight Python backend architecture with zero database footprints",
+      "Decentralized peer-to-peer (P2P) network model with zero central relay servers or databases",
+      "Cryptographic handshake: SECP256R1 ECDH key agreement with HKDF-SHA256 session key derivation",
+      "Authenticated symmetric encryption: AES-256-GCM with 96-bit random nonces and 128-bit authentication tags",
+      "Length-prefixed binary wire framing protocol over raw multi-threaded TCP sockets",
+      "Strict in-memory RAM execution with atomic cleanup_session() purging keys and message buffers",
+      "Dual interface support: scriptable interactive CLI and asynchronous multi-threaded Tkinter GUI",
     ],
-    tags: ["Python", "Web Development", "FastAPI / Flask", "REST APIs", "WebSockets", "Cyber Security"],
+    tags: [
+      "Decentralized P2P",
+      "Applied Cryptography",
+      "ECDH (SECP256R1)",
+      "AES-256-GCM",
+      "HKDF-SHA256",
+      "Raw TCP Sockets",
+      "Multi-Threading",
+      "Python 3.8+",
+      "Tkinter GUI",
+      "Pytest",
+    ],
     githubUrl: "https://github.com/srikar123s/anonymous_ephemeral_chat",
+    academicMeta: {
+      type: "Independent Research",
+      courseCode: "Decentralized Systems & Applied Cryptography",
+      institution: "Vellore Institute of Technology (VIT), Vellore",
+      department: "School of Computer Science and Engineering (SCOPE) · Integrated M.Tech CSE",
+    },
     overview:
-      "Anonymous Ephemeral Chat is an open-source real-time communication platform engineered for absolute privacy. It guarantees that conversations exist only in volatile RAM for the duration of an active socket connection, ensuring complete eradication upon room termination.",
+      "Anonymous Ephemeral Chat is an open-source, peer-to-peer (P2P) decentralized messaging architecture engineered for absolute communication privacy and verifiable zero server-side data retention. Designed to circumvent the pervasive surveillance, persistent logging, and metadata harvesting of centralized messaging networks, the system operates without central servers, accounts, or databases. Each node dynamically generates ephemeral Elliptic Curve keypairs (SECP256R1), derives authenticated session keys via ECDH and HKDF-SHA256, encrypts message payloads using AES-256-GCM with unique 96-bit nonces, and transmits length-prefixed frames over raw TCP sockets. The platform guarantees strict in-memory execution—messages exist exclusively in volatile RAM and are automatically purged upon session termination.",
     problem:
-      "Mainstream chat applications store message archives, user IP logs, and metadata indefinitely in centralized databases, leaving communication vulnerable to data breaches and surveillance.",
+      "Mainstream messaging platforms enforce a centralized architecture that leaves users vulnerable to systemic privacy erosion: (1) Centralized Metadata Harvesting — servers log connection timestamps, participant IP addresses, and communication relationship graphs; (2) Persistent Storage Vulnerability — messages, media caches, and credentials are saved to disk or SQLite files, remaining vulnerable to forensic extraction, device seizures, and database breaches; and (3) Compulsory Permanent Identities — users must register verified telephone numbers or email addresses, destroying whistleblower anonymity and private discourse.",
+    literatureGaps: [
+      "G1. Pervasive Centralized Relays: Commercial messaging solutions rely on centralized routing servers that record traffic metadata even when end-to-end payload encryption is enabled.",
+      "G2. Forensically Recoverable Disk Footprints: Traditional chat applications write session logs and message caches to non-volatile disk storage, leaving residual forensic traces post-deletion.",
+      "G3. Lack of True Ephemeral Identity: Most messaging networks bind cryptographic sessions to permanent phone numbers or user identities rather than disposable session keypairs.",
+      "G4. Unauthenticated Cryptographic Implementations: Many educational messaging tools use outdated unauthenticated ciphers (e.g. AES-CFB/CBC) that fail against active tampering or bit-flipping attacks.",
+      "G5. Indefinite Memory Retention: Applications rarely implement deterministic session teardown, leaving sensitive plaintext keys and conversation fragments in memory indefinitely.",
+    ],
     solution:
-      "Built a WebSocket-driven messaging engine that operates exclusively in volatile memory. No databases, log files, or cookies are utilized; disconnecting from a room immediately triggers memory purging.",
+      "Engineered an autonomous decentralized chat node in Python utilizing authenticated cryptographic primitives and in-memory message lifecycles. Nodes establish direct peer-to-peer TCP connections without any central server intermediary. Each node creates an ephemeral SECP256R1 elliptic curve keypair upon initialization. Peers exchange public keys over a length-prefixed wire protocol, compute an ECDH shared coordinate secret, and derive a 256-bit symmetric session key via HKDF-SHA256. Plaintext JSON messages are encrypted using authenticated AES-256-GCM with unique 96-bit nonces and 128-bit authentication tags. A deterministic cleanup procedure (cleanup_session) atomically closes open sockets, zeroes peer keys, and garbage-collects volatile message buffers.",
     architecture: {
-      summary: "In-Memory WebSocket Ephemeral Messaging Architecture",
+      summary:
+        "Node Initialization (SECP256R1 Keypair) → Direct P2P TCP Socket Handshake → Length-Prefixed Public Key Exchange → ECDH Secret Agreement & HKDF-SHA256 Derivation → Authenticated AES-256-GCM Framing → Volatile RAM Message Buffer → Atomic Session Teardown",
       steps: [
-        { name: "Disposable Token", detail: "Client generates temporary anonymous room code" },
-        { name: "WebSocket Handshake", detail: "Establishes full-duplex bi-directional connection" },
-        { name: "In-Memory Routing", detail: "Messages broadcast directly to active socket clients" },
-        { name: "Zero Disk Persistence", detail: "Explicitly bypasses disk I/O, databases, and logs" },
-        { name: "Purge on Disconnect", detail: "Room data garbage collected immediately upon exit" },
+        {
+          name: "Ephemeral Keypair Generation",
+          detail: "Generates private/public EC keypair on the SECP256R1 curve in volatile memory upon node instantiation.",
+        },
+        {
+          name: "Anonymous Handle Derivation",
+          detail: "Derives default pseudonymous handle (anon_<hex8>) from the SHA-256 hash of the node's public key.",
+        },
+        {
+          name: "Direct P2P TCP Handshake",
+          detail: "Binds a local listening socket and opens outbound TCP socket connections to target peer host/port across dedicated worker threads.",
+        },
+        {
+          name: "Length-Prefixed Key Exchange",
+          detail: "Exchanges serialized SubjectPublicKeyInfo PEM keys over a 4-byte length-prefixed socket frame.",
+        },
+        {
+          name: "ECDH Agreement & HKDF Derivation",
+          detail: "Computes shared elliptic curve point Z = dA · QB and derives a 32-byte AES key via HKDF-SHA256 with domain separation.",
+        },
+        {
+          name: "Authenticated AES-GCM Encryption",
+          detail: "Serializes JSON payload {username, message, timestamp}, generates 12-byte random nonce, and encrypts via AES-256-GCM with 16-byte tag.",
+        },
+        {
+          name: "Framed Wire Transmission",
+          detail: "Prefixes encrypted payload with a 1-byte length-indicator and big-endian size to prevent TCP stream fragmentation.",
+        },
+        {
+          name: "Atomic Cleanup & Zero-Disk Teardown",
+          detail: "On session exit, terminates worker threads, closes all active peer sockets, and clears all key dictionaries and RAM buffers.",
+        },
       ],
     },
-    techStack: ["Python", "FastAPI / Flask", "WebSockets", "REST APIs", "HTML5", "CSS3", "JavaScript"],
+    formulas: [
+      {
+        title: "Elliptic Curve Diffie-Hellman (ECDH) Key Agreement",
+        latex: "Q_A = d_A \\cdot G, \\quad Q_B = d_B \\cdot G \\implies Z = d_A Q_B = d_B Q_A",
+        explanation:
+          "Nodes A and B generate private scalar keys dA, dB in [1, n-1] and public curve points QA, QB on the SECP256R1 elliptic curve. When exchanging public points, both peers compute the exact same coordinate shared secret Z without exposing private keys.",
+        variables: [
+          { symbol: "d_A, d_B", meaning: "Ephemeral private scalar keys of peers A and B" },
+          { symbol: "Q_A, Q_B", meaning: "Public elliptic curve points (keys)" },
+          { symbol: "G", meaning: "SECP256R1 base generator point" },
+          { symbol: "Z", meaning: "Derived shared elliptic curve coordinate secret" },
+        ],
+      },
+      {
+        title: "HKDF-SHA256 Session Key Derivation",
+        latex: "K = \\text{HKDF-SHA256}\\left(Z, \\, \\text{salt}=\\text{None}, \\, \\text{info}=\\text{\"ephemeral_chat_session\"}, \\, L=32\\right)",
+        explanation:
+          "Applies HMAC-based Extract-and-Expand Key Derivation with SHA-256 over shared secret Z, generating a cryptographically uniform 32-byte (256-bit) symmetric master session key K.",
+        variables: [
+          { symbol: "K", meaning: "256-bit symmetric session key for AES-GCM" },
+          { symbol: "Z", meaning: "Raw ECDH shared secret" },
+          { symbol: "L", meaning: "Output key length (32 bytes / 256 bits)" },
+        ],
+      },
+      {
+        title: "Authenticated AES-256-GCM Encryption",
+        latex: "(C, T) = \\text{AES-GCM}_K(N, M, \\text{AAD}=\\text{None}), \\quad P = N \\parallel C \\parallel T",
+        explanation:
+          "Encrypts plaintext JSON message M using 256-bit key K and a freshly generated 96-bit (12-byte) cryptographic nonce N. Produces ciphertext C alongside a 128-bit (16-byte) authentication tag T ensuring confidentiality and tamper resistance.",
+        variables: [
+          { symbol: "N", meaning: "96-bit (12-byte) cryptographically secure pseudo-random nonce" },
+          { symbol: "M", meaning: "Plaintext message payload serialized as JSON" },
+          { symbol: "C", meaning: "Encrypted ciphertext bytes" },
+          { symbol: "T", meaning: "128-bit (16-byte) Galois authentication tag" },
+          { symbol: "P", meaning: "Complete transmitted encrypted payload" },
+        ],
+      },
+      {
+        title: "Length-Prefixed Wire Frame Protocol",
+        latex: "F = L_s \\parallel L \\parallel P \\quad \\text{where} \\quad L = |P|",
+        explanation:
+          "Encapsulates encrypted binary payload P with a 1-byte length-field size indicator Ls and big-endian length integer L, guaranteeing reliable TCP packet boundary reconstruction without frame collision.",
+        variables: [
+          { symbol: "L_s", meaning: "Single-byte length size indicator" },
+          { symbol: "L", meaning: "Big-endian integer encoding the byte length of payload P" },
+          { symbol: "P", meaning: "Transmitted encrypted payload (Nonce + Ciphertext + Tag)" },
+        ],
+      },
+      {
+        title: "Deterministic Anonymous Handle Derivation",
+        latex: "\\text{username} = \\text{\"anon_\"} \\parallel \\text{Hex}_{0:8}\\left( \\text{SHA-256}\\left(\\text{PEM}(Q_A)\\right) \\right)",
+        explanation:
+          "Derives a collision-resistant pseudonymous user handle from the first 8 hexadecimal characters of the SHA-256 digest of the node's public key, guaranteeing unique session identity without user tracking.",
+      },
+    ],
+    modules: [
+      {
+        title: "1. Cryptographic Engine (EphemeralChatNode)",
+        description:
+          "Manages SECP256R1 elliptic curve key generation, ECDH secret agreement, HKDF-SHA256 key expansion, and authenticated AES-256-GCM encryption/decryption.",
+        inputs: ["Ephemeral entropy", "Peer public keys", "Message plaintext"],
+        outputs: ["Session keys", "Authenticated encrypted frames", "Decrypted JSON payloads"],
+      },
+      {
+        title: "2. Peer-to-Peer TCP Networking Subsystem",
+        description:
+          "Maintains listening server sockets and outbound client connections. Spawns dedicated background worker threads for concurrent bidirectional communication.",
+        inputs: ["Host/IP address", "Port numbers", "Binary wire frames"],
+        outputs: ["TCP socket streams", "Connection life-cycle events"],
+      },
+      {
+        title: "3. Ephemeral Messaging & Framing Protocol",
+        description:
+          "Serializes messages into standardized JSON structures, computes wire frames with length prefixes, and buffers incoming/outgoing messages in RAM.",
+        inputs: ["User text", "Target peer ID"],
+        outputs: ["Length-prefixed binary frames", "In-memory message buffer"],
+      },
+      {
+        title: "4. Terminal Command-Line Interface (CLI)",
+        description:
+          "Interactive terminal command processor supporting /connect, /send, /peers, /status, /history, /clear, and /quit commands.",
+        inputs: ["Terminal keyboard input"],
+        outputs: ["Console status logs", "Formatted message stream"],
+      },
+      {
+        title: "5. Multi-Threaded Tkinter Graphical Interface (GUI)",
+        description:
+          "Asynchronous desktop GUI featuring connection dialogs, live chat display, fingerprint verification visualizers, and thread-safe queue updates.",
+        inputs: ["User mouse/keyboard events in Tkinter"],
+        outputs: ["Graphical chat window", "Real-time peer status"],
+      },
+      {
+        title: "6. Deterministic Session Cleanup Subsystem",
+        description:
+          "Executes cleanup_session() to terminate worker threads, close active network sockets, zero out session keys, and wipe in-memory message history.",
+        inputs: ["Session termination signal (/quit or disconnect)"],
+        outputs: ["Zeroed RAM buffers", "Closed sockets", "Zero persistent disk trace"],
+      },
+    ],
+    techStack: [
+      "Python 3.8+",
+      "Python cryptography package",
+      "Raw TCP Sockets",
+      "Multi-Threading (threading, queue)",
+      "Tkinter GUI",
+      "JSON Serialization",
+      "Unittest & Pytest",
+      "Setuptools",
+    ],
     contribution:
-      "Implemented asynchronous WebSocket connection handlers, designed thread-safe in-memory room management, and audited codebase to verify zero data retention.",
+      "Architected and developed the Anonymous Ephemeral Chat platform at SCOPE, VIT Vellore. Formulated and implemented the SECP256R1 ECDH and HKDF key exchange pipeline; integrated authenticated AES-256-GCM encryption with length-prefixed framing; designed the multi-threaded peer-to-peer TCP networking engine; engineered the zero-disk in-memory message buffer with atomic teardown routines; constructed both the CLI and Tkinter GUI interfaces; and authored comprehensive unit test suites for cryptographic and networking operations.",
     implementation:
-      "Constructed using Python asynchronous socket handling, featuring thread locks to prevent race conditions during concurrent client connections and disconnections. Includes a minimalist web interface for instant room creation.",
+      "Programmed in pure Python utilizing the cryptography library for high-assurance cryptographic primitives. Implemented socket handlers across dedicated background threads to manage concurrent bidirectional peer connections. Structured the wire protocol with length prefixes to handle TCP streaming semantics cleanly. Built the GUI using Tkinter and thread-safe message queues to ensure responsive UI updates without blocking network I/O.",
     results: [
-      { metric: "0 Bytes", label: "Disk Footprint / Retention" },
-      { metric: "< 15ms", label: "Broadcast Message Latency" },
-      { metric: "100%", label: "In-Memory Ephemeral Purging" },
-      { metric: "Open Source", label: "Publicly Auditable Code" },
+      { metric: "256-bit", label: "Session Key Length", context: "AES-GCM derived via HKDF-SHA256" },
+      { metric: "0 Bytes", label: "Disk Footprint / I/O", context: "100% in-memory RAM execution with zero logging" },
+      { metric: "27 Tests", label: "Automated Test Cases", context: "Crypto, network, and security verification" },
+      { metric: "17 Passed", label: "Core Test Suite (1.18s)", context: "Fast execution across cryptography and network" },
+      { metric: "12-Byte Nonce", label: "Replay Attack Prevention", context: "96-bit random nonce per message" },
+      { metric: "16-Byte Tag", label: "Galois Authentication Tag", context: "Detects any packet alteration or tampering" },
     ],
     challenges:
-      "Managing race conditions and stale socket references during sudden client disconnects. Overcome by designing an atomic cleanup handler in the room manager.",
+      "Mitigating race conditions and memory retention during abrupt socket disconnections. Solved by implementing thread-safe locks around session dictionaries, designing an atomic cleanup_session handler that explicitly purges keys, closes sockets, and clears message queues, and using variable-length binary framing to eliminate TCP packet concatenation.",
     visual: (
       <div className="visual-bg-agri">
         <div className="atlas-window" aria-hidden="true">
@@ -1270,13 +1607,13 @@ export const projectsData: Project[] = [
           </div>
           <div className="atlas-content">
             <div className="window-top">
-              <span>Ephemeral Room</span>
-              <small style={{ background: "#ffebee", color: "#c62828" }}>ZERO-LOG</small>
+              <span>Ephemeral Node</span>
+              <small style={{ background: "#ffebee", color: "#c62828" }}>ZERO-LOG · SECP256R1</small>
             </div>
             <div className="metric-row">
               <div>
                 <small>Session Lifecycle</small>
-                <strong>In-Memory</strong>
+                <strong>In-Memory (AES-GCM)</strong>
                 <em>Auto-cleared on disconnect</em>
               </div>
             </div>
