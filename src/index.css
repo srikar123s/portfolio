@@ -748,55 +748,57 @@
 
 /* ----------------- Skills Hub Section (3 Focused Cards) ----------------- */
 .skills-section {
-  padding: 130px 5vw; max-width: 1440px; margin: auto;
+  padding: 120px 5vw; max-width: 1440px; margin: auto;
 }
 .skills-header-wrap {
   margin-bottom: 50px; max-width: 1340px; margin-left: auto; margin-right: auto;
+}
+.skills-header-subtitle {
+  color: #66645e; font-size: 15.5px; max-width: 680px; margin-top: 14px; line-height: 1.55;
 }
 .skills-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
   max-width: 1340px; margin: auto;
 }
 .skill-domain-card {
-  background: #ffffff; border: 1px solid var(--line); border-radius: 18px; padding: 34px 28px;
-  transition: all 0.25s ease; display: flex; flex-direction: column; justify-content: space-between;
+  background: #ffffff; border: 1px solid #e1ded6; border-radius: 20px; padding: 34px 28px 36px;
+  transition: all 0.25s ease; display: flex; flex-direction: column; justify-content: flex-start;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.025);
 }
 .skill-domain-card:hover {
-  border-color: var(--ink); box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+  border-color: #b8b5a9; transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.06);
 }
-.skill-domain-card.featured-domain {
-  background: #fbfaf6; border-color: #bdb9aa;
-}
-.skill-domain-head {
-  display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;
+.skill-domain-top {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;
 }
 .skill-domain-icon {
-  width: 44px; height: 44px; border-radius: 12px; background: rgba(28, 28, 26, 0.05);
+  width: 44px; height: 44px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center; font-size: 20px;
 }
-.skill-domain-count {
-  font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted);
-  background: rgba(0,0,0,0.05); padding: 4px 10px; border-radius: 99px;
+.skill-domain-badge {
+  font-family: 'DM Mono', monospace; font-size: 11px; color: #727068;
+  background: #f4f3ed; border: 1px solid #e2e0d8; padding: 5px 13px; border-radius: 99px;
+  font-weight: 500; letter-spacing: 0.02em;
 }
-.skill-domain-card h3 {
-  font-size: 20px; font-weight: 600; letter-spacing: -.03em; margin-bottom: 8px; color: var(--ink);
+.skill-domain-body {
+  margin-bottom: 24px;
 }
-.skill-domain-card p {
-  font-size: 13.5px; color: #62615a; line-height: 1.55; margin-bottom: 24px;
+.skill-domain-title {
+  font-size: 20px; font-weight: 600; letter-spacing: -0.025em; margin-bottom: 8px; color: #181816;
 }
-.skill-tags-cloud {
-  display: flex; flex-wrap: wrap; gap: 8px;
+.skill-domain-desc {
+  font-size: 13.5px; color: #66645e; line-height: 1.55; margin: 0; min-height: 42px;
 }
-.skill-pill {
-  border: 1px solid #d5d2c7; background: #ffffff; border-radius: 99px;
-  padding: 7px 14px; font-size: 12px; color: var(--ink); font-weight: 500;
-  transition: all 0.2s ease; cursor: default;
+.skill-domain-pills {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto;
 }
-.skill-pill:hover {
-  border-color: var(--ink); background: var(--ink); color: #ffffff;
+.skill-arsenal-pill {
+  background: #eef8be; border: 1px solid #d4eb72; color: #242c05; border-radius: 99px;
+  padding: 6.5px 14px; font-size: 12px; font-weight: 600; transition: all 0.2s ease; cursor: default;
+  line-height: 1.35; letter-spacing: -0.01em;
 }
-.skill-pill.highlight {
-  background: rgba(223,255,69,0.35); border-color: rgba(175, 205, 30, 0.7); font-weight: 600;
+.skill-arsenal-pill:hover {
+  background: #e3f596; border-color: #c4e44f; transform: translateY(-1px);
 }
 
 /* ----------------- Education & Certifications ----------------- */

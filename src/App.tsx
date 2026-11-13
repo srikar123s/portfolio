@@ -80,49 +80,58 @@ const skillDomains = [
   {
     title: "AI, ML & GenAI",
     icon: "🧠",
+    iconBg: "rgba(235, 120, 180, 0.12)",
     badge: "Core AI / ML",
     description: "Machine learning pipelines, language models, retrieval-augmented generation (RAG), and agent protocols.",
     skills: [
-      { name: "Machine Learning", highlight: true },
-      { name: "NLP", highlight: true },
-      { name: "LLMs", highlight: true },
-      { name: "RAG", highlight: true },
-      { name: "LangChain", highlight: true },
-      { name: "MCP (Model Context Protocol)", highlight: true },
-      { name: "ChromaDB", highlight: true },
-      { name: "Data Cleaning & Preprocessing", highlight: true },
+      "Machine Learning",
+      "NLP",
+      "LLMs",
+      "RAG",
+      "LangChain",
+      "MCP (Model Context Protocol)",
+      "ChromaDB",
+      "Data Cleaning & Preprocessing",
     ],
   },
   {
     title: "Languages & Development",
     icon: "⚡",
+    iconBg: "rgba(255, 180, 50, 0.15)",
     badge: "Backend & Systems",
     description: "Object-oriented software development, web engineering, RESTful backends, and containerized tools.",
     skills: [
-      { name: "Python", highlight: true },
-      { name: "Java (OOPS)", highlight: true },
-      { name: "SQL", highlight: true },
-      { name: "Web Development", highlight: true },
-      { name: "FastAPI", highlight: true },
-      { name: "REST APIs", highlight: true },
-      { name: "Docker", highlight: true },
-      { name: "Git / GitHub", highlight: true },
-      { name: "Postman", highlight: true },
+      "Python",
+      "Java (OOPS)",
+      "SQL",
+      "Web Development",
+      "FastAPI",
+      "REST APIs",
+      "Docker",
+      "Git / GitHub",
+      "Postman",
     ],
   },
   {
     title: "Databases & Core CS Concepts",
-    icon: "📐",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a5870" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+    iconBg: "rgba(100, 110, 180, 0.12)",
     badge: "Computer Science",
     description: "Database architectures and foundational computer science principles from Integrated M.Tech at VIT Vellore.",
     skills: [
-      { name: "Data Structures & Algorithms (DSA)", highlight: true },
-      { name: "Operating Systems", highlight: true },
-      { name: "DBMS", highlight: true },
-      { name: "MySQL", highlight: true },
-      { name: "MongoDB", highlight: true },
-      { name: "Computer Networks", highlight: true },
-      { name: "Cyber Security", highlight: true },
+      "Data Structures & Algorithms (DSA)",
+      "Operating Systems",
+      "DBMS",
+      "MySQL",
+      "MongoDB",
+      "Computer Networks",
+      "Cyber Security",
     ],
   },
 ]
@@ -730,37 +739,34 @@ export default function App() {
                 <em>AI / ML &amp; Backend Engineering.</em>
               </h2>
             </div>
-            <p style={{ color: "#62615a", fontSize: "15px", maxWidth: "650px", marginTop: "14px" }}>
+            <p className="skills-header-subtitle">
               Balanced technical competencies directly matching production requirements and academic grounding.
             </p>
           </div>
 
           <div className="skills-grid">
             {skillDomains.map((domain) => (
-              <div
-                className={`skill-domain-card reveal ${domain.badge === "Core AI / ML" ? "featured-domain" : ""}`}
-                key={domain.title}
-              >
-                <div className="domain-card-head">
-                  <div className="domain-title-wrap">
-                    <span className="domain-icon" aria-hidden="true">
-                      {domain.icon}
-                    </span>
-                    <div>
-                      <h3>{domain.title}</h3>
-                      <p>{domain.description}</p>
-                    </div>
+              <div className="skill-domain-card reveal" key={domain.title}>
+                <div className="skill-domain-top">
+                  <div
+                    className="skill-domain-icon"
+                    style={{ background: domain.iconBg || "rgba(28, 28, 26, 0.05)" }}
+                    aria-hidden="true"
+                  >
+                    {domain.icon}
                   </div>
-                  <span className="domain-badge">{domain.badge}</span>
+                  <span className="skill-domain-badge">{domain.badge}</span>
                 </div>
 
-                <div className="domain-pill-cloud">
-                  {domain.skills.map((skill) => (
-                    <span
-                      className={`arsenal-pill ${skill.highlight ? "highlight-pill" : ""}`}
-                      key={skill.name}
-                    >
-                      {skill.name}
+                <div className="skill-domain-body">
+                  <h3 className="skill-domain-title">{domain.title}</h3>
+                  <p className="skill-domain-desc">{domain.description}</p>
+                </div>
+
+                <div className="skill-domain-pills">
+                  {domain.skills.map((skillName) => (
+                    <span className="skill-arsenal-pill" key={skillName}>
+                      {skillName}
                     </span>
                   ))}
                 </div>
